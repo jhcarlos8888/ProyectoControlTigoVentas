@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <?php require_once('partes/head.php'); ?>
 <body  class="text-center">
 
