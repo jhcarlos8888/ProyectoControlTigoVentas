@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <?php require_once('partes/head.php'); ?>
-<body
+<body>
 
 <?php require_once('partes/cabecera.php'); ?>
 
