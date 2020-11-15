@@ -4,7 +4,7 @@
           <li class="nav-item">
             <a class="nav-link active" href="#">
               <span data-feather="home"></span>
-              Dashboard <span class="sr-only">(current)</span>
+              Menú Principal<span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
@@ -40,7 +40,7 @@
         </ul>
 
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>Saved reports</span>
+          <span>Menú Secundario</span>
           <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
             <span data-feather="plus-circle"></span>
           </a>
