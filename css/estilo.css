@@ -1,23 +1,25 @@
-body{
-	background-color: white;
-	color: black;
+html,
+body {
+  height: 100%;
 }
 /*------------------------------estilo para el login de la aplicación -------------------------*/
 
 
-
-.form-signin{
-background-color: white;
-border: gray 5px ridge;
-border-radius: 20px; 
+body {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
 }
-  
-.form-signin {	
+
+.form-signin {
   width: 100%;
-  max-width: 500px;
-  padding: 10px;
+  max-width: 330px;
+  padding: 15px;
   margin: auto;
- margin-top: 20px;
 }
 .form-signin .checkbox {
   font-weight: 400;
@@ -33,18 +35,17 @@ border-radius: 20px;
   z-index: 2;
 }
 .form-signin input[type="email"] {
-  margin-bottom: auto;
-  border-bottom-right-radius: 2;
-  border-bottom-left-radius: 2;
-
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
 }
 .form-signin input[type="password"] {
-  margin-bottom: auto;
-  border-top-left-radius: 2;
-  border-top-right-radius: 2;
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
- .bd-placeholder-img {
+.bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
         -webkit-user-select: none;
@@ -58,15 +59,8 @@ border-radius: 20px;
           font-size: 3.5rem;
         }
       }
-      
- #login input{
-	margin-top: 10px; 
-	background-color: white;
- }
  
- /*
- * --------------------------------------estilo plantilla
- */
+ /* --------Estilos para plantilla----*/
 
 .sidebar {
   position: fixed;
