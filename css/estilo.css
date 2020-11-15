@@ -61,6 +61,9 @@ body {
           font-size: 3.5rem;
         }
       }
+#login input{
+  margin-top: 10px;
+}
  
  /* --------Estilos para plantilla----*/
 
