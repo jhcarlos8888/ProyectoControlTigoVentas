@@ -65,7 +65,11 @@ body {
   margin-top: 10px;
 }
  
- /* --------Estilos para plantilla----*/
+/*------------------------------estilo para plantilla -------------------------*/
+
+/*
+ * Sidebar
+ */
 
 .sidebar {
   position: fixed;
@@ -156,7 +160,6 @@ body {
   border-color: transparent;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
 }
-
  
  
  
