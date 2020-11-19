@@ -7,7 +7,9 @@
   
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
+
       <a class="nav-link active" href="#"><span data-feather="log-out"></span> Cerrar Sesión</a>
+
     </li>
   </ul>
 </nav>
