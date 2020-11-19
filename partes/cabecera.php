@@ -1,13 +1,13 @@
 
-<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#"><img src="img/tigo-logo-11.png" width="50" alt=""> TIGO CONTROL</a>
+<nav class="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-8 text-center" href="#"><img src="img/tigo-logo-11.png" width="50" alt=""> TIGO CONTROL</a>
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <input class="form-control form-control-dark w-100" type="text" placeholder="Buscar" aria-label="Search">
+  
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
-      <a class="nav-link" href="#">Cerrar Sesión</a>
+      <a class="nav-link active" href="#"><span data-feather="log-out"></span> Cerrar Sesión</a>
     </li>
   </ul>
 </nav>
