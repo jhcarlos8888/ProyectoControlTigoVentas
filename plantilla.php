@@ -75,6 +75,34 @@
 				      <td>885466</td>
 				      <td>Retirado</td>
 				    </tr>
+				       <tr>
+				      <th scope="row">1053836643</th>
+				      <td>Juan Carlos</td>
+				      <td>3104037717</td>
+				      <td>748925</td>
+				      <td>Activo</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">1054896541</th>
+				      <td>Faver Alonso</td>
+				      <td>3057886198</td>
+				      <td>574892</td>
+				      <td>Activo</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">1060842774</th>
+				      <td>Andres Moná</td>
+				      <td>3214589654</td>
+				      <td>742598</td>
+				      <td>Activo</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">1061896332</th>
+				      <td>Jacobo</td>
+				      <td>3158747788</td>
+				      <td>885466</td>
+				      <td>Retirado</td>
+				    </tr>
 				  </tbody>
 				</table>
 		    	
