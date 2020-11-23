@@ -5,17 +5,6 @@
 <?php require_once('partes/head.php'); ?>
 
 <body>
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-12">
-			<section>
-				<p>
-					Bienvenido
-				</p>
-			</section>
-			
-		</div>
-	</div>	
 
 <?php require_once('partes/cabecera.php'); ?>
 
