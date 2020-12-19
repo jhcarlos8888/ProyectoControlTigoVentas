@@ -164,4 +164,18 @@ class Usuario
     {
         $this->zona_sede = $zona_sede;
     }
+
+    public function EliminarUsuario(){
+
+        $quety = "delete from usuario where id_usuario=".$id_usuario;
+
+
+    }
+
+    public function CrearUsuario(){
+
+    }
+
+
+
 }
