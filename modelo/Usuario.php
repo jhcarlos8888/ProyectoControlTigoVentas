@@ -157,11 +157,9 @@ class Usuario
         $this->rol = $rol;
     }
 
-
     public function EliminarUsuario(){
 
         $query = "delete from usuario where id_usuario=$this->id_usuario";
-
     }
 
     public function CrearUsuario(){
@@ -200,7 +198,4 @@ class Usuario
             return true;
         }
     }
-
-
-
 }

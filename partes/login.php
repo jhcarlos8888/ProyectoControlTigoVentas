@@ -1,8 +1,4 @@
 <div id="bodyForm">
-    <?php
-    session_start();
-
-    ?>
     <form class="form-signin" id="login" method="post" action="controladores/controlador.php">
         <input type="hidden" name="proceso" value="login">
         <img class="mb-4" src="img/tigo-logo-11.png" alt="" width="200" height="200">
