@@ -22,7 +22,6 @@ class Conexion
         }catch (Exception $e){
             echo "Error de conexion";
         }
-
     }
 
     public function CerrarConexion()
@@ -30,10 +29,8 @@ class Conexion
         $this->con->close();
     }
 
-
     public function getCon()
     {
         return $this->con;
     }
-
 }
