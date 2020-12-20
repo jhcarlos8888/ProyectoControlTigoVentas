@@ -19,11 +19,9 @@ class Conexion
                 $this->password) or die("Connection failed: " . mysqli_connect_error());
             mysqli_select_db($this->con, $this->dbname) or die('No se pudo seleccionar la base de datos');
 
-            echo "Conexion Realizada exitosamente";
         }catch (Exception $e){
             echo "Error de conexion";
         }
-
 
     }
 
@@ -32,8 +30,10 @@ class Conexion
         $this->con->close();
     }
 
+
+    public function getCon()
+    {
+        return $this->con;
+    }
+
 }
-
-$prueba = new Conexion();
-
-$prueba->CrearConexion();
