@@ -20,8 +20,7 @@ switch ($proceso) {
         if ($usuario->ConsultarUsuario($email)) {
 
             if (strcmp($usuario->getContrasena(), $contrasena) == 0) {
-                //header("Location: ../plantilla.php");
-                $usuario->getNombre();
+                header("Location: ../plantilla.php");
                 die();
             }else{
                 header("Location: ../index.php");
