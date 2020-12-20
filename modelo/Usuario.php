@@ -1,41 +1,17 @@
 <?php
 
+require __DIR__ . '/../datos/conexion.php';
 
 class Usuario
 {
-    private $id_usuario, $identificacion, $nombre, $usuario, $contrasena, $email, $celular, $zona_sede;
+    private $id_usuario, $identificacion, $nombre, $usuario, $contrasena, $email, $celular, $zona_sede, $rol;
 
     /**
      * Usuario constructor.
-     * @param $id_usuario
-     * @param $identificacion
-     * @param $nombre
-     * @param $usuario
-     * @param $contrasena
-     * @param $email
-     * @param $celular
-     * @param $zona_sede
      */
-    public function __construct(
-        $id_usuario,
-        $identificacion,
-        $nombre,
-        $usuario,
-        $contrasena,
-        $email,
-        $celular,
-        $zona_sede
-    ) {
-        $this->id_usuario = $id_usuario;
-        $this->identificacion = $identificacion;
-        $this->nombre = $nombre;
-        $this->usuario = $usuario;
-        $this->contrasena = $contrasena;
-        $this->email = $email;
-        $this->celular = $celular;
-        $this->zona_sede = $zona_sede;
+    public function __construct()
+    {
     }
-
 
     /**
      * @return mixed
@@ -165,15 +141,64 @@ class Usuario
         $this->zona_sede = $zona_sede;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getRol()
+    {
+        return $this->rol;
+    }
+
+    /**
+     * @param mixed $rol
+     */
+    public function setRol($rol): void
+    {
+        $this->rol = $rol;
+    }
+
+
     public function EliminarUsuario(){
 
-        $quety = "delete from usuario where id_usuario=".$id_usuario;
-
+        $query = "delete from usuario where id_usuario=$this->id_usuario";
 
     }
 
     public function CrearUsuario(){
 
+    }
+
+    public function ConsultarUsuario($email){
+
+        $cnx = new Conexion();
+        $cnx->CrearConexion();
+
+        $query = "SELECT * FROM usuario WHERE email = '$email'";
+
+        $usuario = mysqli_query($cnx->getCon(),$query);
+
+        if (!$usuario){
+
+            $cnx->CerrarConexion();
+            //die("Error en la consulta ". mysqli_error($this->con));
+            return false;
+        }
+        else{
+            while ($fila = mysqli_fetch_array($usuario)) {
+
+                $this->setIdUsuario($fila['id']);
+                $this->setIdentificacion($fila['identificacion']);
+                $this->setNombre($fila['nombre']);
+                $this->setCelular($fila['celular']);
+                $this->setUsuario($fila['usuario']);
+                $this->setContrasena($fila['contrasena']);
+                $this->setEmail($fila['email']);
+                $this->setZonaSede($fila['fk_zona_sede']);
+                $this->setRol($fila['fk_rol']);
+            }
+            $cnx->CerrarConexion();
+            return true;
+        }
     }
 
 
