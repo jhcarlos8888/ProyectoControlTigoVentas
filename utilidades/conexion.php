@@ -1,15 +1,17 @@
 <?php
 
+require "../configuracion/configuracion.php";
+
 class Conexion
 {
     private $hostname, $username, $password, $dbname, $con;
 
     public function __construct()
     {
-        $this->hostname = "localhost";
-        $this->username = "root";
-        $this->password = "";
-        $this->dbname = "ControlVentas";
+        $this->hostname = HOST;
+        $this->username = USER;
+        $this->password = PASSWORD;
+        $this->dbname = DATABASE;
     }
 
     public function CrearConexion()

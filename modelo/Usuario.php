@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/../datos/conexion.php';
+require __DIR__ . '/../utilidades/conexion.php';
 
 class Usuario
 {

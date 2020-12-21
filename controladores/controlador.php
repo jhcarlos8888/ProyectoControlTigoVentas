@@ -26,7 +26,7 @@ switch ($proceso) {
                 $_SESSION['id_user'] = $usuario->getIdUsuario();
                 $_SESSION['nombre_user'] = $usuario->getNombre();
 
-                header("Location: ../plantilla.php");
+                header("Location: ../vistas/plantilla.php");
 
                 die();
             }else{
