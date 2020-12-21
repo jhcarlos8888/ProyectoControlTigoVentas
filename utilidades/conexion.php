@@ -19,10 +19,10 @@ class Conexion
         try {
             $this->con = mysqli_connect($this->hostname, $this->username,
                 $this->password) or die("Connection failed: " . mysqli_connect_error());
-            mysqli_select_db($this->con, $this->dbname) or die('No se pudo seleccionar la base de datos');
+            mysqli_select_db($this->con, $this->dbname) or die('No se pudo seleccionar la base de utilidades');
 
         }catch (Exception $e){
-            echo "Error de conexion";
+            echo "Error de conexion " .$e->getMessage();
         }
     }
 
