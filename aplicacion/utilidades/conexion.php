@@ -1,10 +1,8 @@
 <?php
 
-require "../configuracion/configuracion.php";
-
 class Conexion
 {
-    private $hostname, $username, $password, $dbname, $con;
+    private $hostname, $username, $password, $dbname, $con, $dsn;
 
     public function __construct()
     {
@@ -12,23 +10,21 @@ class Conexion
         $this->username = USER;
         $this->password = PASSWORD;
         $this->dbname = DATABASE;
+        $this->dsn = "mysql:host=$this->hostname;dbname=$this->dbname";
     }
 
     public function CrearConexion()
     {
         try {
-            $this->con = mysqli_connect($this->hostname, $this->username,
-                $this->password) or die("Connection failed: " . mysqli_connect_error());
-            mysqli_select_db($this->con, $this->dbname) or die('No se pudo seleccionar la base de utilidades');
-
-        }catch (Exception $e){
-            echo "Error de conexion " .$e->getMessage();
+            $this->con = new PDO ($this->dsn, $this->username, $this->password);
+        } catch (PDOException $e) {
+            echo "Error de conexion " . $e->getMessage();
         }
     }
 
     public function CerrarConexion()
     {
-        $this->con->close();
+        $this->con = null;
     }
 
     public function getCon()
