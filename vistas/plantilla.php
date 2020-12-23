@@ -2,16 +2,16 @@
 
 <html lang="es">
 
-<?php require_once('../partes/head.php'); ?>
+<?php require_once(RUTA_VISTAS.'partes/head.php'); ?>
 
 <body>
 
-<?php require_once('../partes/cabecera.php'); ?>
+<?php require_once(RUTA_VISTAS.'partes/cabecera.php'); ?>
 
 <div class="container-fluid">
     <div class="row">
 
-    <?php require_once('../partes/menu.php'); ?>
+    <?php require_once(RUTA_VISTAS.'partes/menu.php'); ?>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-md-5 py-2">
             <div class="row text-center">
