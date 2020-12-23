@@ -17,20 +17,22 @@ class Ruta
 
         // Se recupera la url de la peticion
         $uri = isset($_GET['uri']) ? $_GET['uri'] : "/";
-        $paths = array();
         $paths = explode("/", $uri); // Se divide la url por "/" y lo coloca en un array
 
-
-        if ($uri == "/") { // Ruta Principal
+        if ($uri == "/") {
+            // Ruta Principal
 
             // Validamos si la ruta existe en el array de controladore
             $respuesta = array_key_exists("/", $this->controladores);
-            if ($respuesta != "" && $respuesta == 1) {
+            if($respuesta){
+            /*if ($respuesta != "" && $respuesta == 1) {*/
                 foreach ($this->controladores as $ruta => $controller) {
                     if ($ruta == "/") {
+
                         $controlador = $controller;
                     }
                 }
+
                 $this->getController("index", $controlador); // llamamos al metodo que nos recupera el controlador
             }
 
@@ -45,7 +47,35 @@ class Ruta
 
                     $pos = strpos($uri, trim($ruta, "/"));
 
-                    if ($pos !== false) {
+                    if ($pos === false) {
+                        //echo "<small style='color:red;'>no se encontro</small><br>";
+                    } else {
+                        echo "<small style='color:green;'>se econtro </small><br>";
+                        $arrayParams  = array(); //array donde se guardaran los parametros de la web
+                        $estado       = true; // estado de ruta
+                        $controlador  = $controller;
+                        $metodo       = "";
+                        $cantidadRuta = count(explode("/", trim($ruta, "/")));
+                        $cantidad     = count($paths);
+                        if ($cantidad > $cantidadRuta) {
+                            $metodo = $paths[$cantidadRuta];
+                            for ($i = 0; $i < count($paths); $i++) {
+                                if ($i > $cantidadRuta) {
+                                    $arrayParams[] = $paths[$i];
+                                }
+                            }
+                        }
+                        //echo "<b>Parametros: </b>".json_encode($arrayParams);
+                        //echo "<br><b>cantidad Rutas</b>: ".count(explode("/",trim($ruta,"/")))."<br>";
+                        //echo "<br><b>cantidad Uris</b>: ".count($paths)."<br>";
+                        /*if(count($paths) > 1){
+                        $metodo = $paths[1];
+                        }*/
+                        $this->getController($metodo, $controlador, $arrayParams);
+
+                    }
+
+                    /*if ($pos !== false) {
                         $arrayParams  = array(); //array donde se guardaran los parametros de la web
                         $estado = true; // estado de ruta
                         $controlador = $controller;
@@ -56,7 +86,7 @@ class Ruta
                             $metodo = $paths[1];
                         }
                         $this->getController($metodo, $controlador, $arrayParams);
-                    }
+                    }*/
                 }
             }
 
