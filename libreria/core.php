@@ -1,17 +1,20 @@
 <?php
 
-// Se define ruta de archivos modelo
-define("RUTA_APLICACION",RUTA_BASE."aplicacion/");
+// Se define ruta de aplicacion
+define("RUTA_APLICACION", RUTA_BASE . "aplicacion/");
 
 //Se defina ruta de las vistas
-define("RUTA_VISTAS",RUTA_BASE."vistas/");
+define("RUTA_VISTAS", RUTA_BASE . "vistas/");
+
+//Se defina ruta librerias
+define("LIBRERIA", RUTA_BASE . "libreria/");
 
 //Se define la ruta de la carpeta rutas
-define("RUTA",RUTA_APLICACION."rutas/");
+define("RUTA", RUTA_APLICACION . "rutas/");
 
 //Se define la ruta de la carpeta de controladores
-define("RUTA_CONTROLADORES",RUTA_APLICACION."controladores/");
+define("RUTA_CONTROLADORES", RUTA_APLICACION . "controladores/");
 
-include "Vista.php";
+require_once("Vista.php");
 include "Ruta.php";
 include RUTA . "rutas.php";
