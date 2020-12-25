@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/../modelo/Usuario.php';
+use \vista\Vista;
 
 class ControladorUsuario
 {
@@ -8,18 +8,18 @@ class ControladorUsuario
     public function index()
     {
 
-        Vista::crear("usuario.PruebaVista");
+        return Vista::crear("");
 
     }
 
-    public function loguear()
+    public function loguin()
     {
-        $email = $_POST['email'];
+        /*$email = $_POST['email'];
         $contrasena = $_POST['clave'];
 
-        $usuario = new Usuario();
+        $usuario = new Usuario();*/
 
-        Vista::crear("usuario.ListarUsuarios");
+        return Vista::crear("");
 
         /*if ($usuario->ConsultarUsuario($email)) {
 

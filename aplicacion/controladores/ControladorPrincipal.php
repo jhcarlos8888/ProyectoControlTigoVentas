@@ -1,5 +1,7 @@
 <?php
 
+use \vista\Vista;
+
 class ControladorPrincipal
 {
     public function index(){
@@ -7,6 +9,9 @@ class ControladorPrincipal
     }
 
     public function prueba(){
-        Vista::crear("usuario.ListaUsuarios");
+
+        $test = "Pasa test";
+
+        return Vista::crear("usuario.ListarUsuarios");
     }
 }

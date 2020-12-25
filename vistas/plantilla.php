@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 
 <html lang="es">
+<head>
+    <title>Plantilla</title>
+    <?php require_once(RUTA_VISTAS.'partes/head.php'); ?>
+</head>
 
-<?php require_once(RUTA_VISTAS.'partes/head.php'); ?>
 
 <body>
 
@@ -115,7 +118,7 @@
     </div>
 </div>
 
-<?php require_once('../partes/scripts.php'); ?>
+<?php require_once(RUTA_VISTAS.'partes/scripts.php'); ?>
 
 </body>
 </html>
