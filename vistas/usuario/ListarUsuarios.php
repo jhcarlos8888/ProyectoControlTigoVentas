@@ -2,16 +2,20 @@
 
 <html lang="es">
 
-<?php /*include(RUTA_VISTAS.'partes/head.php') */?>
+<head>
+    <title>Lista de Usuarios</title>
+    <?php include(RUTA_VISTAS.'partes/head.php') ?>
+</head>
+
 
 <body>
 
-<?php /*include(RUTA_VISTAS.'partes/cabecera.php') */?>
+<?php include(RUTA_VISTAS.'partes/cabecera.php') ?>
 
 <div class="container-fluid">
     <div class="row">
 
-        <?php /*include(RUTA_VISTAS.'partes/menu.php'); */?>
+        <?php include(RUTA_VISTAS.'partes/menu.php') ?>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-md-5 py-2">
             <div class="row text-center">
@@ -115,7 +119,7 @@
     </div>
 </div>
 
-<?php /*include(RUTA_VISTAS.'partes/scripts.php') */?>
+<?php include(RUTA_VISTAS.'partes/scripts.php') ?>
 
 </body>
 </html>

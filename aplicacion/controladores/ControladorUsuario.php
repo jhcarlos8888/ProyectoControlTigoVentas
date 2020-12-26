@@ -19,7 +19,7 @@ class ControladorUsuario
 
         $usuario = new Usuario();*/
 
-        return Vista::crear("");
+        return Vista::crear("usuario.ListarUsuarios");
 
         /*if ($usuario->ConsultarUsuario($email)) {
 
