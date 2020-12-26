@@ -16,19 +16,14 @@ class Conexion
     public function CrearConexion()
     {
         try {
-            $this->con = new PDO ($this->dsn, $this->username, $this->password);
+            return $this->con = new PDO ($this->dsn, $this->username, $this->password);
         } catch (PDOException $e) {
-            echo "Error de conexion " . $e->getMessage();
+            die( "Error de conexion " . $e->getMessage());
         }
     }
 
     public function CerrarConexion()
     {
         $this->con = null;
-    }
-
-    public function getCon()
-    {
-        return $this->con;
     }
 }
