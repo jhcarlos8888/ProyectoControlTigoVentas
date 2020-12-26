@@ -1,6 +1,7 @@
 <?php
 
-use \vista\Vista;
+use usuario\Usuario;
+use vista\Vista;
 
 class ControladorUsuario
 {
@@ -14,12 +15,23 @@ class ControladorUsuario
 
     public function loguin()
     {
-        /*$email = $_POST['email'];
+        $email = $_POST['email'];
         $contrasena = $_POST['clave'];
 
-        $usuario = new Usuario();*/
 
-        return Vista::crear("usuario.ListarUsuarios");
+        $usuario = new Usuario();
+
+        if ($usuario->LoguearUsuario("$email", "$contrasena")) {
+
+            return Vista::crear("usuario.ListarUsuarios");
+        } else {
+
+            $urlprin = str_replace("index.php", "", $_SERVER["PHP_SELF"]);
+
+            header("location:/".trim($urlprin,"/").""."");
+        }
+
+
 
         /*if ($usuario->ConsultarUsuario($email)) {
 
@@ -27,18 +39,25 @@ class ControladorUsuario
 
                 $_SESSION['id_user'] = $usuario->getIdUsuario();
                 $_SESSION['nombre_user'] = $usuario->getNombre();
+            */
+    }
 
-                header("Location: ../vistas/plantilla.php");
+    public function crear(){
 
-                die();
-            }else{
-                header("Location: ../index.php");
-                die();
-            }
-        } else {
-            header("Location: ../index.php");
-            die();
-        }*/
+        $usuario = new Usuario();
+
+        $usuario->setIdentificacion("123456");
+        $usuario->setNombre("Prueba");
+        $usuario->setCelular("312132133");
+        $usuario->setUsuario("prueba1");
+        $usuario->setContrasena("pass");
+        $usuario->setEmail("prueba@test.com");
+        $usuario->setZonaSede(1040);
+        $usuario->setRol(2);
+
+        $resultado = $usuario->CrearUsuario();
+        echo $resultado;
+        echo $usuario->getIdUsuario();
     }
 
 }
