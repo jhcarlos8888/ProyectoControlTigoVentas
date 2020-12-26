@@ -1,6 +1,9 @@
 <?php
 
-require __DIR__ . '/../utilidades/conexion.php';
+namespace usuario;
+
+use Conexion;
+use PDO;
 
 class Usuario
 {
@@ -8,10 +11,13 @@ class Usuario
 
     /**
      * Usuario constructor.
+     * @param $id_usuario
      */
     public function __construct()
     {
+
     }
+
 
     /**
      * @return mixed
@@ -157,45 +163,78 @@ class Usuario
         $this->rol = $rol;
     }
 
-    public function EliminarUsuario(){
+    public function EliminarUsuario($id)
+    {
+        $conexionDataBase = new Conexion();
+        $conexion = $conexionDataBase->CrearConexion();
+        $stmt = $conexion->prepare("DELETE FROM usuario WHERE id=:id");
+        $stmt->bindParam(":id", $id);
+        $resultado = $stmt->execute();
+        $conexionDataBase->CerrarConexion();
 
-        $query = "delete from usuario where id_usuario=$this->id_usuario";
+        return $resultado;
     }
 
-    public function CrearUsuario(){
+    public function CrearUsuario()
+    {
+        $conexionDataBase = new Conexion();
+        $conexion = $conexionDataBase->CrearConexion();
+        $stmt = $conexion->prepare("INSERT INTO usuario (identificacion, nombre, celular, usuario, contrasena, email, fk_zona_sede, fk_rol) VALUES (:identificacion,:nombre, :celular, :usuario, :contrasena, :email, :sede, :rol)");
 
-    }
+        $identificacion = self::getIdentificacion();
+        $nombre = self::getNombre();
+        $celular = self::getCelular();
+        $usuario = self::getUsuario();
+        $contrasena = self::getContrasena();
+        $email = self::getEmail();
+        $sede = self::getZonaSede();
+        $rol = self::getRol();
 
-    public function ConsultarUsuario($email){
+        $stmt->bindValue(':identificacion', $identificacion);
+        $stmt->bindValue(":nombre", $nombre);
+        $stmt->bindValue(":celular", $celular);
+        $stmt->bindValue(":usuario", $usuario);
+        $stmt->bindValue(":contrasena", $contrasena);
+        $stmt->bindValue(":email", $email);
+        $stmt->bindValue(":sede", $sede, PDO::PARAM_INT);
+        $stmt->bindValue(":rol", $rol,PDO::PARAM_INT);
 
-        $cnx = new Conexion();
-        $cnx->CrearConexion();
+        $resultado = $stmt->execute();
 
-        $query = "SELECT * FROM usuario WHERE email = '$email'";
-
-        $usuario = mysqli_query($cnx->getCon(),$query);
-
-        if (!$usuario){
-
-            $cnx->CerrarConexion();
-            //die("Error en la consulta ". mysqli_error($this->con));
-            return false;
+        if ($resultado) {
+            self::setIdUsuario($conexion->lastInsertId());
+            echo "Se realizo el insert";
         }
         else{
-            while ($fila = mysqli_fetch_array($usuario)) {
+            echo $stmt->queryString;
+        }
+        return $resultado;
+    }
 
-                $this->setIdUsuario($fila['id']);
-                $this->setIdentificacion($fila['identificacion']);
-                $this->setNombre($fila['nombre']);
-                $this->setCelular($fila['celular']);
-                $this->setUsuario($fila['usuario']);
-                $this->setContrasena($fila['contrasena']);
-                $this->setEmail($fila['email']);
-                $this->setZonaSede($fila['fk_zona_sede']);
-                $this->setRol($fila['fk_rol']);
-            }
-            $cnx->CerrarConexion();
+    public function ConsultarUsuario($id)
+    {
+
+    }
+
+    public function LoguearUsuario($email, $contrasena)
+    {
+
+        $conexionDataBase = new Conexion();
+
+        $conexion = $conexionDataBase->CrearConexion();
+
+        $stmt = $conexion->prepare("SELECT * FROM usuario WHERE email=:email AND contrasena=:contrasena");
+        $stmt->bindParam(":email", $email);
+        $stmt->bindParam(":contrasena", $contrasena);
+        $stmt->execute();
+
+        $conexionDataBase->CerrarConexion();
+
+        //return $stmt->rowCount()==1;
+        if ($stmt->rowCount() >= 1) {
             return true;
+        } else {
+            return false;
         }
     }
 }
