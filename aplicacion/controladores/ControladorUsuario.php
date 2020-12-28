@@ -23,14 +23,15 @@ class ControladorUsuario
 
         if ($usuario->LoguearUsuario("$email", "$contrasena")) {
 
-            return Vista::crear("usuario.ListarUsuarios");
+            $listaUsuarios = $usuario->ListarUsuarios();
+
+            return Vista::crear("usuario.ListarUsuarios", "listaUsuarios", $listaUsuarios);
         } else {
 
             $urlprin = str_replace("index.php", "", $_SERVER["PHP_SELF"]);
 
-            header("location:/".trim($urlprin,"/").""."");
+            header("location:/" . trim($urlprin, "/") . "" . "");
         }
-
 
 
         /*if ($usuario->ConsultarUsuario($email)) {
@@ -42,22 +43,43 @@ class ControladorUsuario
             */
     }
 
-    public function crear(){
+    public function crear()
+    {
+
+        $identificacion = $_POST['identificacion'];
+        $nombre = $_POST['nombre'];
+        $celular = $_POST['celular'];
+        $user = $_POST['usuario'];
+        $contrasena = $_POST['contrasena'];
+        $email = $_POST['email'];
+        $sede = $_POST['sede'];
+        $rol = $_POST['rol'];
 
         $usuario = new Usuario();
 
-        $usuario->setIdentificacion("123456");
-        $usuario->setNombre("Prueba");
-        $usuario->setCelular("312132133");
-        $usuario->setUsuario("prueba1");
-        $usuario->setContrasena("pass");
-        $usuario->setEmail("prueba@test.com");
-        $usuario->setZonaSede(1040);
-        $usuario->setRol(2);
+        $usuario->setIdentificacion($identificacion);
+        $usuario->setNombre($nombre);
+        $usuario->setCelular($celular);
+        $usuario->setUsuario($user);
+        $usuario->setContrasena($contrasena);
+        $usuario->setEmail($email);
+        $usuario->setZonaSede($sede);
+        $usuario->setRol($rol);
 
         $resultado = $usuario->CrearUsuario();
-        echo $resultado;
-        echo $usuario->getIdUsuario();
+
+        if ($resultado === 1) {
+            $listaUsuarios = $usuario->ListarUsuarios();
+            return Vista::crear("usuario.ListarUsuarios", "listaUsuarios", $listaUsuarios);
+        } else {
+            self::registrar();
+        }
+
+    }
+
+    public function registrar()
+    {
+        return Vista::crear("usuario.registrar");
     }
 
 }
