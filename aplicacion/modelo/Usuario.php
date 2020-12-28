@@ -237,4 +237,33 @@ class Usuario
             return false;
         }
     }
+
+    public function ListarUsuarios(){
+
+        $listaUsuarios = array();
+
+        $conexionDataBase = new Conexion();
+        $conexion = $conexionDataBase->CrearConexion();
+        $stmt = $conexion->prepare("SELECT * FROM usuario");
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
+        $stmt->execute();
+
+        while ($fila = $stmt->fetch()){
+
+            $usuario = new Usuario();
+
+            $usuario->setIdUsuario($fila->id);
+            $usuario->setIdentificacion($fila->identificacion);
+            $usuario->setNombre($fila->nombre);
+            $usuario->setCelular($fila->celular);
+            $usuario->setUsuario($fila->usuario);
+            $usuario->setEmail($fila->email);
+            $usuario->setZonaSede($fila->fk_zona_sede);
+            $usuario->setRol($fila->fk_rol);
+
+            $listaUsuarios[] = $usuario;
+        }
+
+        return $listaUsuarios;
+    }
 }
