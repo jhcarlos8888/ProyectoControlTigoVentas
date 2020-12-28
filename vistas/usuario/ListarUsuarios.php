@@ -20,7 +20,7 @@
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-md-5 py-2">
             <div class="row text-center">
                 <div class="col-md-4 py-md-3 py-2 order-2 order-md-1">
-                    <button type="button" class="btn btn-primary w-100">Nueva cuenta</button>
+                    <a class="bt badge-primary" href="#">Crear Cuenta</a>
                 </div>
                 <div class="offset-md-2 col-md-6 offset-lg-4 col-lg-4 py-md-3 order-1 order-md-2">
                     <div class="input-group">
@@ -46,71 +46,28 @@
 
                     <table class="table table-hover">
                         <thead>
-                        <tr>
-                            <th scope="col">CC</th>
-                            <th scope="col">NOMBRE</th>
-                            <th scope="col">MOVIL</th>
-                            <th scope="col">CUENTA</th>
-                            <th scope="col">ESTADO</th>
-                        </tr>
+                            <tr>
+                                <th scope="col">CC</th>
+                                <th scope="col">NOMBRE</th>
+                                <th scope="col">USUARIO</th>
+                                <th scope="col">E-MAIL</th>
+                                <th scope="col">CELULAR</th>
+                                <th scope="col">ZONA SEDE</th>
+                                <th scope="col">ROL</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row">1053836643</th>
-                            <td>Juan Carlos</td>
-                            <td>3104037717</td>
-                            <td>748925</td>
-                            <td>Activo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1054896541</th>
-                            <td>Faver Alonso</td>
-                            <td>3057886198</td>
-                            <td>574892</td>
-                            <td>Activo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1060842774</th>
-                            <td>Andres Moná</td>
-                            <td>3214589654</td>
-                            <td>742598</td>
-                            <td>Activo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1061896332</th>
-                            <td>Jacobo</td>
-                            <td>3158747788</td>
-                            <td>885466</td>
-                            <td>Retirado</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1053836643</th>
-                            <td>Juan Carlos</td>
-                            <td>3104037717</td>
-                            <td>748925</td>
-                            <td>Activo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1054896541</th>
-                            <td>Faver Alonso</td>
-                            <td>3057886198</td>
-                            <td>574892</td>
-                            <td>Activo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1060842774</th>
-                            <td>Andres Moná</td>
-                            <td>3214589654</td>
-                            <td>742598</td>
-                            <td>Activo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1061896332</th>
-                            <td>Jacobo</td>
-                            <td>3158747788</td>
-                            <td>885466</td>
-                            <td>Retirado</td>
-                        </tr>
+                            <?php for($i=0; $i < count($listaUsuarios);$i++){?>
+                            <tr>
+                                <td><?=$listaUsuarios[$i]->getIdentificacion(); ?></td>
+                                <td><?=$listaUsuarios[$i]->getNombre(); ?></td>
+                                <td><?=$listaUsuarios[$i]->getUsuario(); ?></td>
+                                <td><?=$listaUsuarios[$i]->getEmail(); ?></td>
+                                <td><?=$listaUsuarios[$i]->getCelular(); ?></td>
+                                <td><?=$listaUsuarios[$i]->getZonaSede(); ?></td>
+                                <td><?=$listaUsuarios[$i]->getRol(); ?></td>
+                            </tr>
+                            <?php }?>
                         </tbody>
                     </table>
                 </div>
