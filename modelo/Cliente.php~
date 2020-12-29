@@ -124,7 +124,6 @@ class Cliente
     {
         $this->email = $email;
     }
-    
     /**
      * crud Class Cliente
      */
@@ -246,7 +245,7 @@ class Cliente
     
     /**
     *registrar cliente
-    
+    */
     public function Registrar(cliente $data)
     {
         try 
@@ -270,7 +269,6 @@ class Cliente
         {
             die($e->getMessage());
         }
-        */
     }
 }
         
