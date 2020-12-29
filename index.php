@@ -1,8 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
-<?php require_once('partes/head.php'); ?>
-<body  class="text-center">
-<?php require_once('partes/login.php'); ?>
-<?php require_once('partes/scripts.php'); ?>
-</body>
-</html>
+<?php
+
+// Defino ruta
+define("RUTA_BASE",dirname(realpath(__FILE__))."/");
+include "libreria/core.php";

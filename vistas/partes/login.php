@@ -1,5 +1,5 @@
 <div id="bodyForm">
-    <form class="form-signin" id="login" method="post" action="controladores/controlador.php">
+    <form class="form-signin" id="login" method="post" action="usuario/loguin" >
         <input type="hidden" name="proceso" value="login">
         <img class="mb-4" src="img/tigo-logo-11.png" alt="" width="200" height="200">
         <h1 class="h3 mb-3 font-weight-normal">TIGO CONTROL</h1>
@@ -14,5 +14,3 @@
         <p class="mt-5 mb-3 text-muted">&copy;2020</p>
     </form>
 </div>
-
-<?php
