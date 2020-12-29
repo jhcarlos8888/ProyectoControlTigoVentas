@@ -68,7 +68,7 @@ class ControladorUsuario
 
         $resultado = $usuario->CrearUsuario();
 
-        if ($resultado === 1) {
+        if ($resultado) {
             $listaUsuarios = $usuario->ListarUsuarios();
             return Vista::crear("usuario.ListarUsuarios", "listaUsuarios", $listaUsuarios);
         } else {

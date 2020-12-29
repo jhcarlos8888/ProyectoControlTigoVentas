@@ -197,18 +197,17 @@ class Usuario
         $stmt->bindValue(":contrasena", $contrasena);
         $stmt->bindValue(":email", $email);
         $stmt->bindValue(":sede", $sede, PDO::PARAM_INT);
-        $stmt->bindValue(":rol", $rol,PDO::PARAM_INT);
+        $stmt->bindValue(":rol", $rol, PDO::PARAM_INT);
 
-        $resultado = $stmt->execute();
+        return $stmt->execute();
 
-        if ($resultado) {
+        /*if ($stmt->execute()) {
             self::setIdUsuario($conexion->lastInsertId());
-            echo "Se realizo el insert";
+            return true;
         }
         else{
-            echo $stmt->queryString;
-        }
-        return $resultado;
+            return false;
+        }*/
     }
 
     public function ConsultarUsuario($id)
@@ -230,15 +229,16 @@ class Usuario
 
         $conexionDataBase->CerrarConexion();
 
-        //return $stmt->rowCount()==1;
-        if ($stmt->rowCount() >= 1) {
+        return $stmt->rowCount()==1;
+        /*if ($stmt->rowCount() >= 1) {
             return true;
         } else {
             return false;
-        }
+        }*/
     }
 
-    public function ListarUsuarios(){
+    public function ListarUsuarios()
+    {
 
         $listaUsuarios = array();
 
@@ -248,7 +248,7 @@ class Usuario
         $stmt->setFetchMode(PDO::FETCH_OBJ);
         $stmt->execute();
 
-        while ($fila = $stmt->fetch()){
+        while ($fila = $stmt->fetch()) {
 
             $usuario = new Usuario();
 
