@@ -13,14 +13,13 @@
     <?php include(RUTA_VISTAS . 'partes/menu.php') ?>
 
     <img class="mb-2"
-         src="https://cdn.icon-icons.com/icons2/20/PNG/256/business_application_addmale_useradd_insert_add_user_client_2312.png"
+         src=""
          alt="imagen agregar usuario" width="100" height="100">
 
     <h3>REGISTRAR USUARIO</h3>
 
-        <form class="form" id="login" method="post" action="/crear">
+        <form class="form" id="login" method="post" action="<?php url("usuario/crear") ?>">
             <input type="hidden" name="proceso" value="login"><!--Aqui debe ir un token-->
-
 
             <div class="form-group row">
                 <label for="identificacion" class="col-sm-3 col-form-label">IDENTIFICACION</label>
