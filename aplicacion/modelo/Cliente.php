@@ -9,24 +9,21 @@ class Cliente
     private $celular;
     private $direccion;
     private $email;
+    private $pdo;
 
-    /**
-     * Cliente constructor.
-     * @param $id_cliente
-     * @param $identificacion
-     * @param $nombre
-     * @param $celular
-     * @param $direccion
-     * @param $email
-     */
-    public function __construct($id_cliente, $identificacion, $nombre, $celular, $direccion, $email)
+    
+ 
+    public function __CONSTRUCT()
     {
-        $this->id_cliente = $id_cliente;
-        $this->identificacion = $identificacion;
-        $this->nombre = $nombre;
-        $this->celular = $celular;
-        $this->direccion = $direccion;
-        $this->email = $email;
+        try
+        {
+            $this->pdo = new PDO('mysql:host=localhost;dbname=ControlVentas', 'root', '');
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);                
+        }
+        catch(Exception $e)
+        {
+            die($e->getMessage());
+        }
     }
 
     /**
@@ -128,23 +125,12 @@ class Cliente
     /**
      * crud Class Cliente
      */
-    class Cliente
-{
-    private $pdo;
+    
 
-    public function __CONSTRUCT()
-    {
-        try
-        {
-            $this->pdo = new PDO('mysql:host=localhost;dbname=ControlVentas', 'root', '');
-            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);                
-        }
-        catch(Exception $e)
-        {
-            die($e->getMessage());
-        }
-    }
+   
 
+    
+/**
     public function crear()
     {
         try
@@ -232,19 +218,20 @@ class Cliente
                  ->execute(
                 array(
                     $data->__GET('identificacion'), 
-                    $data->__GET('Nombre', 
+                    $data->__GET('Nombre'), 
                     $data->__GET('celular'),
                     $data->__GET('email'),
                     $data->__GET('id')
-                    )
-                );
+                    
+                ));
+                
         } catch (Exception $e) 
         {
             die($e->getMessage());
         }
     }
     
-    /**
+    
     *registrar cliente
     
     public function Registrar(cliente $data)
@@ -270,8 +257,8 @@ class Cliente
         {
             die($e->getMessage());
         }
-        */
+       
     }
+    */
 }
         
-}
