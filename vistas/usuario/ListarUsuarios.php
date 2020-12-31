@@ -20,8 +20,9 @@
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-md-5 py-2">
             <div class="row text-center">
                 <div class="col-md-4 py-md-3 py-2 order-2 order-md-1">
-                    <a class="btn-primary" href="<?php url("usuario/registrar")?>">Crear Cuenta</a>
+                    <a class="btn btn-primary w-100" href="<?php url("usuario/registrar")?>" role="button">Crear cuenta</a>
                 </div>
+
                 <div class="offset-md-2 col-md-6 offset-lg-4 col-lg-4 py-md-3 order-1 order-md-2">
                     <div class="input-group">
                         <input type="text" placeholder="Buscar cliente" class="form-control"
