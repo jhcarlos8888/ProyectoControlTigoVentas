@@ -6,7 +6,6 @@
     <?php require_once(RUTA_VISTAS.'partes/head.php'); ?>
 </head>
 
-
 <body>
 
 <?php require_once(RUTA_VISTAS.'partes/cabecera.php'); ?>
