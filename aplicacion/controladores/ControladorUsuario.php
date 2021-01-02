@@ -41,36 +41,6 @@ class ControladorUsuario
 
     }
 
-    public function loguin()
-    {
-        $email = $_POST['email'];
-        $contrasena = $_POST['clave'];
-
-
-        $usuario = new Usuario();
-
-        if ($usuario->LoguearUsuario("$email", "$contrasena")) {
-
-            $listaUsuarios = $usuario->ListarUsuarios();
-
-            return Vista::crear("usuario.ListarUsuarios", "listaUsuarios", $listaUsuarios);
-        } else {
-
-            $urlprin = str_replace("index.php", "", $_SERVER["PHP_SELF"]);
-
-            header("location:/" . trim($urlprin, "/") . "" . "");
-        }
-
-
-        /*if ($usuario->ConsultarUsuario($email)) {
-
-            if (strcmp($usuario->getContrasena(), $contrasena) === 0) {
-
-                $_SESSION['id_user'] = $usuario->getIdUsuario();
-                $_SESSION['nombre_user'] = $usuario->getNombre();
-            */
-    }
-
     public function crear()
     {
 
