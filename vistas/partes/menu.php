@@ -7,7 +7,7 @@
               Inicio<span class="sr-only">(current)</span>
             </a>
           </li>
-          
+
           <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span data-feather="bar-chart-2"></span>Seguimientos</a>
               <div class="dropdown-menu">
@@ -38,7 +38,7 @@
                 <a class="dropdown-item" href="#">Rol de usuarios</a>
               </div>
           </li>
-          
+
           <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span data-feather="layers"></span>Ayudas</a>
               <div class="dropdown-menu">

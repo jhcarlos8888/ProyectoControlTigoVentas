@@ -11,6 +11,7 @@
   padding-bottom: 40px;
 }
 
+
 .form-signin {
 
   width: 100%;
@@ -61,7 +62,7 @@
 #login input{
   margin-top: 10px;
 }
- 
+
 /*------------------------------estilo para plantilla -------------------------*/
 
 /*
@@ -158,13 +159,3 @@
   border-color: transparent;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
 }
-
- 
- 
- 
- 
- 
- 
- 
- 
- 
