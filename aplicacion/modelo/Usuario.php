@@ -11,7 +11,6 @@ class Usuario
 
     /**
      * Usuario constructor.
-     * @param $id_usuario
      */
     public function __construct()
     {
@@ -163,18 +162,6 @@ class Usuario
         $this->rol = $rol;
     }
 
-    public function EliminarUsuario($id)
-    {
-        $conexionDataBase = new Conexion();
-        $conexion = $conexionDataBase->CrearConexion();
-        $stmt = $conexion->prepare("DELETE FROM usuario WHERE id=:id");
-        $stmt->bindParam(":id", $id);
-        $resultado = $stmt->execute();
-        $conexionDataBase->CerrarConexion();
-
-        return $resultado;
-    }
-
     public function CrearUsuario()
     {
         $conexionDataBase = new Conexion();
@@ -212,29 +199,78 @@ class Usuario
 
     public function ConsultarUsuario($id)
     {
-
-    }
-
-    public function LoguearUsuario($email, $contrasena)
-    {
-
         $conexionDataBase = new Conexion();
+        $usuario = new Usuario();
 
         $conexion = $conexionDataBase->CrearConexion();
+        $stmt = $conexion->prepare("SELECT * FROM usuario WHERE id=:id");
+        $stmt->bindParam(":id", $id);
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
+        $stmt->execute();
 
-        $stmt = $conexion->prepare("SELECT * FROM usuario WHERE email=:email AND contrasena=:contrasena");
-        $stmt->bindParam(":email", $email);
-        $stmt->bindParam(":contrasena", $contrasena);
+        if ($stmt->rowCount() == 1) {
+
+            $fila = $stmt->fetch();
+            $usuario->setIdUsuario($fila->id);
+            $usuario->setIdentificacion($fila->identificacion);
+            $usuario->setNombre($fila->nombre);
+            $usuario->setCelular($fila->celular);
+            $usuario->setUsuario($fila->usuario);
+            $usuario->setEmail($fila->email);
+            $usuario->setZonaSede($fila->fk_zona_sede);
+            $usuario->setRol($fila->fk_rol);
+        } else {
+            $usuario = null;
+        }
+
+        $conexionDataBase->CerrarConexion();
+
+        return $usuario;
+    }
+
+    public function ActualizarUsuario()
+    {
+        $conexionDataBase = new Conexion();
+        $conexion = $conexionDataBase->CrearConexion();
+        $stmt = $conexion->prepare("UPDATE usuario SET identificacion=:identificacion, nombre=:nombre, celular=:celular, usuario=:usuario, contrasena=:contrasena, email=:email, fk_zona_sede=:sede, fk_rol=:rol WHERE id=:id");
+
+        $id = self::getIdUsuario();
+        $identificacion = self::getIdentificacion();
+        $nombre = self::getNombre();
+        $celular = self::getCelular();
+        $usuario = self::getUsuario();
+        $contrasena = self::getContrasena();
+        $email = self::getEmail();
+        $sede = self::getZonaSede();
+        $rol = self::getRol();
+
+        $stmt->bindValue(':id', $id,PDO::PARAM_INT);
+        $stmt->bindValue(':identificacion', $identificacion);
+        $stmt->bindValue(":nombre", $nombre);
+        $stmt->bindValue(":celular", $celular);
+        $stmt->bindValue(":usuario", $usuario);
+        $stmt->bindValue(":contrasena", $contrasena);
+        $stmt->bindValue(":email", $email);
+        $stmt->bindValue(":sede", $sede, PDO::PARAM_INT);
+        $stmt->bindValue(":rol", $rol, PDO::PARAM_INT);
+
         $stmt->execute();
 
         $conexionDataBase->CerrarConexion();
 
-        return $stmt->rowCount()==1;
-        /*if ($stmt->rowCount() >= 1) {
-            return true;
-        } else {
-            return false;
-        }*/
+        return($stmt->rowCount() > 0);
+    }
+
+    public function EliminarUsuario($id)
+    {
+        $conexionDataBase = new Conexion();
+        $conexion = $conexionDataBase->CrearConexion();
+        $stmt = $conexion->prepare("DELETE FROM usuario WHERE id=:id");
+        $stmt->bindParam(":id", $id);
+        $resultado = $stmt->execute();
+        $conexionDataBase->CerrarConexion();
+
+        return $resultado;
     }
 
     public function ListarUsuarios()
@@ -265,5 +301,21 @@ class Usuario
         }
 
         return $listaUsuarios;
+    }
+
+    public function LoguearUsuario($cedula, $contrasena)
+    {
+        $conexionDataBase = new Conexion();
+
+        $conexion = $conexionDataBase->CrearConexion();
+
+        $stmt = $conexion->prepare("SELECT * FROM usuario WHERE identificacion=:cedula AND contrasena=:contrasena");
+        $stmt->bindParam(":cedula", $cedula);
+        $stmt->bindParam(":contrasena", $contrasena);
+        $stmt->execute();
+
+        $conexionDataBase->CerrarConexion();
+
+        return $stmt->rowCount() == 1;
     }
 }
