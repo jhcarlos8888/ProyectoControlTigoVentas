@@ -11,6 +11,7 @@
   padding-bottom: 40px;
 }
 
+
 .form-signin {
 
   width: 100%;
@@ -71,7 +72,7 @@ input[type=number]::-webkit-outer-spin-button {
 .form-signin .btn-scs:hover {
   background-color: #1e7131;
 }
- 
+
 /*------------------------------estilo para plantilla -------------------------*/
 
 /*
@@ -168,13 +169,3 @@ input[type=number]::-webkit-outer-spin-button {
   border-color: transparent;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
 }
-
- 
- 
- 
- 
- 
- 
- 
- 
- 
