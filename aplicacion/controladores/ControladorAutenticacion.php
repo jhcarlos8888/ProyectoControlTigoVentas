@@ -1,5 +1,7 @@
 <?php
 
+use usuario\Usuario;
+use vista\Vista;
 
 class ControladorAutenticacion
 {
