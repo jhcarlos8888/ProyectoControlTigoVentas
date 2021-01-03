@@ -216,6 +216,7 @@ class Usuario
             $usuario->setNombre($fila->nombre);
             $usuario->setCelular($fila->celular);
             $usuario->setUsuario($fila->usuario);
+            $usuario->setContrasena($fila->contrasena);
             $usuario->setEmail($fila->email);
             $usuario->setZonaSede($fila->fk_zona_sede);
             $usuario->setRol($fila->fk_rol);
