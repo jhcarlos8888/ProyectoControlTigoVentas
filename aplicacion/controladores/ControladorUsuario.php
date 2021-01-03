@@ -6,6 +6,16 @@ use vista\Vista;
 class ControladorUsuario
 {
 
+    public function editar()
+    {
+        $id = $_REQUEST['id'];
+
+        $usuario = new Usuario();
+        $usuario = $usuario->ConsultarUsuario($id);
+
+        return Vista::crear("usuario.actualizar","usuario",$usuario);
+    }
+
     public function actualizar()
     {
         $id = $_POST['id'];
@@ -80,7 +90,8 @@ class ControladorUsuario
         return Vista::crear("usuario.registrar");
     }
 
-    public function eliminar(){
+    public function eliminar()
+    {
 
         $id = $_REQUEST['id'];
 
