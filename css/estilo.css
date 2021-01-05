@@ -94,9 +94,12 @@ input[type=number]::-webkit-outer-spin-button {
 
 @media (max-width: 767.98px) {
   .sidebar {
-    top: 5rem;
+    top: 2rem;
+	padding-bottom:4rem;
+	
   }
 }
+
 
 .sidebar-sticky {
   position: relative;
@@ -105,6 +108,7 @@ input[type=number]::-webkit-outer-spin-button {
   padding-top: .5rem;
   overflow-x: hidden;
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  
 }
 
 @supports ((position: -webkit-sticky) or (position: sticky)) {
