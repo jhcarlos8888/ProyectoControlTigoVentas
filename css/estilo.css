@@ -66,16 +66,18 @@ input[type=number]::-webkit-outer-spin-button {
   margin-top: 10px;
 }
 
+
 .form-signin .btn-scs {
   background-color: #04a453;
 }
+
 .form-signin .btn-scs:hover {
   background-color: #1e7131;
 }
 
 /*------------------------------estilo para plantilla -------------------------*/
 
-/*
+/
  * Sidebar
  */
 
