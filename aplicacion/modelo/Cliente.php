@@ -11,14 +11,14 @@ class Cliente
     private $email;
     private $pdo;
 
-    
- 
+
+
     public function __CONSTRUCT()
     {
         try
         {
             $this->pdo = new PDO('mysql:host=localhost;dbname=ControlVentas', 'root', '');
-            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);                
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
         catch(Exception $e)
         {
@@ -121,17 +121,12 @@ class Cliente
     {
         $this->email = $email;
     }
-    
+
     /**
      * crud Class Cliente
      */
-    
 
-   
-
-    
-/**
-    public function crear()
+    public function listar()
     {
         try
         {
@@ -162,9 +157,9 @@ class Cliente
         }
     }
 
-    public function consultar($id)
+    public function Obtener($id)
     {
-        try 
+        try
         {
             $stm = $this->pdo
                       ->prepare("SELECT * FROM Clientes WHERE id = ?");
@@ -182,7 +177,7 @@ class Cliente
                 $clt->__SET('email', $r->email);
 
             return $clt;
-        } catch (Exception $e) 
+        } catch (Exception $e)
         {
             die($e->getMessage());
         }
@@ -190,13 +185,13 @@ class Cliente
 
     public function Eliminar($id)
     {
-        try 
+        try
         {
             $stm = $this->pdo
-                      ->prepare("DELETE FROM Clientes WHERE id = ?");                      
+                      ->prepare("DELETE FROM Clientes WHERE id = ?");
 
             $stm->execute(array($id));
-        } catch (Exception $e) 
+        } catch (Exception $e)
         {
             die($e->getMessage());
         }
@@ -204,41 +199,39 @@ class Cliente
 
     public function Actualizar(Cliente $data)
     {
-        try 
+        try
         {
-            $sql = "UPDATE Cliente SET 
+            $sql = "UPDATE Cliente SET
                         identificacion
-                        Nombre          = ?, 
+                        Nombre          = ?,
                         celular       = ?,
-                        direccion           = ?, 
+                        direccion           = ?,
                         email = ?
                     WHERE id = ?";
 
             $this->pdo->prepare($sql)
                  ->execute(
                 array(
-                    $data->__GET('identificacion'), 
-                    $data->__GET('Nombre'), 
+                    $data->__GET('identificacion'),
+                    $data->__GET('Nombre'),
                     $data->__GET('celular'),
                     $data->__GET('email'),
                     $data->__GET('id')
-                    
+
                 ));
-                
-        } catch (Exception $e) 
+
+        } catch (Exception $e)
         {
             die($e->getMessage());
         }
     }
-    
-    
-    *registrar cliente
-    
+
+
     public function Registrar(cliente $data)
     {
-        try 
+        try
         {
-        $sql = "INSERT INTO Cliente (id, identificacion, Nombre,celular, email) 
+        $sql = "INSERT INTO Cliente (id, identificacion, Nombre,celular, email)
                 VALUES (?, ?, ?, ?)";
 
         $this->pdo->prepare($sql)
@@ -246,19 +239,18 @@ class Cliente
             array(
                 $data->__GET('id'),
                 $data->__GET('identificacion'),
-                $data->__GET('Nombre'), 
-                $data->__GET('celular'), 
+                $data->__GET('Nombre'),
+                $data->__GET('celular'),
                 $data->__GET('email'),
-                
-                
+
+
                 )
             );
-        } catch (Exception $e) 
+        } catch (Exception $e)
         {
             die($e->getMessage());
         }
-       
+
     }
-    */
+
 }
-        

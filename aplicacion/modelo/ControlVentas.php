@@ -12,6 +12,7 @@ class ControlVentas
     private $estado;
     private $fecha;
     private $numero_orden_instalacion;
+    private $pdo;
 
     /**
      * ControlVentas constructor.
@@ -171,5 +172,145 @@ class ControlVentas
     {
         $this->numero_orden_instalacion = $numero_orden_instalacion;
     }
+    /**
+     * crud Class ControlVentas
+     */
 
+    public function listar()
+    {
+        try
+        {
+            $result = array();
+
+            $stm = $this->pdo->prepare("SELECT * FROM control_ventas");
+            $stm->execute();
+
+            foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
+            {
+                $clt = new cvtas();
+
+                $cvtas->__SET('id', $r->id);
+                $cvtas->__SET('oferta', $r->oferta);
+                $cvtas->__SET('asesor', $r->asesor);
+                $cvtas->__SET('cliente', $r->cliente);
+                $cvtas->__SET('servicio', $r->servicio);
+                $cvtas->__SET('estado', $r->estado);
+                $cvtas->__SET('fecha', $r->fecha);
+                $cvtas->__SET('numero_orden_instalacion', $r->numero_orden_instalacion);
+
+                $result[] = $cvtas;
+            }
+
+            return $result;
+        }
+        catch(Exception $e)
+        {
+            die($e->getMessage());
+        }
+    }
+
+    public function Obtener($id)
+    {
+        try
+        {
+            $stm = $this->pdo
+                      ->prepare("SELECT * FROM control_ventas WHERE id = ?");
+
+            $stm->execute(array($id));
+            $r = $stm->fetch(PDO::FETCH_OBJ);
+
+            $clt = new cvtas();
+
+            $clt->__SET('id', $r->id);
+            $cvtas->__SET('oferta', $r->oferta);
+            $cvtas->__SET('asesor', $r->asesor);
+            $cvtas->__SET('cliente', $r->cliente);
+            $cvtas->__SET('servicio', $r->servicio);
+            $cvtas->__SET('estado', $r->estado);
+            $cvtas->__SET('fecha', $r->fecha);
+            $cvtas->__SET('numero_orden_instalacion', $r->numero_orden_instalacion);
+
+            return $cvtas;
+        } catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+    }
+
+    public function Eliminar($id)
+    {
+        try
+        {
+            $stm = $this->pdo
+                      ->prepare("DELETE FROM control_ventas WHERE id = ?");
+
+            $stm->execute(array($id));
+        } catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+    }
+
+    public function Actualizar(ControlVentas $data)
+    {
+        try
+        {
+            $sql = "UPDATE control_ventas SET
+                        oferta
+                        asesor         = ?,
+                        cliente       = ?,
+                        servicio           = ?,
+                        estado        = ?,
+                        fecha           = ?,
+                        numero_orden_instalacion        = ?
+                    WHERE id = ?";
+
+            $this->pdo->prepare($sql)
+                 ->execute(
+                array(
+                    $data->__GET('oferta'),
+                    $data->__GET('asesor'),
+                    $data->__GET('cliente'),
+                    $data->__GET('servicio'),
+                    $data->__GET('estado'),
+                    $data->__GET('fecha '),
+                    $data->__GET('numero_orden_instalacion'),
+
+                ));
+
+        } catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+    }
+
+
+    public function Registrar(ControlVentas $data)
+    {
+        try
+        {
+        $sql = "INSERT INTO control_ventas (id, oferta, asesor,cliente, servicio,estado,fecha,numero_orden_instalacion)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+        $this->pdo->prepare($sql)
+             ->execute(
+            array(
+                $data->__GET('id'),
+                $data->__GET('oferta'),
+                $data->__GET('asesor,'),
+                $data->__GET('cliente'),
+                $data->__GET('servicio'),
+                $data->__GET('estado'),
+                $data->__GET('fecha'),
+                $data->__GET('numero_orden_instalacion'),
+
+
+                )
+            );
+        } catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+
+}
 }

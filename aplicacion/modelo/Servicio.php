@@ -5,6 +5,7 @@ class Servicio
 {
     private $id_servicio;
     private $tipo_servicio;
+    private $pdo;
 
     /**
      * Servicio constructor.
@@ -48,4 +49,115 @@ class Servicio
     {
         $this->tipo_servicio = $tipo_servicio;
     }
+    /**
+     * crud Class servicio
+     */
+
+    public function listar()
+    {
+        try
+        {
+            $result = array();
+
+            $stm = $this->pdo->prepare("SELECT * FROM servicios");
+            $stm->execute();
+
+            foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
+            {
+                $ser = new servicio();
+
+                $ser->__SET('id', $r->id);
+                $ser->__SET('tipo_servicio', $r->tipo_servicio);
+
+                $result[] = $ser;
+            }
+
+            return $result;
+        }
+        catch(Exception $e)
+        {
+            die($e->getMessage());
+        }
+    }
+
+    public function Obtener($id)
+    {
+        try
+        {
+            $stm = $this->pdo
+                      ->prepare("SELECT * FROM servicios WHERE id = ?");
+
+            $stm->execute(array($id));
+            $r = $stm->fetch(PDO::FETCH_OBJ);
+
+            $ser = new servicio();
+
+            $ser->__SET('id', $r->id);
+            $ser->__SET('tipo_servicio', $r->tipo_servicio);
+
+
+            return $ser;
+        } catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+    }
+
+    public function Eliminar($id)
+    {
+        try
+        {
+            $stm = $this->pdo
+                      ->prepare("DELETE FROM servicios WHERE id = ?");
+
+            $stm->execute(array($id));
+        } catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+    }
+
+    public function Actualizar(servicio $data)
+    {
+        try
+        {
+            $sql = "UPDATE servicio SET
+                        tipo_servicio
+                    WHERE id = ?";
+
+            $this->pdo->prepare($sql)
+                 ->execute(
+                array(
+                    $data->__GET('tipo_servicio'),
+                ));
+
+        } catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+    }
+
+
+    public function Registrar(servicio $data)
+    {
+        try
+        {
+        $sql = "INSERT INTO servicio (id, tipo_servicio)
+                VALUES (?, ?)";
+
+        $this->pdo->prepare($sql)
+             ->execute(
+            array(
+                $data->__GET('id'),
+                $data->__GET('tipo_servicio'),
+
+
+
+                )
+            );
+        } catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+}
 }
