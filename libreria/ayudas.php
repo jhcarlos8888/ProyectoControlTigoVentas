@@ -17,3 +17,12 @@ function url($ruta)
     $url = str_replace("index.php", "", $_SERVER["PHP_SELF"]);
     echo "/" . trim($url, "/") . "/" . $ruta;
 }
+
+/* esta funcion nos va a ayudar a retornar un recurso
+* - $asset : nombre del archivo que esta dentro de la carpeta publico
+* */
+function assets($assets)
+{
+    $url = trim(str_replace("index.php", "", $_SERVER["PHP_SELF"]), "/");
+    echo "/" . $url . "/assets/" . $assets;
+}
