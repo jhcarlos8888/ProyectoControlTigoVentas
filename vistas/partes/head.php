@@ -3,7 +3,3 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="<?php assets("css/bootstrap/bootstrap.css" )?>" type="text/css" rel="stylesheet">
 <link href="<?php assets("css/estilo.css")?>" type="text/css" rel="stylesheet">
-
-
-
-

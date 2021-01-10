@@ -6,7 +6,7 @@
         <input type="number" id="cedula" name="cedula" class="form-control" placeholder="Usuario" required autofocus
                minlength="5" maxlength="12">
         <input type="password" id="clave" name="clave" class="form-control" placeholder="Contraseña" required>
-        <button class="btn btn-lg btn-primary btn-scs btn-block" type="submit" name="boton">Ingresar</button>
+        <button class="btn btn-lg btn-primary btn-scs btn-block" type="submit" name="ingresar" id="ingresar">Ingresar</button>
         <p class="mt-5 mb-3 text-muted">&copy;2020</p>
     </form>
 </div>
