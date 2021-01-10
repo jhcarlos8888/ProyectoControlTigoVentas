@@ -19,7 +19,7 @@
               </div>
           </li>
          <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span data-feather="dollar-sign"></span>Financiera</a>
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span data-feather="dollar-sign"></span>Mi gestión</a>
               <div class="dropdown-menu  text-right ml-4">
                 <a class="dropdown-item pr-1" href="#">Descuentos y promociones</a>
                 <a class="dropdown-item pr-1" href="#">Historial de ventas</a>
