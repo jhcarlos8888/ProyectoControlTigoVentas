@@ -4,7 +4,7 @@
 </div>
 
 <nav class="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-12 col-sm-4 col-md-4 col-lg-2 mr-0 p-1 text-center" href="<?php url("")?>"><img
+    <a class="navbar-brand col-12 col-md-3 mr-0 p-1 text-center" href="<?php url("")?>"><img
                 src="<?php assets("img/logo_project_control_min.png") ?>" width="50" alt=""></a>
     <h4 class=" navbar-nav ml-2 px-8 text-center">Sales Control System</h4>
     <button class="navbar-toggler position-absolute d-dm-none d-lg-none collapsed my-2" type="button"
