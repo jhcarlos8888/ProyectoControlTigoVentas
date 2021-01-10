@@ -15,8 +15,8 @@
 
     <ul class="navbar-nav pl-2 pr-3 py-1">
         <li class="nav-item text-nowrap">
-            <form method="post" action="">
-                <input type="hidden" name="proceso" value="logout">
+            <form method="post" action="<?php url("autenticacion/logout") ?>">
+                <input type="hidden" name="proceso" value="logout"><!--Aqui debe ir un token-->
                 <button type="submit" class="btn btn-light">Cerrar Sesión</button>
             </form>
         </li>
