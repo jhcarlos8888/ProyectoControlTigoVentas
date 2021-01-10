@@ -6,23 +6,63 @@ use vista\Vista;
 class ControladorAutenticacion
 {
 
+    private $errores = array();
+    private $cedula;
+    private $contrasena;
+
+
+    public function index()
+    {
+        return Vista::crear("index");
+    }
+
     public function login()
     {
-        $cedula = $_POST['cedula'];
-        $contrasena = $_POST['clave'];
+        $this->errores = array();
+        $this->cedula = isset($_POST['cedula']) ? $_POST['cedula'] : null;
+        $this->contrasena = isset($_POST['clave']) ? $_POST['clave'] : null;
 
-        $usuario = new Usuario();
+        self::_validar();
 
-        if ($usuario->LoguearUsuario($cedula, $contrasena)) {
+        if($this->errores){
+            foreach ($this->errores as $error){
+                echo $error , '<br>';
+            }
+            return Vista::crear("index", "errores", $this->errores);
+        }else{
 
-            $listaUsuarios = $usuario->ListarUsuarios();
+            $usuario = new Usuario();
 
-            return Vista::crear("usuario.ListarUsuarios", "listaUsuarios", $listaUsuarios);
-        } else {
+            if ($usuario->LoguearUsuario($this->cedula, $this->contrasena)) {
 
-            $urlprin = str_replace("index.php", "", $_SERVER["PHP_SELF"]);
+                $listaUsuarios = $usuario->ListarUsuarios();
 
-            header("location:/" . trim($urlprin, "/") . "" . "");
+                return Vista::crear("usuario.ListarUsuarios", "listaUsuarios", $listaUsuarios);
+            } else {
+
+
+                $urlprin = str_replace("index.php", "", $_SERVER["PHP_SELF"]);
+
+                header("location:/" . trim($urlprin, "/"));
+            }
+        }
+    }
+
+    public function logout(){
+
+        $urlprin = str_replace("index.php", "", $_SERVER["PHP_SELF"]);
+
+        header("location:/" . trim($urlprin, "/"));
+    }
+
+    private function _validar(){
+
+        if(!validate($this->cedula,"requerido", "numerico")){
+            $this->errores['cedula'] = "El campo es requerido y numerico";
+        }
+
+        if(!validate($this->contrasena,"requerido")){
+            $this->errores['contrasena'] = "Valor es requerido";
         }
     }
 }
