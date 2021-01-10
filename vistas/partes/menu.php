@@ -1,4 +1,4 @@
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse text-center py-md-5">
+    <nav id="sidebarMenu" class="col-12 col-sm-4 col-md-4 col-lg-2 col-xl-2 d-md-block bg-light sidebar collapse text-md-center text-left py-md-5 px-0">
       <div class="sidebar-sticky p-10">
         <ul class="nav flex-column">
           <li class="nav-item">
@@ -8,9 +8,9 @@
             </a>
           </li>
 
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdow ">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span data-feather="bar-chart-2"></span>Seguimientos</a>
-              <div class="dropdown-menu  text-right ml-4">
+              <div class="dropdown-menu text-right ml-4">
                 <a class="dropdown-item pr-1" href="#">Seguimiento de clientes</a>
                 <a class="dropdown-item pr-1" href="#">Actualización de clientes</a>
                 <a class="dropdown-item pr-1" href="#">Ventas, productos y servicios</a>

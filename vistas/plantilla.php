@@ -15,7 +15,7 @@
 
     <?php require_once(RUTA_VISTAS.'partes/menu.php'); ?>
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-md-5 py-2">
+        <main role="main" class="col-12 col-sm-12 col-md-8 col-lg-10 col-xl-10 ml-sm-auto px-md-4 py-md-5 py-2">
             <div class="row text-center">
                 <div class="col-md-4 py-md-3 py-2 order-2 order-md-1">
                     <button type="button" class="btn btn-primary w-100">Nueva cuenta</button>

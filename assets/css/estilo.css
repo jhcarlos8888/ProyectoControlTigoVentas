@@ -97,14 +97,6 @@ input[type=number]::-webkit-outer-spin-button {
  * Sidebar
  */
 
-#sidebarMenu ul li a {
-
-  text-align: right;
-}
-
-
-
-
 .sidebar {
   position: fixed;
   top: 0;
@@ -113,6 +105,7 @@ input[type=number]::-webkit-outer-spin-button {
   z-index: 0; /* Behind the navbar */
   padding: 48px 0 0; /* Height of navbar */
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+ 
 }
 
 @media (max-width: 767.98px) {
@@ -124,6 +117,8 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 
+
+
 .sidebar-sticky {
   position: relative;
   top: 0;
@@ -131,6 +126,7 @@ input[type=number]::-webkit-outer-spin-button {
   padding-top: .5rem;
   overflow-x: hidden;
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  
   
 }
 
@@ -153,6 +149,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .sidebar .nav-link.active {
   color: #007bff;
+  
 }
 
 .sidebar .nav-link:hover .feather,
