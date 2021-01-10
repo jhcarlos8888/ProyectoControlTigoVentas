@@ -7,5 +7,6 @@
 <body class="text-center">
     <?php include(RUTA_VISTAS.'partes/login.php') ?>
     <?php include(RUTA_VISTAS .'partes/scripts.php') ?>
+    <script src="<?php assets("js/validacionLogin.js") ?>"></script>
 </body>
 </html>
