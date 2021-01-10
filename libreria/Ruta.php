@@ -112,7 +112,7 @@ class Ruta
                 //llamamos a la funcion de recibida de esa clase
                 if ($functionOfController == "index") {
                     //si la funcion es index no se deben recibir parametros
-                    if (is_null($params)/*count($params) == 0*/) {
+                    if (count($params) == 0) {
                         $ClaseTemporal->$functionOfController();
                     } else {
                         die("Error en parametros recibidos");
