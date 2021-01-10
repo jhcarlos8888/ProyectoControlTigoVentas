@@ -51,11 +51,13 @@ class ControladorAutenticacion
     public function logout(){
 
         $urlprin = str_replace("index.php", "", $_SERVER["PHP_SELF"]);
-
         header("location:/" . trim($urlprin, "/"));
     }
 
     private function _validar(){
+
+        $this->cedula = htmlspecialchars($this->cedula);
+        $this->contrasena = htmlspecialchars($this->contrasena);
 
         if(!validate($this->cedula,"requerido", "numerico")){
             $this->errores['cedula'] = "El campo es requerido y numerico";
