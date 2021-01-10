@@ -17,7 +17,7 @@
         <li class="nav-item text-nowrap">
             <form method="post" action="<?php url("autenticacion/logout") ?>">
                 <input type="hidden" name="proceso" value="logout"><!--Aqui debe ir un token-->
-                <button type="submit" class="btn btn-light">Cerrar Sesión</button>
+                <button type="submit" class="btn btn-light">Salir</button>
             </form>
         </li>
     </ul>
