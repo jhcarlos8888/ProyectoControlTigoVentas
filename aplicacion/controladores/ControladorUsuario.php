@@ -10,9 +10,9 @@ class ControladorUsuario
     {
         $usuario = new Usuario();
 
-            $listaUsuarios = $usuario->ListarUsuarios();
+        $listaUsuarios = $usuario->ListarUsuarios();
 
-            return Vista::crear("usuario.ListarUsuarios", "listaUsuarios", $listaUsuarios);
+        return Vista::crear("usuario.ListarUsuarios", "listaUsuarios", $listaUsuarios);
     }
 
     public function editar($id)
@@ -22,7 +22,7 @@ class ControladorUsuario
         $usuario = new Usuario();
         $usuario = $usuario->ConsultarUsuario($id);
 
-        return Vista::crear("usuario.actualizar","usuario",$usuario);
+        return Vista::crear("usuario.actualizar", "usuario", $usuario);
     }
 
     public function actualizar()
@@ -96,7 +96,21 @@ class ControladorUsuario
 
     public function registrar()
     {
-        return Vista::crear("usuario.registrar");
+
+        $roles = array(
+            "1" => "Administrador",
+            "2" => "Coordinador Comercial",
+            "3" => "Asesor Comercial"
+        );
+
+        $sedes = array(
+            "1040" => "San Diego",
+            "1041" => "Santa Fe",
+            "1042" => "Molinos",
+            "1043" => "Oriental"
+        );
+
+        return Vista::crear("usuario.registrar", array("sedes"=>$sedes,"roles"=>$roles));
     }
 
     public function eliminar($id)
