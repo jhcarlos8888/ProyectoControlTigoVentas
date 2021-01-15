@@ -1,9 +1,13 @@
 <?php
 
+namespace Cliente;
+
+use Exception;
+use PDO;
 
 class Cliente
 {
-    private $id_cliente;
+    private $id;
     private $identificacion;
     private $nombre;
     private $celular;
@@ -11,115 +15,24 @@ class Cliente
     private $email;
     private $pdo;
 
-
-
     public function __CONSTRUCT()
     {
-        try
-        {
-            $this->pdo = new PDO('mysql:host=localhost;dbname=ControlVentas', 'root', '');
+        try {
+            $this->pdo = new PDO('mysql:host=localhost;dbname=ControlVentas', USER, PASSWORD);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             die($e->getMessage());
         }
     }
 
-    /**
-     * @return mixed
-     */
-    public function getIdCliente()
+    public function __get($name)
     {
-        return $this->id_cliente;
+        return $this->$name;
     }
 
-    /**
-     * @param mixed $id_cliente
-     */
-    public function setIdCliente($id_cliente): void
+    public function __set($name, $value)
     {
-        $this->id_cliente = $id_cliente;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIdentificacion()
-    {
-        return $this->identificacion;
-    }
-
-    /**
-     * @param mixed $identificacion
-     */
-    public function setIdentificacion($identificacion): void
-    {
-        $this->identificacion = $identificacion;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getNombre()
-    {
-        return $this->nombre;
-    }
-
-    /**
-     * @param mixed $nombre
-     */
-    public function setNombre($nombre): void
-    {
-        $this->nombre = $nombre;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCelular()
-    {
-        return $this->celular;
-    }
-
-    /**
-     * @param mixed $celular
-     */
-    public function setCelular($celular): void
-    {
-        $this->celular = $celular;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDireccion()
-    {
-        return $this->direccion;
-    }
-
-    /**
-     * @param mixed $direccion
-     */
-    public function setDireccion($direccion): void
-    {
-        $this->direccion = $direccion;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param mixed $email
-     */
-    public function setEmail($email): void
-    {
-        $this->email = $email;
+        $this->$name = $value;
     }
 
     /**
@@ -128,20 +41,18 @@ class Cliente
 
     public function listar()
     {
-        try
-        {
+        try {
             $result = array();
 
-            $stm = $this->pdo->prepare("SELECT * FROM Clientes");
+            $stm = $this->pdo->prepare("SELECT * FROM cliente");
             $stm->execute();
 
-            foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
-            {
+            foreach ($stm->fetchAll(PDO::FETCH_OBJ) as $r) {
                 $clt = new cliente();
 
                 $clt->__SET('id', $r->id);
                 $clt->__SET('identificacion', $r->identificacion);
-                $clt->__SET('Nombre', $r->Nombre);
+                $clt->__SET('nombre', $r->nombre);
                 $clt->__SET('celular', $r->celular);
                 $clt->__SET('direccion', $r->direccion);
                 $clt->__SET('email', $r->email);
@@ -150,19 +61,15 @@ class Cliente
             }
 
             return $result;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             die($e->getMessage());
         }
     }
 
     public function Obtener($id)
     {
-        try
-        {
-            $stm = $this->pdo
-                      ->prepare("SELECT * FROM Clientes WHERE id = ?");
+        try {
+            $stm = $this->pdo->prepare("SELECT * FROM cliente WHERE id = ?");
 
             $stm->execute(array($id));
             $r = $stm->fetch(PDO::FETCH_OBJ);
@@ -170,87 +77,63 @@ class Cliente
             $clt = new cliente();
 
             $clt->__SET('id', $r->id);
-                $clt->__SET('identificacion', $r->identificacion);
-                $clt->__SET('Nombre', $r->Nombre);
-                $clt->__SET('celular', $r->celular);
-                $clt->__SET('direccion', $r->direccion);
-                $clt->__SET('email', $r->email);
+            $clt->__SET('identificacion', $r->identificacion);
+            $clt->__SET('nombre', $r->nombre);
+            $clt->__SET('celular', $r->celular);
+            $clt->__SET('direccion', $r->direccion);
+            $clt->__SET('email', $r->email);
 
             return $clt;
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             die($e->getMessage());
         }
     }
 
     public function Eliminar($id)
     {
-        try
-        {
-            $stm = $this->pdo
-                      ->prepare("DELETE FROM Clientes WHERE id = ?");
-
+        try {
+            $stm = $this->pdo->prepare("DELETE FROM cliente WHERE id = ?");
             $stm->execute(array($id));
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             die($e->getMessage());
         }
     }
 
-    public function Actualizar(Cliente $data)
+    public function Actualizar($cliente)
     {
-        try
-        {
-            $sql = "UPDATE Cliente SET
-                        identificacion
-                        Nombre          = ?,
-                        celular       = ?,
-                        direccion           = ?,
-                        email = ?
-                    WHERE id = ?";
+        try {
+            $sql = "UPDATE cliente SET identificacion = ?, nombre = ?, celular = ?, direccion = ?, email = ? WHERE id = ?";
 
-            $this->pdo->prepare($sql)
-                 ->execute(
-                array(
-                    $data->__GET('identificacion'),
-                    $data->__GET('Nombre'),
-                    $data->__GET('celular'),
-                    $data->__GET('email'),
-                    $data->__GET('id')
-
+            return $this->pdo->prepare($sql)
+                ->execute(array(
+                    $cliente->__GET('identificacion'),
+                    $cliente->__GET('nombre'),
+                    $cliente->__GET('celular'),
+                    $cliente->__GET('direccion'),
+                    $cliente->__GET('email'),
+                    $cliente->__GET('id')
                 ));
 
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             die($e->getMessage());
         }
     }
 
-
-    public function Registrar(cliente $data)
+    public function Registrar()
     {
-        try
-        {
-        $sql = "INSERT INTO Cliente (id, identificacion, Nombre,celular, email)
-                VALUES (?, ?, ?, ?)";
+        try {
+            $sql = "INSERT INTO cliente (identificacion, nombre, celular, direccion, email) VALUES (?, ?, ?, ?, ?)";
 
-        $this->pdo->prepare($sql)
-             ->execute(
-            array(
-                $data->__GET('id'),
-                $data->__GET('identificacion'),
-                $data->__GET('Nombre'),
-                $data->__GET('celular'),
-                $data->__GET('email'),
-
-
-                )
-            );
-        } catch (Exception $e)
-        {
-            die($e->getMessage());
+            return $this->pdo->prepare($sql)
+                ->execute(array(
+                    $this->__GET('identificacion'),
+                    $this->__GET('nombre'),
+                    $this->__GET('celular'),
+                    $this->__GET('direccion'),
+                    $this->__GET('email'),
+                ));
+        } catch (Exception $e) {
+            die($e->getMessage() . $e->getFile() . $e->getTraceAsString());
         }
-
     }
-
 }
