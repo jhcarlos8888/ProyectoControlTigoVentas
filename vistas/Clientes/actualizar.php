@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Registrar Cliente</title>
+    <title>Actualizar Cliente</title>
     <?php include(RUTA_VISTAS . 'partes/head.php') ?>
 </head>
 
@@ -19,15 +19,15 @@
 
             <div class="text-center">
 
-                <img class="mb-4 img-fluid" src="../img/user_bussines.png" alt="" width="100" height="100">
+                <img class="mb-4 img-fluid" src="<?php assets("img/user_bussines.png") ?>" alt="" width="100" height="100">
 
-                <h3>REGISTRAR CLIENTE</h3>
+                <h3>ACTUALIZAR CLIENTE</h3>
 
             </div>
 
             <form class="form " id="login" method="post" action="<?php url("cliente/actualizar") ?>">
                 <input type="hidden" name="proceso" value="login"><!--Aqui debe ir un token-->
-                <input type="hidden" name="id" value="<?= $cliente->getIdcliente()?>">
+                <input type="hidden" name="id" value="<?= $cliente->__get("id")?>">
 
                 <div class=" form-group row offset-md-2 my-0">
                     <div class="col-md-3">
@@ -35,7 +35,7 @@
                     </div>
                     <div class="col-md-5">
                         <input type="text" name="identificacion" id="identificacion"
-                               value="<?= $cliente->getIdentificacion() ?>"
+                               value="<?= $cliente->__get("identificacion") ?>"
                                class="form-control text-center my-2" placeholder="Ingrese cedula del cliente">
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="col-md-5">
                         <input type="text" name="nombre" id="nombre" class="form-control text-center my-2"
-                               value="<?= $cliente->getNombre()?>"
+                               value="<?= $cliente->__get("nombre")?>"
                                placeholder="Ingrese nombre del cliente">
                     </div>
                 </div>
@@ -57,18 +57,18 @@
                     </div>
                     <div class="col-md-5">
                         <input type="text" name="celular" id="celular" class="form-control text-center my-2"
-                               value="<?= $cliente>getCelular()?>"
+                               value="<?= $cliente->__get("celular")?>"
                                placeholder="Ingrese celular">
                     </div>
                 </div>
 
                 <div class=" form-group row offset-md-2 my-0">
                     <div class="col-md-3">
-                        <label for="cliente" class="col-form-label my-2">DIRECCION</label>
+                        <label for="direccion" class="col-form-label my-2">DIRECCION</label>
                     </div>
                     <div class="col-md-5">
                         <input type="text" name="direccion" id="direccion" class="form-control text-center my-2"
-                               value="<?= $usuario->getdireccion()?>"
+                               value="<?= $cliente->__get("direccion")?>"
                                placeholder="Ingrese direccion">
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                     </div>
                     <div class="col-md-5">
                         <input type="text" name="email" id="email" class="form-control text-center my-2"
-                               value="<?= $usuario->getEmail()?>"
+                               value="<?= $cliente->__get("email")?>"
                                placeholder="Ingrese e-mail">
                     </div>
                 </div>
