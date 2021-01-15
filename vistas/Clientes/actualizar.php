@@ -19,7 +19,7 @@
 
             <div class="text-center">
 
-                <img class="mb-4 img-fluid" src="<?php assets("img/user_bussines.png") ?>" alt="" width="100" height="100">
+                <img class="mb-4 img-fluid" src="<?php assets("img/edit_user.png") ?>" alt="" width="100" height="100">
 
                 <h3>ACTUALIZAR CLIENTE</h3>
 
