@@ -47,7 +47,7 @@
 
                     <div class="col-12 order-3 table-responsive">
 
-                        <table class="table table-hover">
+                        <table class="table table-hover" id="tblClientes" aria-label="Lista de Clientes">
                             <thead>
                                 <tr>
                                     <th scope="col">CC</th>
@@ -58,21 +58,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (isset($$ListarClientes)) {
+                                <?php if (isset($ListarClientes)) {
                                     for ($i = 0; $i < count($ListarClientes); $i++) {
                                         ?>
                                         <tr>
-                                            <td><?= $ListarClientes[$i]->getIdentificacion(); ?></td>
-                                            <td><?= $ListarClientes[$i]->getNombre(); ?></td>
-                                            <td><?= $ListarClientes[$i]->getDireccion(); ?></td>
-                                            <td><?= $ListarClientes[$i]->getEmail(); ?></td>
-                                            <td><?= $ListarClientes[$i]->getCelular(); ?></td>
+                                            <td><?= $ListarClientes[$i]->__get("identificacion"); ?></td>
+                                            <td><?= $ListarClientes[$i]->__get("nombre"); ?></td>
+                                            <td><?= $ListarClientes[$i]->__get("direccion"); ?></td>
+                                            <td><?= $ListarClientes[$i]->__get("email"); ?></td>
+                                            <td><?= $ListarClientes[$i]->__get("celular"); ?></td>
                                             <td>
-                                                <a href="<?php url("cliente/editar/" . $ListarClientes[$i]->getIdCliente()) ?>"
+                                                <a href="<?php url("cliente/editar/" . $ListarClientes[$i]->__get("id")) ?>"
                                                    class="bnt"><span data-feather="edit-3"></span></a>
-                                                <a href="<?php url("cliente/eliminar/" . $ListarClientes[$i]->getIdCliente()) ?>"
+                                                <a href="<?php url("cliente/eliminar/" . $ListarClientes[$i]->__get("id")) ?>"
                                                    class="bnt"><span data-feather="trash-2"></span></a>
-                                                <!--<button class="btn"><span data-feather="trash-2"></span></button>-->
                                             </td>
                                         </tr>
                                     <?php }
