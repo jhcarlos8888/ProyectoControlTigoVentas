@@ -9,6 +9,6 @@ $ruta->Controladores(array(
     "/"=>"ControladorPrincipal",
     "/usuario"=>"ControladorUsuario",
     "/prueba"=>"ControladorPrincipal",
-    "/cliente"=>"ControladorPrincipal",
+    "/cliente"=>"ControladorCliente",
     "/autenticacion"=>"ControladorAutenticacion",
 ));
