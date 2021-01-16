@@ -15,7 +15,7 @@
 
         <?php include(RUTA_VISTAS . 'partes/menu.php') ?>
 
-        <main role="main" class="col-md-9  ml-sm-auto px-md-4 py-md-5 py-2 ">
+        <main role="main" class="col-md-9  ml-sm-auto px-md-4 py-md-4 py-2 ">
             <div class="text-center">
                 <img class="mb-4 img-fluid" src="<?php assets("img/user_bussines.png") ?>" alt="" width="60"
                      height="60">
@@ -38,8 +38,6 @@
                            placeholder="Ingrese Cedula" required>
                 </div>
 
-
-
                 <div class="col-md-6">
                     <label for="email" class="col-form-label">Email</label>
                     <input type="email" name="email" id="email" class="form-control" placeholder="Ingrese Correo"
@@ -52,12 +50,11 @@
                            pattern="[0-9]{7-10}" minlength="7" maxlength="10" title="Debe contener minimo 7 digitos, maximo 10">
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <label for="direccion" class="col-form-label">Direccion</label>
                     <input type="text" name="direccion" id="direccion" class="form-control" placeholder="Ingrese Direccion"
                            required>
                 </div>
-
 
                 <div class="col-md-8 m-auto pt-4">
                     <button type="submit" class="btn btn-primary btn-block">Registrar</button>
