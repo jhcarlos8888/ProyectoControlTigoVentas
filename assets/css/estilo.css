@@ -34,13 +34,13 @@
     z-index: 2;
 }
 
-.form-signin input[type=number]::-webkit-inner-spin-button,
-.form-signin input[type=number]::-webkit-outer-spin-button {
+input[type=number]::-webkit-inner-spin-button,
+nput[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-.form-signin input[type=number] {
+input[type=number] {
     -moz-appearance: textfield;
 }
 
