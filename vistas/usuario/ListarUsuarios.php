@@ -17,8 +17,8 @@
 
             <?php include(RUTA_VISTAS . 'partes/menu.php') ?>
 
-            <main role="main" class="col-12 col-md-9 px-md-4 py-md-5 py-2">
-                <div class="row text-center">
+            <main role="main" class="col-12 col-md-10 px-md-4 py-md-5 py-2">
+                <div class="row">
                     <div class="col-md-4 py-md-3 py-2 order-2 order-md-1">
                         <a class="btn btn-primary w-100" href="<?php url("usuario/registrar") ?>"
                            role="button">Crear Cuenta</a>
@@ -45,9 +45,9 @@
                         </div>
                     </div>
 
-                    <div class="col-12 order-3 table-responsive">
+                    <div class="col-12 order-md-12 table-responsive">
 
-                        <table class="table table-hover">
+                        <table class="table table-hover" aria-label="lista de usuarios">
                             <thead>
                                 <tr>
                                     <th scope="col">CC</th>
