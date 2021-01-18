@@ -10,11 +10,4 @@ class ControladorPrincipal
 
         header("location:/" . trim($urlprin, "/") . "/autenticacion");
     }
-
-    public function prueba(){
-
-        $test = "Pasa test";
-
-        return Vista::crear("usuario.ListarUsuarios");
-    }
 }

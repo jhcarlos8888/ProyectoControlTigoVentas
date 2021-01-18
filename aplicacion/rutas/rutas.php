@@ -8,7 +8,6 @@ $ruta->Controladores(array(
     //agregar aqui las rutas con su controlador que gestionata la peticion
     "/"=>"ControladorPrincipal",
     "/usuario"=>"ControladorUsuario",
-    "/prueba"=>"ControladorPrincipal",
     "/cliente"=>"ControladorCliente",
     "/autenticacion"=>"ControladorAutenticacion",
 ));
