@@ -11,7 +11,7 @@
     <ul class="navbar-nav pl-2 pr-3 py-1">
         <li class="nav-item text-nowrap">
             <form method="post" action="<?php url("autenticacion/logout") ?>">
-                <input type="hidden" name="proceso" value="logout"><!--Aqui debe ir un token-->
+                <span><?php echo (isset($_SESSION['nombre_user'])) ? $_SESSION['nombre_user'] : "Error User_name" ?></span>
                 <button type="submit" class="btn btn-light">Salir</button>
             </form>
         </li>
