@@ -35,23 +35,26 @@ class ControladorAutenticacion
 
             if ($usuario->LoguearUsuario($this->cedula, $this->contrasena)) {
 
-                $listaUsuarios = $usuario->ListarUsuarios();
+                session_start();
+                $_SESSION['id'] = session_id();
+                $_SESSION['id_user'] = $usuario->getIdUsuario();
+                $_SESSION['nombre_user'] = $usuario->getNombre();
 
-                return Vista::crear("usuario.ListarUsuarios", "listaUsuarios", $listaUsuarios);
+                redirecciona("usuario");
             } else {
 
-
-                $urlprin = str_replace("index.php", "", $_SERVER["PHP_SELF"]);
-
-                header("location:/" . trim($urlprin, "/"));
+                redirecciona("");
             }
         }
     }
 
     public function logout(){
 
-        $urlprin = str_replace("index.php", "", $_SERVER["PHP_SELF"]);
-        header("location:/" . trim($urlprin, "/"));
+        session_start();
+        session_unset();
+        session_destroy();
+
+        redirecciona("");
     }
 
     private function _validar(){
