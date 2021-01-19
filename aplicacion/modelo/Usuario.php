@@ -187,14 +187,6 @@ class Usuario
         $stmt->bindValue(":rol", $rol, PDO::PARAM_INT);
 
         return $stmt->execute();
-
-        /*if ($stmt->execute()) {
-            self::setIdUsuario($conexion->lastInsertId());
-            return true;
-        }
-        else{
-            return false;
-        }*/
     }
 
     public function ConsultarUsuario($id)
@@ -313,10 +305,27 @@ class Usuario
         $stmt = $conexion->prepare("SELECT * FROM usuario WHERE identificacion=:cedula AND contrasena=:contrasena");
         $stmt->bindParam(":cedula", $cedula);
         $stmt->bindParam(":contrasena", $contrasena);
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
         $stmt->execute();
 
         $conexionDataBase->CerrarConexion();
 
-        return $stmt->rowCount() == 1;
+        if ($stmt->rowCount() == 1) {
+
+            $fila = $stmt->fetch();
+            self::setIdUsuario($fila->id);
+            self::setIdentificacion($fila->identificacion);
+            self::setNombre($fila->nombre);
+            self::setCelular($fila->celular);
+            self::setUsuario($fila->usuario);
+            self::setContrasena($fila->contrasena);
+            self::setEmail($fila->email);
+            self::setZonaSede($fila->fk_zona_sede);
+            self::setRol($fila->fk_rol);
+
+            return true;
+        } else {
+            return false;
+        }
     }
 }
