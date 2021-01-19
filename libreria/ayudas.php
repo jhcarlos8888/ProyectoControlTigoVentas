@@ -26,3 +26,17 @@ function assets($assets)
     $url = trim(str_replace("index.php", "", $_SERVER["PHP_SELF"]), "/");
     echo "/" . $url . "/assets/" . $assets;
 }
+
+function validarSession(){
+    session_start();
+    $valid_session = isset($_SESSION['id']) ? $_SESSION['id'] === session_id() : FALSE;
+    if (!$valid_session) {
+        redirecciona("");
+        exit();
+    }
+}
+
+function redirecciona($ruta){
+    $urlprin = str_replace("index.php", "", $_SERVER["PHP_SELF"]);
+    header("location:/" . trim($urlprin, "/") . "/" . $ruta);
+}
