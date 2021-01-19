@@ -8,8 +8,9 @@ class ControladorUsuario
 
     public function index()
     {
-        $usuario = new Usuario();
+        validarSession();
 
+        $usuario = new Usuario();
         $listaUsuarios = $usuario->ListarUsuarios();
 
         return Vista::crear("usuario.ListarUsuarios", "listaUsuarios", $listaUsuarios);
@@ -17,7 +18,7 @@ class ControladorUsuario
 
     public function editar($id)
     {
-        /*$id = $_REQUEST['id'];*/
+        validarSession();
 
         $usuario = new Usuario();
         $usuario = $usuario->ConsultarUsuario($id);
@@ -27,6 +28,8 @@ class ControladorUsuario
 
     public function actualizar()
     {
+        validarSession();
+
         $id = $_POST['id'];
         $identificacion = $_POST['identificacion'];
         $nombre = $_POST['nombre'];
@@ -38,7 +41,6 @@ class ControladorUsuario
         $rol = $_POST['rol'];
 
         $usuario = new Usuario();
-
         $usuario->setIdUsuario($id);
         $usuario->setIdentificacion($identificacion);
         $usuario->setNombre($nombre);
@@ -52,16 +54,15 @@ class ControladorUsuario
         $resultado = $usuario->ActualizarUsuario();
 
         if ($resultado) {
-            $listaUsuarios = $usuario->ListarUsuarios();
-            return Vista::crear("usuario.ListarUsuarios", "listaUsuarios", $listaUsuarios);
+            redirecciona("usuario");
         } else {
-            self::registrar();
+            self::editar($usuario->getIdUsuario());
         }
-
     }
 
     public function crear()
     {
+        validarSession();
 
         $identificacion = $_POST['identificacion'];
         $nombre = $_POST['nombre'];
@@ -86,16 +87,15 @@ class ControladorUsuario
         $resultado = $usuario->CrearUsuario();
 
         if ($resultado) {
-            $listaUsuarios = $usuario->ListarUsuarios();
-            return Vista::crear("usuario.ListarUsuarios", "listaUsuarios", $listaUsuarios);
+            redirecciona("usuario");
         } else {
             self::registrar();
         }
-
     }
 
     public function registrar()
     {
+        validarSession();
 
         $roles = array(
             "1" => "Administrador",
@@ -110,19 +110,16 @@ class ControladorUsuario
             "1043" => "Oriental"
         );
 
-        return Vista::crear("usuario.registrar", array("sedes"=>$sedes,"roles"=>$roles));
+        return Vista::crear("usuario.registrar", array("sedes" => $sedes, "roles" => $roles));
     }
 
     public function eliminar($id)
     {
-
-        /*$id = $_REQUEST['id'];*/
+        validarSession();
 
         $usuario = new Usuario();
-
         $usuario->EliminarUsuario($id);
 
-        $listaUsuarios = $usuario->ListarUsuarios();
-        return Vista::crear("usuario.ListarUsuarios", "listaUsuarios", $listaUsuarios);
+        redirecciona("usuario");
     }
 }
