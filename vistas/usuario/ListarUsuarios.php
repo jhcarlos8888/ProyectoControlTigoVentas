@@ -26,7 +26,7 @@
 
                     <div class="offset-md-2 col-md-6 offset-lg-4 col-lg-4 py-md-3 order-1 order-md-2">
                         <div class="input-group">
-                            <input type="text" placeholder="Buscar Usuario" class="form-control"
+                            <input type="text" id="busqueda" placeholder="Buscar Usuario" class="form-control" data-generator="Usuario"
                                    aria-label="Text input with segmented dropdown button">
                             <div class="input-group-append">
                                 <button type="button" class="btn btn-outline-secondary">
@@ -47,7 +47,7 @@
 
                     <div class="col-12 order-md-12 table-responsive">
 
-                        <table class="table table-hover" aria-label="lista de usuarios">
+                        <table id="UserList" class="table table-hover" aria-label="lista de usuarios">
                             <thead>
                                 <tr>
                                     <th scope="col">CC</th>
@@ -59,7 +59,7 @@
                                     <th scope="col">ROL</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="bodyTable">
                                 <?php if (isset($listaUsuarios)) {
                                     for ($i = 0; $i < count($listaUsuarios); $i++) {
                                         ?>
