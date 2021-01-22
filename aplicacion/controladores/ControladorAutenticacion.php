@@ -28,7 +28,7 @@ class ControladorAutenticacion
             foreach ($this->errores as $error){
                 echo $error , '<br>';
             }
-            return Vista::crear("index", "errores", $this->errores);
+            redirecciona("autenticacion");
         }else{
 
             $usuario = new Usuario();
@@ -43,7 +43,7 @@ class ControladorAutenticacion
                 redirecciona("usuario");
             } else {
 
-                redirecciona("");
+                redirecciona("autenticacion");
             }
         }
     }
@@ -54,7 +54,7 @@ class ControladorAutenticacion
         session_unset();
         session_destroy();
 
-        redirecciona("");
+        redirecciona("autenticacion");
     }
 
     private function _validar(){
