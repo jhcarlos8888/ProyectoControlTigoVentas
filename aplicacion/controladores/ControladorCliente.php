@@ -8,6 +8,8 @@ class ControladorCliente
 
     public function index()
     {
+        validarSession();
+
         $cliente = new Cliente();
 
         $listaClientes = $cliente->listar();
@@ -17,6 +19,8 @@ class ControladorCliente
 
     public function editar($id)
     {
+        validarSession();
+
         $cliente = new cliente();
         $cliente = $cliente->Obtener($id);
 
@@ -25,6 +29,8 @@ class ControladorCliente
 
     public function actualizar()
     {
+        validarSession();
+
         $id = $_POST['id'];
         $identificacion = $_POST['identificacion'];
         $nombre = $_POST['nombre'];
@@ -43,8 +49,7 @@ class ControladorCliente
         $resultado = $cliente->Actualizar($cliente);
 
         if ($resultado) {
-            $listacliente = $cliente->listar();
-            return Vista::crear("Clientes.ListarClientes", "ListarClientes", $listacliente);
+            redirecciona("cliente");
         } else {
             self::editar($cliente);
             die();
@@ -53,6 +58,8 @@ class ControladorCliente
 
     public function crear()
     {
+        validarSession();
+
         $identificacion = $_POST['identificacion'];
         $nombre = $_POST['nombre'];
         $celular = $_POST['celular'];
@@ -70,8 +77,7 @@ class ControladorCliente
         $resultado = $cliente->Registrar();
 
         if ($resultado) {
-            $ListarClientes = $cliente->listar();
-            return Vista::crear("Clientes.ListarClientes", "ListarClientes", $ListarClientes);
+            redirecciona("cliente");
         } else {
             self::registrar();
             die();
@@ -80,16 +86,18 @@ class ControladorCliente
 
     public function registrar()
     {
+        validarSession();
+
         return Vista::crear("Clientes.registrar");
     }
 
     public function eliminar($id)
     {
-        $cliente = new cliente();
+        validarSession();
 
+        $cliente = new cliente();
         $cliente->Eliminar($id);
 
-        $listacliente = $cliente->listar();
-        return Vista::crear("Clientes.ListarClientes", "ListarClientes", $listacliente);
+        redirecciona("cliente");
     }
 }
