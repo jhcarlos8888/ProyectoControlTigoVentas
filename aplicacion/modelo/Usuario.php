@@ -237,7 +237,7 @@ class Usuario
         $sede = self::getZonaSede();
         $rol = self::getRol();
 
-        $stmt->bindValue(':id', $id,PDO::PARAM_INT);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->bindValue(':identificacion', $identificacion);
         $stmt->bindValue(":nombre", $nombre);
         $stmt->bindValue(":celular", $celular);
@@ -251,7 +251,7 @@ class Usuario
 
         $conexionDataBase->CerrarConexion();
 
-        return($stmt->rowCount() > 0);
+        return ($stmt->rowCount() > 0);
     }
 
     public function EliminarUsuario($id)
@@ -327,5 +327,41 @@ class Usuario
         } else {
             return false;
         }
+    }
+
+    public function Buscar(string $valor)
+    {
+
+        $usuarios = array();
+
+        $conexionDataBase = new Conexion();
+
+        $conexion = $conexionDataBase->CrearConexion();
+
+        $valor = $valor."%";
+        $stmt = $conexion->prepare("SELECT * FROM usuario WHERE identificacion LIKE :cedula OR nombre LIKE :nombre");
+        $stmt->bindParam(":cedula", $valor);
+        $stmt->bindParam(":nombre", $valor);
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
+        $stmt->execute();
+
+        while ($fila = $stmt->fetch()) {
+            $usuario = array(
+                "id" => $fila->id,
+                "identificacion" => $fila->identificacion,
+                "nombre" => $fila->nombre,
+                "celular" => $fila->celular,
+                "usuario" => $fila->usuario,
+                "email" => $fila->email,
+                "sede" => $fila->fk_zona_sede,
+                "rol" => $fila->fk_rol,
+                );
+
+            $usuarios[] = $usuario;
+        }
+
+        $conexionDataBase->CerrarConexion();
+
+        return $usuarios;
     }
 }

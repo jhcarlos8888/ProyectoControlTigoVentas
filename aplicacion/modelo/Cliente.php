@@ -2,6 +2,7 @@
 
 namespace Cliente;
 
+use Conexion;
 use Exception;
 use PDO;
 
@@ -135,5 +136,39 @@ class Cliente
         } catch (Exception $e) {
             die($e->getMessage() . $e->getFile() . $e->getTraceAsString());
         }
+    }
+
+    public function Buscar($valor)
+    {
+        $clientes = array();
+
+        $conexionDataBase = new Conexion();
+
+        $conexion = $conexionDataBase->CrearConexion();
+
+        $valor = $valor."%";
+        $stmt = $conexion->prepare("SELECT * FROM cliente WHERE identificacion LIKE :cedula OR nombre LIKE :nombre");
+        $stmt->bindParam(":cedula", $valor);
+        $stmt->bindParam(":nombre", $valor);
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
+        $stmt->execute();
+
+        while ($fila = $stmt->fetch()) {
+            $cliente = array(
+                "id" => $fila->id,
+                "identificacion" => $fila->identificacion,
+                "nombre" => $fila->nombre,
+                "celular" => $fila->celular,
+                "direccion" => $fila->direccion,
+                "email" => $fila->email,
+
+            );
+
+            $clientes[] = $cliente;
+        }
+
+        $conexionDataBase->CerrarConexion();
+
+        return $clientes;
     }
 }
