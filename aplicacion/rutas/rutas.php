@@ -11,4 +11,5 @@ $ruta->Controladores(array(
     "/cliente"=>"ControladorCliente",
     "/autenticacion"=>"ControladorAutenticacion",
     "/buscar"=>"ControladorBusqueda",
+    "/manuales"=>"ControladorManuales",
 ));
