@@ -10,10 +10,14 @@ class ControladorAutenticacion
     private $cedula;
     private $contrasena;
 
-
     public function index()
     {
-        return Vista::crear("index");
+        session_start();
+        if(isset($_SESSION['id'])){
+            redirecciona("cliente");
+        }else {
+            return Vista::crear("index");
+        }
     }
 
     public function login()
