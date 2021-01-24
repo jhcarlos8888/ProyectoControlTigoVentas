@@ -7,8 +7,8 @@ class Ruta
     /**
      * @param $listaControladores
      */
-    public function controladores($listaControladores
-    ) //recibe lo lista de controladores con sus respectivas rutas del archivo rutas.php
+    //recibe lo lista de controladores con sus respectivas rutas del archivo rutas.php
+    public function controladores($listaControladores)
     {
         $this->controladores = $listaControladores;
 
@@ -45,21 +45,14 @@ class Ruta
                 die("No existe la ruta principal o raiz, no fue definida en las rutas");
             }
 
-            // Si la ruta no es el index o raiz del proyecto validamos la ruta recibida
-        } else {
+            // buscando si existe la ruta en el array de $controladores
+        } else if (array_key_exists("/$partesUrl[0]", $this->controladores) == 1) {
 
-            $estadoRuta = false;
+                foreach ($this->controladores as $ruta => $controller) {
 
-            foreach ($this->controladores as $ruta => $controller) {
+                    if (trim($ruta, "/") != "" && ("/$partesUrl[0]") == $ruta) {
 
-                if (trim($ruta, "/") != "") {
-                    $pos = strpos($url, trim($ruta, "/"));
-
-                    if ($pos === false) {
-                        echo "";
-                    } else {
                         $listaParametros = array(); //array donde se guardaran los parametros de la web
-                        $estadoRuta = true;
                         $controlador = $controller;
                         $funcion = "";
                         $cantidadRuta = count(explode("/", trim($ruta, "/")));
@@ -73,14 +66,12 @@ class Ruta
                                 }
                             }
                         }
+
                         $this->getController($funcion, $controlador, $listaParametros);
                     }
                 }
-            }
-
-            if ($estadoRuta == false) {
-                die("Error en la ruta recibida");
-            }
+        } else {
+            vista\Vista::crear("errores.404");
         }
     }
 
@@ -101,6 +92,7 @@ class Ruta
         }
         // incluimos el controlador a ruta
         $this->incluirControlador($controlador);
+
         //comprobamos si existe una clase con el mismo nombre del controlador
         if (class_exists($controlador)) {
             //creamos una clase temporal en base la variable controlador
@@ -121,7 +113,8 @@ class Ruta
                     call_user_func_array(array($ClaseTemporal, $functionOfController), $params);
                 }
             } else {
-                die("No existe la funcion declara en el controlador");
+                vista\Vista::crear("errores.404");
+                exit();
             }
         } else {
             die("No existe el controlador");
