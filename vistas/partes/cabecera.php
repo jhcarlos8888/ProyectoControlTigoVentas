@@ -11,8 +11,7 @@
     <ul class="navbar-nav pl-2 pr-3 py-1">
         <li class="nav-item text-nowrap">
             <form method="post" action="<?php url("autenticacion/logout") ?>">
-                <span><?php echo (isset($_SESSION['nombre_user'])) ? $_SESSION['nombre_user'] : "Error User_name" ?></span>
-                <button type="submit" class="btn btn-light">Salir</button>
+                <button type="submit" class="btn btn-light"><span data-feather="log-out"></span></button>
             </form>
         </li>
     </ul>

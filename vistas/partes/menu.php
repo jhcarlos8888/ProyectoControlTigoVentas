@@ -6,22 +6,17 @@
 
             <li class="nav-item">
                 <a class="nav-link active" href="#">
-                    <span data-feather="home"></span>Inicio<span class="sr-only">(current)</span>
+
+                    <span data-feather="airplay"></span>¡Hola!
+                    <span><?php echo (isset($_SESSION['nombre_user'])) ? $_SESSION['nombre_user'] : "Error User_name" ?></span>
                 </a>
             </li>
 
-            <li class="nav-item dropdown">
+            <li class="nav-item">
 
-                <a class="nav-link dropdown-toggle" role="button" href="#" data-toggle="collapse"
-                   data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><span
-                            data-feather="users"></span>Usuario</a>
+                <a class="nav-link" role="button" href="#" ><span data-feather="users"></span>Usuario</a>
 
-                <!--<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                    <a class="dropdown-item" href="#">Ingreso a mi perfil</a>
-                    <a class="dropdown-item" href="#">Cambio de contraseña</a>
-                    <a class="dropdown-item" href="#">Desactivacion de usuarios</a>
-                    <a class="dropdown-item" href="#">Rol de usuarios</a>
-                </div>-->
+
             </li>
 
 
@@ -57,13 +52,14 @@
             <li class="nav-item dropdown">
 
                 <a class="nav-link dropdown-toggle" role="button" href="#" data-toggle="collapse"
-                   data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"><span
+                   data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><span
                             data-feather="layers"></span>Ayudas</a>
 
-                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                     <a class="dropdown-item" href="#">Volantes</a>
                 </div>
             </li>
+
         </ul>
     </div>
 </nav>
