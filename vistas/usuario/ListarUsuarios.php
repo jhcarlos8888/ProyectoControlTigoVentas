@@ -45,7 +45,7 @@
                         </div>
                     </div>
 
-                    <div class="col-12 order-md-12 table-responsive">
+                    <div class="col-12 order-3  table-responsive">
 
                         <table id="UserList" class="table table-hover" aria-label="lista de usuarios">
                             <thead>

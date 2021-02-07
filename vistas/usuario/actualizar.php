@@ -15,7 +15,7 @@
 
         <?php include(RUTA_VISTAS . 'partes/menu.php') ?>
 
-        <main role="main" class="col-12 col-md-9 ml-sm-auto  px-md-4 py-md-5 py-2 ">
+        <main role="main" class="col-12 col-md-10 px-md-4 py-md-5 py-2">
 
             <div class="text-center">
 
