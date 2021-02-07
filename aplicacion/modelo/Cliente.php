@@ -146,7 +146,7 @@ class Cliente
 
         $conexion = $conexionDataBase->CrearConexion();
 
-        $valor = $valor."%";
+        $valor = $valor . "%";
         $stmt = $conexion->prepare("SELECT * FROM cliente WHERE identificacion LIKE :cedula OR nombre LIKE :nombre");
         $stmt->bindParam(":cedula", $valor);
         $stmt->bindParam(":nombre", $valor);

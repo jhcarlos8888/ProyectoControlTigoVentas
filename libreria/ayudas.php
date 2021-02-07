@@ -1,5 +1,7 @@
 <?php
 
+define("INDEX","index.php");
+
 //Esta funcion realiza un require_once de todos los archivos contenidos en la carpeta modelo.
 function incluirModelos()
 {
@@ -14,7 +16,7 @@ function incluirModelos()
 // La funcion permite enviar una ruta y retornar una url valida para la clase Ruta que recibe la peticion
 function url($ruta)
 {
-    $url = str_replace("index.php", "", $_SERVER["PHP_SELF"]);
+    $url = str_replace(INDEX, "", $_SERVER["PHP_SELF"]);
     echo "/" . trim($url, "/") . "/" . $ruta;
 }
 
@@ -23,7 +25,7 @@ function url($ruta)
 * */
 function assets($assets)
 {
-    $url = trim(str_replace("index.php", "", $_SERVER["PHP_SELF"]), "/");
+    $url = trim(str_replace(INDEX, "", $_SERVER["PHP_SELF"]), "/");
     echo "/" . $url . "/assets/" . $assets;
 }
 
@@ -37,6 +39,6 @@ function validarSession(){
 }
 
 function redirecciona($ruta){
-    $urlprin = str_replace("index.php", "", $_SERVER["PHP_SELF"]);
+    $urlprin = str_replace(INDEX, "", $_SERVER["PHP_SELF"]);
     header("location:/" . trim($urlprin, "/") . "/" . $ruta);
 }
