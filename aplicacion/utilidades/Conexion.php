@@ -2,7 +2,12 @@
 
 class Conexion
 {
-    private $hostname, $username, $password, $dbname, $con, $dsn;
+    private $hostname;
+    private $username;
+    private $password;
+    private $dbname;
+    private $con;
+    private $dsn;
 
     public function __construct()
     {
