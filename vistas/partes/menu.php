@@ -10,15 +10,29 @@
                 </a>
             </li>
 
+            <li class="nav-item dropdown">
+
+                <a class="nav-link dropdown-toggle" role="button" href="#" data-toggle="collapse"
+                   data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><span
+                            data-feather="users"></span>Usuario</a>
+
+                <!--<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <a class="dropdown-item" href="#">Ingreso a mi perfil</a>
+                    <a class="dropdown-item" href="#">Cambio de contraseña</a>
+                    <a class="dropdown-item" href="#">Desactivacion de usuarios</a>
+                    <a class="dropdown-item" href="#">Rol de usuarios</a>
+                </div>-->
+            </li>
+
+
             <li class="nav-item dropdow">
 
                 <a class="nav-link dropdown-toggle" role="button" href="#" data-toggle="collapse"
                    data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne"><span
-                            data-feather="bar-chart-2"></span>Seguimientos</a>
+                            data-feather="bar-chart-2"></span>Clientes</a>
 
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                     <a class="dropdown-item" href="#">Seguimiento de clientes</a>
-                    <a class="dropdown-item" href="#">Actualización de clientes</a>
                     <a class="dropdown-item" href="#">Ventas, productos y servicios</a>
                     <a class="dropdown-item" href="#">Envios de SMS</a>
                     <a class="dropdown-item" href="#">Generacion de Id de pedido</a>
@@ -43,32 +57,13 @@
             <li class="nav-item dropdown">
 
                 <a class="nav-link dropdown-toggle" role="button" href="#" data-toggle="collapse"
-                   data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><span
-                            data-feather="users"></span>Usuarios</a>
-
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                    <a class="dropdown-item" href="#">Ingreso a mi perfil</a>
-                    <a class="dropdown-item" href="#">Cambio de contraseña</a>
-                    <a class="dropdown-item" href="#">Desactivacion de usuarios</a>
-                    <a class="dropdown-item" href="#">Rol de usuarios</a>
-                </div>
-            </li>
-
-            <li class="nav-item dropdown">
-
-                <a class="nav-link dropdown-toggle" role="button" href="#" data-toggle="collapse"
                    data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"><span
                             data-feather="layers"></span>Ayudas</a>
 
                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-                    <a class="dropdown-item" href="#">Diseño volante publicitario</a>
-                    <a class="dropdown-item" href="#">Manuales tecnicos y de uso</a>
-                    <a class="dropdown-item" href="#">Documentos legales</a>
+                    <a class="dropdown-item" href="#">Volantes</a>
                 </div>
             </li>
         </ul>
     </div>
 </nav>
-
-
-
