@@ -41,22 +41,22 @@ class ControladorUsuario
         $rol = $_POST['rol'];
 
         $usuario = new Usuario();
-        $usuario->setIdUsuario($id);
-        $usuario->setIdentificacion($identificacion);
-        $usuario->setNombre($nombre);
-        $usuario->setCelular($celular);
-        $usuario->setUsuario($user);
-        $usuario->setContrasena($contrasena);
-        $usuario->setEmail($email);
-        $usuario->setZonaSede($sede);
-        $usuario->setRol($rol);
+        $usuario->__set("id_usuario",$id);
+        $usuario->__set("identificacion",$identificacion);
+        $usuario->__set("nombre",$nombre);
+        $usuario->__set("celular",$celular);
+        $usuario->__set("usuario",$user);
+        $usuario->__set("contrasena",$contrasena);
+        $usuario->__set("email",$email);
+        $usuario->__set("zona_sede",$sede);
+        $usuario->__set("rol",$rol);
 
         $resultado = $usuario->ActualizarUsuario();
 
         if ($resultado) {
             redirecciona("usuario");
         } else {
-            self::editar($usuario->getIdUsuario());
+            self::editar($usuario->__get("id_usuario"));
         }
     }
 
@@ -75,14 +75,14 @@ class ControladorUsuario
 
         $usuario = new Usuario();
 
-        $usuario->setIdentificacion($identificacion);
-        $usuario->setNombre($nombre);
-        $usuario->setCelular($celular);
-        $usuario->setUsuario($user);
-        $usuario->setContrasena($contrasena);
-        $usuario->setEmail($email);
-        $usuario->setZonaSede($sede);
-        $usuario->setRol($rol);
+        $usuario->__set("identificacion",$identificacion);
+        $usuario->__set("nombre",$nombre);
+        $usuario->__set("celular",$celular);
+        $usuario->__set("usuario",$user);
+        $usuario->__set("contrasena",$contrasena);
+        $usuario->__set("email",$email);
+        $usuario->__set("zona_sede",$sede);
+        $usuario->__set("rol",$rol);
 
         $resultado = $usuario->CrearUsuario();
 

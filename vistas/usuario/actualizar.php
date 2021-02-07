@@ -27,7 +27,7 @@
 
             <form class="form " id="login" method="post" action="<?php url("usuario/actualizar") ?>">
                 <input type="hidden" name="proceso" value="login"><!--Aqui debe ir un token-->
-                <input type="hidden" name="id" value="<?= $usuario->getIdUsuario()?>">
+                <input type="hidden" name="id" value="<?= $usuario->__get("id_usuario")?>">
 
                 <div class=" form-group row offset-md-2 my-0">
                     <div class="col-md-3">
@@ -35,7 +35,7 @@
                     </div>
                     <div class="col-md-5">
                         <input type="text" name="identificacion" id="identificacion"
-                               value="<?= $usuario->getIdentificacion() ?>"
+                               value="<?= $usuario->__get("identificacion") ?>"
                                class="form-control text-center my-2" placeholder="Ingrese cedula del usuario">
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="col-md-5">
                         <input type="text" name="nombre" id="nombre" class="form-control text-center my-2"
-                               value="<?= $usuario->getNombre()?>"
+                               value="<?= $usuario->__get("nombre")?>"
                                placeholder="Ingrese nombre del usuario">
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                     </div>
                     <div class="col-md-5">
                         <input type="text" name="celular" id="celular" class="form-control text-center my-2"
-                               value="<?= $usuario->getCelular()?>"
+                               value="<?= $usuario->__get("celular")?>"
                                placeholder="Ingrese celular">
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                     </div>
                     <div class="col-md-5">
                         <input type="text" name="usuario" id="usuario" class="form-control text-center my-2"
-                               value="<?= $usuario->getUsuario()?>"
+                               value="<?= $usuario->__get("usuario")?>"
                                placeholder="Ingrese usuario">
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                     </div>
                     <div class="col-md-5">
                         <input type="password" name="contrasena" id="contrasena" class="form-control text-center my-2"
-                               value="<?= $usuario->getContrasena()?>"
+                               value="<?= $usuario->__get("contrasena")?>"
                                placeholder="Ingrese contraseña">
                     </div>
                 </div>
@@ -90,7 +90,7 @@
                     </div>
                     <div class="col-md-5">
                         <input type="text" name="email" id="email" class="form-control text-center my-2"
-                               value="<?= $usuario->getEmail()?>"
+                               value="<?= $usuario->__get("email")?>"
                                placeholder="Ingrese e-mail">
                     </div>
                 </div>
@@ -101,7 +101,7 @@
                     </div>
                     <div class="col-md-5">
                         <input type="text" name="sede" id="sede" class="form-control text-center my-2"
-                               value="<?= $usuario->getZonaSede()?>"
+                               value="<?= $usuario->__get("zona_sede")?>"
                                placeholder="Ingrese sede">
                     </div>
                 </div>
@@ -112,7 +112,7 @@
                     </div>
                     <div class="col-md-5">
                         <input type="text" name="rol" id="rol" class="form-control text-center my-2"
-                               value="<?= $usuario->getRol()?>"
+                               value="<?= $usuario->__get("rol")?>"
                                placeholder="Ingrese rol">
                     </div>
                 </div>

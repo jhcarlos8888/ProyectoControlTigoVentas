@@ -64,19 +64,18 @@
                                     for ($i = 0; $i < count($listaUsuarios); $i++) {
                                         ?>
                                         <tr>
-                                            <td><?= $listaUsuarios[$i]->getIdentificacion(); ?></td>
-                                            <td><?= $listaUsuarios[$i]->getNombre(); ?></td>
-                                            <td><?= $listaUsuarios[$i]->getUsuario(); ?></td>
-                                            <td><?= $listaUsuarios[$i]->getEmail(); ?></td>
-                                            <td><?= $listaUsuarios[$i]->getCelular(); ?></td>
-                                            <td><?= $listaUsuarios[$i]->getZonaSede(); ?></td>
-                                            <td><?= $listaUsuarios[$i]->getRol(); ?></td>
+                                            <td><?= $listaUsuarios[$i]->__get("identificacion"); ?></td>
+                                            <td><?= $listaUsuarios[$i]->__get("nombre"); ?></td>
+                                            <td><?= $listaUsuarios[$i]->__get("usuario"); ?></td>
+                                            <td><?= $listaUsuarios[$i]->__get("email"); ?></td>
+                                            <td><?= $listaUsuarios[$i]->__get("celular"); ?></td>
+                                            <td><?= $listaUsuarios[$i]->__get("zona_sede"); ?></td>
+                                            <td><?= $listaUsuarios[$i]->__get("rol"); ?></td>
                                             <td>
-                                                <a href="<?php url("usuario/editar/" . $listaUsuarios[$i]->getIdUsuario()) ?>"
+                                                <a href="<?php url("usuario/editar/" . $listaUsuarios[$i]->__get("id_usuario")) ?>"
                                                    class="bnt"><span data-feather="edit-3"></span></a>
-                                                <a href="<?php url("usuario/eliminar/" . $listaUsuarios[$i]->getIdUsuario()) ?>"
+                                                <a href="<?php url("usuario/eliminar/" . $listaUsuarios[$i]->__get("id_usuario")) ?>"
                                                    class="bnt"><span data-feather="trash-2"></span></a>
-                                                <!--<button class="btn"><span data-feather="trash-2"></span></button>-->
                                             </td>
                                         </tr>
                                     <?php }

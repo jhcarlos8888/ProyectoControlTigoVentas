@@ -13,9 +13,9 @@ class ControladorAutenticacion
     public function index()
     {
         session_start();
-        if(isset($_SESSION['id'])){
+        if (isset($_SESSION['id'])) {
             redirecciona("cliente");
-        }else {
+        } else {
             return Vista::crear("index");
         }
     }
@@ -28,12 +28,9 @@ class ControladorAutenticacion
 
         self::_validar();
 
-        if($this->errores){
-            foreach ($this->errores as $error){
-                echo $error , '<br>';
-            }
+        if ($this->errores) {
             redirecciona("autenticacion");
-        }else{
+        } else {
 
             $usuario = new Usuario();
 
@@ -41,8 +38,8 @@ class ControladorAutenticacion
 
                 session_start();
                 $_SESSION['id'] = session_id();
-                $_SESSION['id_user'] = $usuario->getIdUsuario();
-                $_SESSION['nombre_user'] = $usuario->getNombre();
+                $_SESSION['id_user'] = $usuario->__get("id_usuario");
+                $_SESSION['nombre_user'] = $usuario->__get("nombre");
 
                 redirecciona("usuario");
             } else {
@@ -52,7 +49,8 @@ class ControladorAutenticacion
         }
     }
 
-    public function logout(){
+    public function logout()
+    {
 
         session_start();
         session_unset();
@@ -61,16 +59,17 @@ class ControladorAutenticacion
         redirecciona("autenticacion");
     }
 
-    private function _validar(){
+    private function _validar()
+    {
 
         $this->cedula = htmlspecialchars($this->cedula);
         $this->contrasena = htmlspecialchars($this->contrasena);
 
-        if(!validate($this->cedula,"requerido", "numerico")){
+        if (!validate($this->cedula, "requerido", "numerico")) {
             $this->errores['cedula'] = "El campo es requerido y numerico";
         }
 
-        if(!validate($this->contrasena,"requerido")){
+        if (!validate($this->contrasena, "requerido")) {
             $this->errores['contrasena'] = "Valor es requerido";
         }
     }
