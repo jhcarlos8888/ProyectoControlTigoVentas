@@ -21,9 +21,40 @@
                     <a class="btn btn-primary w-100" href="<?php url("manuales/cargar") ?>"
                        role="button">Subir Manual</a>
                 </div>
-                <div class="offset-md-2 col-md-6 offset-lg-4 col-lg-4 py-md-3 order-1 order-md-2">
-                <a href="<?php assets("manuales/reglamento_del_aprendiz.pdf");?>">Reglamento del Aprendiz</a>
-
+            </div>
+            <div class="p-2">
+                <div class="row ">
+                    <?php if (isset($listaDeManuales)) {
+                        for ($i = 0; $i < count($listaDeManuales); $i++) {
+                            ?>
+                            <!--aqui debe ir un bucle que dibuje las tarjetas-->
+                            <div class="col-md-4 col-sm-12 ">
+                                <div class="card float-left h-100">
+                                    <div class="card-header text-center">
+                                        <h5 class="card-title"><?php $listaDeManuales[$i] . getNombre(); ?></h5>
+                                    </div>
+                                    <!-- Body de la tarjeta -->
+                                    <div class="card-body">
+                                        <img class="card-img-top h-100" src="<?php assets("img/pdf_icon.svg"); ?>"
+                                             alt="">
+                                    </div>
+                                    <!--Pie de la tarjeta-->
+                                    <div class="card-footer">
+                                        <small class="text-muted pr-2">
+                                            <a class="btn btn-md btn-outline-info"
+                                               href="<?php url($listaDeManuales[$i] . getRuta()); ?>"
+                                               download="<?php $listaDeManuales[$i] . getNombre() ?>">Descargar</a>
+                                        </small>
+                                        <small class="text-muted">
+                                            <a class="btn btn-md btn-outline-success"
+                                               href="<?php url($listaDeManuales[$i] . getRuta()); ?>">Visualizar</a>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php }
+                    } ?>
+                    <!--aqui cerrara el bucle-->
                 </div>
             </div>
         </main>
