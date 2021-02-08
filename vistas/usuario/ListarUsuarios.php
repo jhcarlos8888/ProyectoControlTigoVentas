@@ -20,7 +20,7 @@
             <main role="main" class="col-12 col-md-10 px-md-4 py-md-5 py-2">
                 <div class="row">
                     <div class="col-md-4 py-md-3 py-2 order-2 order-md-1">
-                        <a class="btn btn-primary w-100" href="<?php url("usuario/subir") ?>"
+                        <a class="btn btn-primary w-100" href="<?php url("usuario/registrar") ?>"
                            role="button">Crear Cuenta</a>
                     </div>
 
