@@ -28,10 +28,10 @@
                         for ($i = 0; $i < count($listaDeManuales); $i++) {
                             ?>
                             <!--aqui debe ir un bucle que dibuje las tarjetas-->
-                            <div class="col-md-4 col-sm-12 ">
+                            <div class="col-md-2 mr-md-1">
                                 <div class="card float-left h-100">
                                     <div class="card-header text-center">
-                                        <h5 class="card-title"><?php $listaDeManuales[$i] . getNombre(); ?></h5>
+                                        <h6 class="card-title"><?php echo $listaDeManuales[$i]->getNombre(); ?></h6>
                                     </div>
                                     <!-- Body de la tarjeta -->
                                     <div class="card-body">
@@ -39,15 +39,15 @@
                                              alt="">
                                     </div>
                                     <!--Pie de la tarjeta-->
-                                    <div class="card-footer">
+                                    <div class="card-footer text-center">
                                         <small class="text-muted pr-2">
                                             <a class="btn btn-md btn-outline-info"
-                                               href="<?php url($listaDeManuales[$i] . getRuta()); ?>"
-                                               download="<?php $listaDeManuales[$i] . getNombre() ?>">Descargar</a>
+                                               href="<?php assets($listaDeManuales[$i]->getRuta()); ?>"
+                                               download="<?php echo $listaDeManuales[$i]->getNombre() ?>"><span data-feather="download"></span></a>
                                         </small>
                                         <small class="text-muted">
                                             <a class="btn btn-md btn-outline-success"
-                                               href="<?php url($listaDeManuales[$i] . getRuta()); ?>">Visualizar</a>
+                                               href="<?php assets($listaDeManuales[$i]->getRuta()); ?>"><span data-feather="eye"></span></a>
                                         </small>
                                     </div>
                                 </div>

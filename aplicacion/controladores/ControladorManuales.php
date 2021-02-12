@@ -29,15 +29,19 @@ class ControladorManuales
         validarSession();
 
         $nombre = $_POST['nombre'];
-        $archivo = $_FILES['manual'];
-        $rutaMelodia = $_FILES['melodia']['tmp_name'];
+        $rutaTemporal = $_FILES['manual']['tmp_name'];
+        $fileExtension = ".pdf";
+        $rutaFinal = "./assets/manuales/" . $nombre . $fileExtension;
+        $resultado = move_uploaded_file($rutaTemporal, $rutaFinal);
 
-        $nuevoManual = new Manual();
-
-        $nuevoManual->setNombre($nombre);
-        $nuevoManual->setRuta($rutaMelodia);
-
-        
+        if ($resultado) {
+            $ruta = "manuales/" . $nombre . $fileExtension;
+            $nuevoManual = new Manual();
+            $nuevoManual->setNombre($nombre);
+            $nuevoManual->setRuta($ruta);
+            $nuevoManual->subirManual();
+        }
+        redirecciona("manuales");
     }
 
 }

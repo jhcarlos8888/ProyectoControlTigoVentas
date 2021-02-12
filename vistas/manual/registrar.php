@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Subir manual</title>
+    <title>Subir Manual</title>
     <?php include(RUTA_VISTAS . 'partes/head.php') ?>
 </head>
 
@@ -18,23 +18,22 @@
         <main role="main" class="col-12 col-md-10 px-md-4 py-md-5 py-2">
 
           <div class="text-center offset-md-2">
-
-              <h3 class="alert-secondary col-md-10 mt-3">Gestión de manuales</h3>
+              <h3 class="alert-secondary col-md-10 mt-3">Gestión de Manuales</h3>
           </div>
 
 
-          <form class="offset-md-2">
+          <form class="offset-md-2" method="post" action="<?php url("manuales/crear") ?>" enctype="multipart/form-data">
 
             <div class="form-row my-5">
               <div class="col-md-10">
-                <input type="text" class="form-control" placeholder="Ingrese el nombre del manual">
+                <input type="text" name="nombre" class="form-control" placeholder="Ingrese el nombre del manual">
               </div>
             </div>
 
+              <input type="file" class="" id="manual" name="manual" lang="es" required>
             <div class="form-row mb-5">
-                <div class="custom-file col-md-10">
-                <input type="file" class="custom-file-input" id="customFileLang" lang="es">
-                <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                <div class="col-md-10">
+                <label class="custom-file-label" for="manual">Seleccionar Archivo</label>
                 </div>
             </div>
 
