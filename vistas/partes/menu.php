@@ -14,7 +14,7 @@
 
             <li class="nav-item">
 
-                <a class="nav-link" role="button" href="#" ><span data-feather="users"></span>Usuario</a>
+                <a class="nav-link" role="button" href="<?php url("usuario") ?>" ><span data-feather="users"></span>Usuario</a>
 
 
             </li>
@@ -22,14 +22,13 @@
 
             <li class="nav-item dropdow">
 
-                <a class="nav-link dropdown-toggle" role="button" href="#" data-toggle="collapse"
+                <a class="nav-link dropdown-toggle" role="button" href="<?php url("cliente") ?>" data-toggle="collapse"
                    data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne"><span
                             data-feather="bar-chart-2"></span>Clientes</a>
 
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                    <a class="dropdown-item" href="#">Seguimiento de clientes</a>
+                    <a class="dropdown-item" href="<?php url("cliente") ?>">Seguimiento de clientes</a>
                     <a class="dropdown-item" href="#">Ventas, productos y servicios</a>
-                    <a class="dropdown-item" href="#">Envios de SMS</a>
                     <a class="dropdown-item" href="#">Generacion de Id de pedido</a>
                 </div>
             </li>
@@ -53,9 +52,10 @@
 
                 <a class="nav-link dropdown-toggle" role="button" href="#" data-toggle="collapse"
                    data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><span
-                            data-feather="layers"></span>Ayudas</a>
+                            data-feather="help-circle"></span>Ayudas</a>
 
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <a class="dropdown-item" href="<?php url("manuales") ?>">Manuales</a>
                     <a class="dropdown-item" href="#">Volantes</a>
                 </div>
             </li>
