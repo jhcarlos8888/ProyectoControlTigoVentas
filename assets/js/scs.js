@@ -7,22 +7,35 @@
 
 document.addEventListener("change", (e) => {
 
-    const $search = e.target;
-    const $generator = $search.getAttribute("data-generator")
-    const modelo = ($generator === "Usuario") ? "usuario" : "cliente";
-    const $table = document.getElementById("UserList");
+    const $target = e.target;
+    const $generator = $target.getAttribute("data-generator")
+
+    let usuario = ($generator === "usuario");
+    let cliente = ($generator === "cliente");
+    let buscar = (cliente || usuario);
+
+    if (buscar) {
+        busqueda($target, $generator);
+    } else if($generator === "archivo") {
+        cambiarTextLabelInputFile($target);
+    }
+});
+
+function busqueda(search, modelo) {
+
+    let valor = search.value;
+    const modeloBuscar = (modelo === "usuario") ? "Usuario" : "Cliente";
+    const $table = document.getElementById("tableList");
     const $bodyTable = document.getElementById("bodyTable");
     const $tbody = document.createElement("tbody");
     $tbody.setAttribute("id", "bodyTable");
     const $fragment = document.createDocumentFragment();
-    let valor = $search.value;
-    //console.log($search, $table, $generator, valor);
 
-    fetch("buscar/buscar" + $generator + "/" + valor)
+    fetch("buscar/buscar" + modeloBuscar + "/" + valor)
 
         .then((res) => (res.ok ? res.json() : Promise.reject(res)))
         .then((json) => {
-            //console.log(json);
+
             json.forEach((el) => {
                 const $tr = document.createElement("tr");
                 if (modelo === "usuario") {
@@ -57,7 +70,17 @@ document.addEventListener("change", (e) => {
             feather.replace()
         })
         .catch((err) => {
-            console.log(err);
             let message = err.statusText || "Ocurrió un error";
+            console.log(err, message);
         })
-});
+}
+
+function cambiarTextLabelInputFile($input) {
+
+    const $label = $input.nextElementSibling;
+    let valor = $input.value;
+    let archivo = valor.split("\\");
+    let nombreArchivo = archivo[archivo.length - 1];
+
+    $label.innerHTML = (valor.length) ? nombreArchivo : "Seleccionar Archivo"
+}
