@@ -35,7 +35,7 @@
 }
 
 input[type=number]::-webkit-inner-spin-button,
-nput[type=number]::-webkit-outer-spin-button {
+input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
@@ -109,15 +109,15 @@ input[type=number] {
  * Sidebar
  */
 
-.sidebar {
+/*.sidebar {
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
-    z-index: 0; /* Behind the navbar */
-    padding: 48px 0 0; /* Height of navbar */
+    z-index: 0; !* Behind the navbar *!
+    padding: 48px 0 0; !* Height of navbar *!
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-}
+}*/
 
 @media (max-width: 767.98px) {
     .sidebar {
@@ -197,4 +197,9 @@ input[type=number] {
 .form-control-dark:focus {
     border-color: transparent;
     box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+}
+
+/*Label despues de campo input file*/
+.custom-file-label::after{
+    content: "Examinar" !important;
 }
