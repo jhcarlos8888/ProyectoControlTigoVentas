@@ -26,28 +26,19 @@
 
                     <div class="offset-md-2 col-md-6 offset-lg-4 col-lg-4 py-md-3 order-1 order-md-2">
                         <div class="input-group">
-                            <input type="text" id="busqueda" placeholder="Buscar Usuario" class="form-control" data-generator="Usuario"
+                            <input type="text" id="busqueda" placeholder="Buscar Usuario" class="form-control" data-generator="usuario"
                                    aria-label="Text input with segmented dropdown button">
                             <div class="input-group-append">
                                 <button type="button" class="btn btn-outline-secondary">
-                                    <span data-feather="filter"></span>
+                                    <span data-feather="search"></span>
                                 </button>
-                                <button type="button"
-                                        class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span class="sr-only">Toggle Dropdown</span>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Cedula</a>
-                                    <a class="dropdown-item" href="#">Cuenta</a>
-                                </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-12 order-3  table-responsive">
 
-                        <table id="UserList" class="table table-hover" aria-label="lista de usuarios">
+                        <table id="tableList" class="table table-hover" aria-label="lista de usuarios">
                             <thead>
                                 <tr>
                                     <th scope="col">CC</th>
