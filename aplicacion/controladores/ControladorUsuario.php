@@ -68,7 +68,7 @@ class ControladorUsuario
         $nombre = $_POST['nombre'];
         $celular = $_POST['celular'];
         $user = $_POST['usuario'];
-        $contrasena = $_POST['contrasena'];
+        $contrasena = encriptar($_POST['contrasena']);
         $email = $_POST['email'];
         $sede = $_POST['sede'];
         $rol = $_POST['rol'];
@@ -89,7 +89,7 @@ class ControladorUsuario
         if ($resultado) {
             redirecciona("usuario");
         } else {
-            self::registrar();
+            redirecciona("usuario/registrar");
         }
     }
 
