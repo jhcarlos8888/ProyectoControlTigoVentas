@@ -142,9 +142,9 @@ class Usuario
 
         $conexion = $conexionDataBase->CrearConexion();
 
-        $stmt = $conexion->prepare("SELECT * FROM usuario WHERE identificacion=:cedula AND contrasena=:contrasena");
+        $stmt = $conexion->prepare("SELECT * FROM usuario WHERE identificacion=:cedula" /*AND contrasena=:contrasena"*/);
         $stmt->bindParam(":cedula", $cedula);
-        $stmt->bindParam(":contrasena", $contrasena);
+        /*$stmt->bindParam(":contrasena", $contrasena);*/
         $stmt->setFetchMode(PDO::FETCH_OBJ);
         $stmt->execute();
 
@@ -164,7 +164,8 @@ class Usuario
             $this->zona_sede = $fila->fk_zona_sede;
             $this->rol = $fila->fk_rol;
 
-            return true;
+            return (validarEncriptacion($contrasena,$this->contrasena));
+            /*return true;*/
 
         } else {
 
