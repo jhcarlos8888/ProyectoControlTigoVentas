@@ -7,7 +7,7 @@ function incluirModelos()
 {
     $directorio = opendir(RUTA_MODELO);
     while ($archivo = readdir($directorio)) {
-        if (!is_dir($archivo)) {
+        if (!is_dir($archivo)&& ($archivo != "." && $archivo != "..")) {
             require_once RUTA_MODELO . $archivo;
         }
     }
