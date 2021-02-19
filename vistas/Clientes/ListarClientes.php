@@ -63,7 +63,8 @@
                                         ?>
                                         <tr>
                                             <td><?= $ListarClientes[$i]->__get("identificacion"); ?></td>
-                                            <td><?= $ListarClientes[$i]->__get("nombre"); ?></td>
+                                            <td><a href="<?php url("seguimiento/cliente/" .$ListarClientes[$i]->__get("id")) ?>"
+                                              <span><?= $ListarClientes[$i]->__get("nombre"); ?></span></a></td>
                                             <td><?= $ListarClientes[$i]->__get("direccion"); ?></td>
                                             <td><?= $ListarClientes[$i]->__get("email"); ?></td>
                                             <td><?= $ListarClientes[$i]->__get("celular"); ?></td>
