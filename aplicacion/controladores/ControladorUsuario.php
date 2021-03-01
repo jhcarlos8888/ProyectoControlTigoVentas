@@ -1,5 +1,7 @@
 <?php
 
+use aplicacion\modelo\Rol\Rol;
+use aplicacion\modelo\Sede\Sede;
 use usuario\Usuario;
 use vista\Vista;
 
@@ -22,8 +24,10 @@ class ControladorUsuario
 
         $usuario = new Usuario();
         $usuario = $usuario->ConsultarUsuario($id);
+        $roles = Rol::ListarRoles();
+        $sedes = Sede::ListarSedes();
 
-        return Vista::crear("usuario.actualizar", "usuario", $usuario);
+        return Vista::crear("usuario.actualizar", array("usuario" => $usuario, "sedes" => $sedes, "roles" => $roles));
     }
 
     public function actualizar()
@@ -41,15 +45,15 @@ class ControladorUsuario
         $rol = $_POST['rol'];
 
         $usuario = new Usuario();
-        $usuario->__set("id_usuario",$id);
-        $usuario->__set("identificacion",$identificacion);
-        $usuario->__set("nombre",$nombre);
-        $usuario->__set("celular",$celular);
-        $usuario->__set("usuario",$user);
-        $usuario->__set("contrasena",$contrasena);
-        $usuario->__set("email",$email);
-        $usuario->__set("zona_sede",$sede);
-        $usuario->__set("rol",$rol);
+        $usuario->__set("id_usuario", $id);
+        $usuario->__set("identificacion", $identificacion);
+        $usuario->__set("nombre", $nombre);
+        $usuario->__set("celular", $celular);
+        $usuario->__set("usuario", $user);
+        $usuario->__set("contrasena", $contrasena);
+        $usuario->__set("email", $email);
+        $usuario->__set("zona_sede", $sede);
+        $usuario->__set("rol", $rol);
 
         $resultado = $usuario->ActualizarUsuario();
 
@@ -70,19 +74,18 @@ class ControladorUsuario
         $user = $_POST['usuario'];
         $contrasena = encriptar($_POST['contrasena']);
         $email = $_POST['email'];
-        $sede = $_POST['sede'];
-        $rol = $_POST['rol'];
-
+        $sede = Sede::consultarSede($_POST['sede']);
+        $rol = Rol::consultarRol($_POST['rol']);
         $usuario = new Usuario();
 
-        $usuario->__set("identificacion",$identificacion);
-        $usuario->__set("nombre",$nombre);
-        $usuario->__set("celular",$celular);
-        $usuario->__set("usuario",$user);
-        $usuario->__set("contrasena",$contrasena);
-        $usuario->__set("email",$email);
-        $usuario->__set("zona_sede",$sede);
-        $usuario->__set("rol",$rol);
+        $usuario->__set("identificacion", $identificacion);
+        $usuario->__set("nombre", $nombre);
+        $usuario->__set("celular", $celular);
+        $usuario->__set("usuario", $user);
+        $usuario->__set("contrasena", $contrasena);
+        $usuario->__set("email", $email);
+        $usuario->__set("sede", $sede);
+        $usuario->__set("rol", $rol);
 
         $resultado = $usuario->CrearUsuario();
 
@@ -97,18 +100,8 @@ class ControladorUsuario
     {
         validarSession();
 
-        $roles = array(
-            "1" => "Administrador",
-            "2" => "Coordinador Comercial",
-            "3" => "Asesor Comercial"
-        );
-
-        $sedes = array(
-            "1040" => "San Diego",
-            "1041" => "Santa Fe",
-            "1042" => "Molinos",
-            "1043" => "Oriental"
-        );
+        $roles = Rol::ListarRoles();
+        $sedes = Sede::ListarSedes();
 
         return Vista::crear("usuario.registrar", array("sedes" => $sedes, "roles" => $roles));
     }

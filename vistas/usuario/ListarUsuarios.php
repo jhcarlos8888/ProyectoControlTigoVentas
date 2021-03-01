@@ -60,13 +60,13 @@
                                             <td><?= $listaUsuarios[$i]->__get("usuario"); ?></td>
                                             <td><?= $listaUsuarios[$i]->__get("email"); ?></td>
                                             <td><?= $listaUsuarios[$i]->__get("celular"); ?></td>
-                                            <td><?= $listaUsuarios[$i]->__get("zona_sede"); ?></td>
-                                            <td><?= $listaUsuarios[$i]->__get("rol"); ?></td>
+                                            <td><?= ($listaUsuarios[$i]->__get("sede"))->getNombre(); ?></td>
+                                            <td><?= ($listaUsuarios[$i]->__get("rol"))->getNombre(); ?></td>
                                             <td>
                                                 <a href="<?php url("usuario/editar/" . $listaUsuarios[$i]->__get("id_usuario")) ?>"
-                                                   class="bnt"><span data-feather="edit-3"></span></a>
+                                                   class="bnt" title="Editar"><span data-feather="edit-3"></span></a>
                                                 <a href="<?php url("usuario/eliminar/" . $listaUsuarios[$i]->__get("id_usuario")) ?>"
-                                                   class="bnt"><span data-feather="trash-2"></span></a>
+                                                   class="bnt" title="Eliminar"><span data-feather="trash-2"></span></a>
                                             </td>
                                         </tr>
                                     <?php }

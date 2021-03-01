@@ -4,6 +4,8 @@ namespace usuario;
 
 use Conexion;
 use PDO;
+use aplicacion\modelo\Rol\Rol;
+use aplicacion\modelo\Sede\Sede;
 
 class Usuario
 {
@@ -14,16 +16,8 @@ class Usuario
     private $contrasena;
     private $email;
     private $celular;
-    private $zona_sede;
+    private $sede;
     private $rol;
-
-    /**
-     * Usuario constructor.
-     */
-    public function __construct()
-    {
-
-    }
 
     public function __get($name)
     {
@@ -39,7 +33,8 @@ class Usuario
     {
         $conexionDataBase = new Conexion();
         $conexion = $conexionDataBase->CrearConexion();
-        $stmt = $conexion->prepare("INSERT INTO usuario (identificacion, nombre, celular, usuario, contrasena, email, fk_zona_sede, fk_rol) VALUES (:identificacion,:nombre, :celular, :usuario, :contrasena, :email, :sede, :rol)");
+        $stmt = $conexion->prepare("INSERT INTO usuario (identificacion, nombre, celular, usuario, contrasena, email, fk_zona_sede, fk_rol) 
+                                        VALUES (:identificacion,:nombre, :celular, :usuario, :contrasena, :email, :sede, :rol)");
 
         $stmt = $this->agregarParametros($stmt);
 
@@ -67,8 +62,8 @@ class Usuario
             $user->__set("usuario",$fila->usuario);
             $user->__set("contrasena",$fila->contrasena);
             $user->__set("email",$fila->email);
-            $user->__set("zona_sede",$fila->fk_zona_sede);
-            $user->__set("rol",$fila->fk_rol);
+            $user->__set("sede",Sede::consultarSede($fila->fk_zona_sede));
+            $user->__set("rol",Rol::consultarRol($fila->fk_rol));
         } else {
             $user = null;
         }
@@ -127,8 +122,8 @@ class Usuario
             $user->__set("celular", $fila->celular);
             $user->__set("usuario", $fila->usuario);
             $user->__set("email", $fila->email);
-            $user->__set("zona_sede", $fila->fk_zona_sede);
-            $user->__set("rol", $fila->fk_rol);
+            $user->__set("sede", Sede::consultarSede($fila->fk_zona_sede));
+            $user->__set("rol", Rol::consultarRol($fila->fk_rol));
 
             $listaUsuarios[] = $user;
         }
@@ -142,9 +137,8 @@ class Usuario
 
         $conexion = $conexionDataBase->CrearConexion();
 
-        $stmt = $conexion->prepare("SELECT * FROM usuario WHERE identificacion=:cedula" /*AND contrasena=:contrasena"*/);
+        $stmt = $conexion->prepare("SELECT * FROM usuario WHERE identificacion=:cedula");
         $stmt->bindParam(":cedula", $cedula);
-        /*$stmt->bindParam(":contrasena", $contrasena);*/
         $stmt->setFetchMode(PDO::FETCH_OBJ);
         $stmt->execute();
 
@@ -161,11 +155,10 @@ class Usuario
             $this->usuario = $fila->usuario;
             $this->contrasena = $fila->contrasena;
             $this->email = $fila->email;
-            $this->zona_sede = $fila->fk_zona_sede;
-            $this->rol = $fila->fk_rol;
+            $this->sede = Sede::consultarSede($fila->fk_zona_sede);
+            $this->rol = Rol::consultarRol($fila->fk_rol);
 
             return (validarEncriptacion($contrasena,$this->contrasena));
-            /*return true;*/
 
         } else {
 
@@ -173,7 +166,7 @@ class Usuario
         }
     }
 
-    public function Buscar(string $valor)
+    public function Buscar($valor)
     {
 
         $usuarios = array();
@@ -211,14 +204,15 @@ class Usuario
 
     private function agregarParametros($stmt)
     {
+
         $stmt->bindValue(":identificacion", $this->identificacion);
         $stmt->bindValue(":nombre", $this->nombre);
         $stmt->bindValue(":celular", $this->celular);
         $stmt->bindValue(":usuario", $this->usuario);
         $stmt->bindValue(":contrasena", $this->contrasena);
         $stmt->bindValue(":email", $this->email);
-        $stmt->bindValue(":sede", $this->zona_sede, PDO::PARAM_INT);
-        $stmt->bindValue(":rol", $this->rol, PDO::PARAM_INT);
+        $stmt->bindValue(":sede",$this->__get("sede")->getId(), PDO::PARAM_INT);
+        $stmt->bindValue(":rol", $this->__get("rol")->getId(), PDO::PARAM_INT);
 
         return $stmt;
     }
