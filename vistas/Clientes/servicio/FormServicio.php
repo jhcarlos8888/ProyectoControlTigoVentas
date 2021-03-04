@@ -3,7 +3,7 @@
 <html lang="es">
 
 <head>
-    <title>Seguimiento de Clientes</title>
+    <title>FORMULARIO DE SERVICIOS</title>
     <?php include(RUTA_VISTAS . 'partes/head.php') ?>
 </head>
 
@@ -19,9 +19,8 @@
           <main role="main" class="col-12 col-md-10 px-md-4 py-md-5 py-2">
               <div class="row">
                   <div class="col-md-4 py-md-3 py-2 order-2 order-md-1">
-                      <a class="btn btn-primary w-100" href="<?php url("agregar/servicio/") ?>"
-                         role="button">Añadir producto</a>
-                       </br>
+                      <a class="btn btn-primary w-100" href="<?php url("") ?>"
+                         role="button">Nuevo Servicio</a>
                       <a class="btn btn-primary w-100" href="<?php url("") ?>"
                             role="button">Cancelar</a>
                   </div>
@@ -52,27 +51,20 @@
                       <table id="UserList" class="table table-hover" id="tblServices" aria-label="Lista de Servicios">
                           <thead>
                               <tr>
-                                  <th scope="col">TIPO DE PROCESO</th>
-                                  <th scope="col">FECHA</th>
-                                  <th scope="col">ACCIONES</th>
+                                  <th scope="col">SERVICIOS</th>
+                                  <th scope="col">NOMBRE</th>
+                                  <th scope="col">ESTADO</th>
                                 </tr>
                             </thead>
-                            <tbody id="bodyTableServ">
-                                <tr>
-                                   <td><p>DUO PLAY 30 MB</p></td>
-                                   <td><p>03-12-2018</p></td>
-                                   <td><p>+</p></td>
-                                </tr>
-                                <tr>
-                                   <td><p>DUO PLAY 60 MB</p></td>
-                                   <td><p>23-11-2018</p></td>
-                                   <td><p>+</p></td>
-                                </tr>
-                                <tr>
-                                   <td><p>TRIPLE PLAY 30 MB</p></td>
-                                   <td><p>23-01-2021</p></td>
-                                   <td><p>+</p></td>
-                                </tr>
+                            <tbody id="bodyTable">
+                                <?php if (isset($servicio)) {
+                                    for ($i = 0; $i < count($servicio); $i++) {
+                                        ?>
+                                        <tr>
+                                            <td><?= $servicio[$i]->__get("servicio"); ?></td>
+                                        </tr>
+                                    <?php }
+                                } ?>
                             </tbody>
                         </table>
                     </div>

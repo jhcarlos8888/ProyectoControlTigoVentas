@@ -29,6 +29,7 @@ class ControladorSeguimiento
         return Vista::crear("servicio.ActualizarServicio", "servicio", $servicio);
     }
 
+
     public function actualizar()
     {
         validarSession();
@@ -100,4 +101,6 @@ class ControladorSeguimiento
 
         redirecciona("servicio");
     }
+
+    
 }
