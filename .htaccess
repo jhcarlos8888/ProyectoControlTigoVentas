@@ -1,5 +1,6 @@
 RewriteEngine On
-IndexIgnore *
+Options -Indexes
+ErrorDocument 403 /ProyectoControlTigoVentas/error
 RewriteBase /ProyectoControlTigoVentas/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

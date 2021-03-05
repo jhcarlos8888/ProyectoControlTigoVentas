@@ -13,6 +13,5 @@ $ruta->Controladores(array(
     "/buscar"=>"ControladorBusqueda",
     "/manuales"=>"ControladorManuales",
     "/seguimiento"=>"ControladorSeguimiento",
-    "/agregar"=>"ControladorAgregarServicio",
-    "/control_ventas"=>"ControladorControlVentas",
+    "/volante"=>"ControladorVolante"
 ));

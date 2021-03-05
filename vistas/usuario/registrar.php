@@ -72,8 +72,8 @@
                     <label for="sede" class="col-form-label">Sede</label>
                     <select name="sede" id="sede" class="form-control" required aria-required="true">
                         <option value="">Seleecione una sede</option>
-                        <?php foreach ($sedes as $key => $sede) { ?>
-                            <option value="<?php echo $key ?>"><?php echo $sede ?></option>
+                        <?php foreach ($sedes as $sede) { ?>
+                            <option value="<?php echo $sede->getId(); ?>"><?php echo $sede->getnombre(); ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -82,8 +82,8 @@
                     <label for="rol" class="col-form-label">Rol</label>
                     <select name="rol" id="rol" class="form-control" required aria-required="true">
                         <option value="">Seleecione un Rol</option>
-                        <?php foreach ($roles as $key => $rol) { ?>
-                            <option value="<?php echo $key ?>"><?php echo $rol ?></option>
+                        <?php foreach ($roles as $rol) { ?>
+                            <option value="<?php echo $rol->getId(); ?>"><?php echo $rol->getNombre(); ?></option>
                         <?php } ?>
                     </select>
                 </div>

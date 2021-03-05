@@ -15,7 +15,8 @@
 
         <?php include(RUTA_VISTAS . 'partes/menu.php') ?>
 
-        <main role="main" class="col-md-9  ml-sm-auto px-md-4 py-md-4 py-2 ">
+
+        <main role="main" class="col-12 col-md-10 px-md-4 py-md-5 py-2">
             <div class="text-center">
                 <img class="mb-4 img-fluid" src="<?php assets("img/user_bussines.png") ?>" alt="" width="60"
                      height="60">
@@ -38,6 +39,7 @@
                            placeholder="Ingrese Cedula" required>
                 </div>
 
+
                 <div class="col-md-6">
                     <label for="email" class="col-form-label">Email</label>
                     <input type="email" name="email" id="email" class="form-control" placeholder="Ingrese Correo"
@@ -56,17 +58,21 @@
                            required>
                 </div>
 
+
+
                 <div class="col-md-8 m-auto pt-4">
                     <button type="submit" class="btn btn-primary btn-block">Registrar</button>
                 </div>
 
+
             </form>
 
             <footer class="row offset-md-2 text-center">
-                <p class="mt-5 mb-3 text-muted col-md-8">&copy;2020</p>
+                <p class="mt-5 mb-3 text-muted col-md-10">&copy;2020</p>
             </footer>
 
         </main>
+
     </div>
 </div>
 

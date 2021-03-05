@@ -7,7 +7,7 @@ function incluirModelos()
 {
     $directorio = opendir(RUTA_MODELO);
     while ($archivo = readdir($directorio)) {
-        if (!is_dir($archivo)) {
+        if (!is_dir($archivo)&& ($archivo != "." && $archivo != "..")) {
             require_once RUTA_MODELO . $archivo;
         }
     }
@@ -41,4 +41,14 @@ function validarSession(){
 function redirecciona($ruta){
     $urlprin = str_replace(INDEX, "", $_SERVER["PHP_SELF"]);
     header("location:/" . trim($urlprin, "/") . "/" . $ruta);
+}
+
+function encriptar($password)
+{
+    return password_hash($password, PASSWORD_DEFAULT, ['cost' => 15]);
+}
+
+function validarEncriptacion($password, $hash): bool
+{
+    return password_verify($password, $hash);
 }

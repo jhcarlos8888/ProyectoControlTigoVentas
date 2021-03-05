@@ -13,7 +13,7 @@ class Manual
 
     public function getId()
     {
-        return$this->id;
+        return $this->id;
     }
 
     public function getNombre()
@@ -23,7 +23,7 @@ class Manual
 
     public function getRuta()
     {
-        return$this->ruta;
+        return $this->ruta;
     }
 
     public function setId($id)
@@ -60,6 +60,20 @@ class Manual
 
             $listaDeManuales[] = $nuevoManual;
         }
+        $conexionDataBase->CerrarConexion();
         return $listaDeManuales;
+    }
+
+    public function subirManual()
+    {
+        $conexionDataBase = new Conexion();
+        $conexion = $conexionDataBase->CrearConexion();
+
+        $stmt = $conexion->prepare("INSERT INTO manual (nombre, ruta) VALUES (:nombre,:ruta)");
+
+        $stmt->bindValue(":nombre", $this->nombre);
+        $stmt->bindValue(":ruta", $this->ruta);
+        return $stmt->execute();
+
     }
 }

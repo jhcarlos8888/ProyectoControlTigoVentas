@@ -4,3 +4,5 @@ ProyectoControlTigoVentas.workspace
 .js~
 .vscode/
 ControlVentas.sql
+assets/manuales/*.pdf
+assets/volantes/*.pdf

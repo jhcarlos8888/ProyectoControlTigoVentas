@@ -19,11 +19,11 @@ define("RUTA_MODELO",RUTA_APLICACION . "modelo/");
 //Se define la ruta de la carpeta de controladores
 define("RUTA_CONTROLADORES", RUTA_APLICACION . "controladores/");
 
-require ("validaciones.php");
+require_once ("validaciones.php");
 require_once ("ayudas.php");
 incluirModelos();
 require_once (RUTA_APLICACION."configuracion/configuracion.php");
 require_once (RUTA_APLICACION."utilidades/Conexion.php");
 require_once ("Vista.php");
-include "Ruta.php";
-include RUTA . "rutas.php";
+include_once "Ruta.php";
+include_once RUTA . "rutas.php";
