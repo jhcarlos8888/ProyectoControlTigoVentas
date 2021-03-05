@@ -13,6 +13,7 @@ class ControladorSeguimiento
       }
 
 
+
     public function cliente($id)
     {
       validarSession();
@@ -102,5 +103,5 @@ class ControladorSeguimiento
         redirecciona("servicio");
     }
 
-    
+
 }
