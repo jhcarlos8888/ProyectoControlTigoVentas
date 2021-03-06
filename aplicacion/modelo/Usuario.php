@@ -36,6 +36,7 @@ class Usuario
         $stmt = $conexion->prepare("INSERT INTO usuario (identificacion, nombre, celular, usuario, contrasena, email, fk_zona_sede, fk_rol) 
                                         VALUES (:identificacion,:nombre, :celular, :usuario, :contrasena, :email, :sede, :rol)");
 
+        $stmt->bindValue(":contrasena", $this->contrasena);
         $stmt = $this->agregarParametros($stmt);
 
         return $stmt->execute();
@@ -77,10 +78,10 @@ class Usuario
     {
         $conexionDataBase = new Conexion();
         $conexion = $conexionDataBase->CrearConexion();
-        $stmt = $conexion->prepare("UPDATE usuario SET identificacion=:identificacion, nombre=:nombre, celular=:celular, usuario=:usuario, contrasena=:contrasena, email=:email, fk_zona_sede=:sede, fk_rol=:rol WHERE id=:id");
+        $stmt = $conexion->prepare("UPDATE usuario SET identificacion=:identificacion, nombre=:nombre, celular=:celular, usuario=:usuario, email=:email, fk_zona_sede=:sede, fk_rol=:rol WHERE id=:id");
 
         $stmt->bindValue(':id', $this->id_usuario, PDO::PARAM_INT);
-        $this->agregarParametros($stmt);
+        $stmt =$this->agregarParametros($stmt);
 
         $stmt->execute();
 
@@ -209,11 +210,25 @@ class Usuario
         $stmt->bindValue(":nombre", $this->nombre);
         $stmt->bindValue(":celular", $this->celular);
         $stmt->bindValue(":usuario", $this->usuario);
-        $stmt->bindValue(":contrasena", $this->contrasena);
         $stmt->bindValue(":email", $this->email);
         $stmt->bindValue(":sede",$this->__get("sede")->getId(), PDO::PARAM_INT);
         $stmt->bindValue(":rol", $this->__get("rol")->getId(), PDO::PARAM_INT);
 
         return $stmt;
+    }
+
+    public function CambiarContrasena($id, $contrasenaEncriptada)
+    {
+        $conexionDataBase = new Conexion();
+        $conexion = $conexionDataBase->CrearConexion();
+
+        $stmt = $conexion->prepare("UPDATE usuario SET contrasena=:contrasena WHERE id=:id");
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->bindValue(':contrasena', $contrasenaEncriptada);
+        $stmt->execute();
+
+        $conexionDataBase->CerrarConexion();
+
+        return ($stmt->rowCount() > 0);
     }
 }
