@@ -19,7 +19,7 @@
           <main role="main" class="col-12 col-md-10 px-md-4 py-md-5 py-2">
               <div class="row">
                   <div class="col-md-4 py-md-3 py-2 order-2 order-md-1">
-                      <a class="btn btn-primary w-100" href="<?php url("agregar/servicio/") ?>"
+                      <a class="btn btn-primary w-100" href="<?php url("seguimiento/registrar/") ?>"
                          role="button">Añadir producto</a>
                        </br>
                       <a class="btn btn-primary w-100" href="<?php url("") ?>"
@@ -58,21 +58,21 @@
                                 </tr>
                             </thead>
                             <tbody id="bodyTableServ">
-                                <tr>
-                                   <td><p>DUO PLAY 30 MB</p></td>
-                                   <td><p>03-12-2018</p></td>
-                                   <td><p>+</p></td>
-                                </tr>
-                                <tr>
-                                   <td><p>DUO PLAY 60 MB</p></td>
-                                   <td><p>23-11-2018</p></td>
-                                   <td><p>+</p></td>
-                                </tr>
-                                <tr>
-                                   <td><p>TRIPLE PLAY 30 MB</p></td>
-                                   <td><p>23-01-2021</p></td>
-                                   <td><p>+</p></td>
-                                </tr>
+                              <?php if (isset($Listado)) {
+                                  for ($i = 0; $i < count($Listado); $i++) {
+                                      ?>
+                                      <tr>
+                                              <td><?= $Listado[$i]->getServicio()->getTipoServicio; ?></td>
+                                              <td><?= $Listado[$i]->getFecha(); ?></td>
+                                              <td>
+                                              <a href="<?php url("seguimiento/editar/" . $Listado[$i]->getIdVentas()) ?>"
+                                                 class="bnt"><span data-feather="edit-3"></span></a>
+                                              <a href="<?php url("seguimiento/eliminar/" . $Listado[$i]->getIdVentas()) ?>"
+                                                 class="bnt"><span data-feather="trash-2"></span></a>
+                                          </td>
+                                      </tr>
+                                  <?php }
+                              } ?>
                             </tbody>
                         </table>
                     </div>

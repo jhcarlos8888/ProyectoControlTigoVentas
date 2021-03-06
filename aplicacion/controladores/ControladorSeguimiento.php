@@ -17,7 +17,10 @@ class ControladorSeguimiento
     public function cliente($id)
     {
       validarSession();
-      return Vista::crear("Clientes.servicio.ActualizarServicio");
+      $controlVenta = new ControlVentas();
+      $Listado = $controlVenta->ListarControlVentasDelCliente($id);
+
+      return Vista::crear("Clientes.servicio.ActualizarServicio", "Listado", $Listado);
     }
 
     public function editar($id_servicios)

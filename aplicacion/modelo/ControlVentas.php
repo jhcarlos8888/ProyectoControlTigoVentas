@@ -25,7 +25,7 @@ class ControlVentas
      * @param $fecha
      * @param $numero_orden_instalacion
      */
-    public function __construct(
+    /*public function __construct(
         $id_ventas,
         $oferta,
         $asesor,
@@ -43,7 +43,7 @@ class ControlVentas
         $this->estado = $estado;
         $this->fecha = $fecha;
         $this->numero_orden_instalacion = $numero_orden_instalacion;
-    }
+    }*/
 
     /**
      * @return mixed
@@ -311,6 +311,43 @@ class ControlVentas
         {
             die($e->getMessage());
         }
+      }
 
-}
+      public function ListarControlVentasDelCliente($id)
+      {
+        $ListaSeguimiento = array();
+        try
+        {
+            $stm = $this->pdo
+                      ->prepare("SELECT control_ventas.id, servicios.id_servicio, servicios.tipo_servicio
+                        AS servicio, control_ventas.fecha
+                        FROM control_ventas
+                        INNER JOIN servicios
+                        ON control_ventas.fk_servicio = servicios.id_servicios
+                        WHERE control_ventas.fk_cliente = ?");
+
+            $stm->execute(array($id));
+            $r = $stm->fetch(PDO::FETCH_OBJ);
+
+            foreach ($r as $seguimiento) {
+              $control = new ControlVentas();
+
+              $control->setIdVentas($seguimiento->id);
+
+              $ser = new servicio();
+              $ser->__SET('id', $seguimiento->id_servicio);
+              $ser->__SET('tipo_servicio', $seguimiento->servicio);
+
+              $control->setServicio($ser);
+              $control->setFecha($seguimiento->fecha);
+              $ListaSeguimiento[] = $control;
+
+            }
+
+            return $ListaSeguimiento;
+        } catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+      }
 }
