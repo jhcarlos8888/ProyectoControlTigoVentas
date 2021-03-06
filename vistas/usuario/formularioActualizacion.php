@@ -11,7 +11,7 @@
 <!-- Panel de las tablas -->
 <div class="tab-content">
     <div class="tab-pane container active" id="datos-basicos">
-        <form class="row" id="registrar" method="post" action="<?php url("usuario/actualizar") ?>">
+        <form class="row" id="actualizar" method="post" action="<?php url("usuario/actualizar") ?>">
 
             <input type="hidden" name="proceso" value="registrar"><!--Aqui debe ir un token-->
             <input type="hidden" name="id" value="<?= $usuario->__get("id_usuario") ?>">
@@ -70,28 +70,13 @@
                     <?php } ?>
                 </select>
             </div>
-            <div class="col-md-8 m-auto pt-4">
+            <div class="col-md-6 m-auto pt-4">
                 <button type="submit" class="btn btn-primary btn-block">Actualizar</button>
             </div>
         </form>
     </div>
 
     <div class="tab-pane container fade" id="cambiar-contrasena">
-        <form class="row" id="registrar" method="post" action="<?php url("usuario/contrasena") ?>">
-
-            <div class="col-md-6">
-                <label for="contrasena" class="col-form-label">Nueva Contraseña</label>
-                <input type="password" name="contrasena" id="contrasena"
-                       class="form-control" placeholder="Ingrese una nueva contraseña" required>
-            </div>
-            <div class="col-md-6">
-                <label for="repite-contrasena" class="col-form-label">Confirme la Contraseña</label>
-                <input type="password" name="repite-contrasena" id="repite-contrasena"
-                       class="form-control" placeholder="Confirme la nueva Contraseña" required>
-            </div>
-            <div class="col-md-8 m-auto pt-4">
-                <button type="submit" class="btn btn-primary btn-block">Actualizar</button>
-            </div>
-        </form>
+        <?php include(RUTA_VISTAS . 'usuario/cambiarContrasena.php') ?>
     </div>
 </div>
