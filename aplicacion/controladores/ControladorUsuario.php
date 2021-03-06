@@ -27,7 +27,8 @@ class ControladorUsuario
         $roles = Rol::ListarRoles();
         $sedes = Sede::ListarSedes();
 
-        return Vista::crear("usuario.actualizar", array("usuario" => $usuario, "sedes" => $sedes, "roles" => $roles));
+        return Vista::crear("usuario.actualizarUsuario",
+            array("usuario" => $usuario, "sedes" => $sedes, "roles" => $roles));
     }
 
     public function actualizar()
@@ -39,10 +40,9 @@ class ControladorUsuario
         $nombre = $_POST['nombre'];
         $celular = $_POST['celular'];
         $user = $_POST['usuario'];
-        $contrasena = $_POST['contrasena'];
         $email = $_POST['email'];
-        $sede = $_POST['sede'];
-        $rol = $_POST['rol'];
+        $sede = Sede::consultarSede($_POST['sede']);
+        $rol = Rol::consultarRol($_POST['rol']);
 
         $usuario = new Usuario();
         $usuario->__set("id_usuario", $id);
@@ -50,9 +50,8 @@ class ControladorUsuario
         $usuario->__set("nombre", $nombre);
         $usuario->__set("celular", $celular);
         $usuario->__set("usuario", $user);
-        $usuario->__set("contrasena", $contrasena);
         $usuario->__set("email", $email);
-        $usuario->__set("zona_sede", $sede);
+        $usuario->__set("sede", $sede);
         $usuario->__set("rol", $rol);
 
         $resultado = $usuario->ActualizarUsuario();
@@ -114,5 +113,29 @@ class ControladorUsuario
         $usuario->EliminarUsuario($id);
 
         redirecciona("usuario");
+    }
+
+    public function cambiarContrasena()
+    {
+
+        validarSession();
+
+        $id = $_POST['id'];
+        $nuevaContrasena = $_POST['contrasena'];
+        $validacionContrasena = $_POST['validacionContrasena'];
+        $resultado = false;
+
+        if ($nuevaContrasena === $validacionContrasena) {
+
+            $usuario = new Usuario();
+            $contrasenaEncriptada = encriptar($_POST['contrasena']);
+            $resultado = $usuario->cambiarContrasena($id, $contrasenaEncriptada);
+        }
+
+        if ($resultado) {
+            redirecciona("usuario");
+        } else {
+            redirecciona("usuario/editar/" . $id);
+        }
     }
 }
