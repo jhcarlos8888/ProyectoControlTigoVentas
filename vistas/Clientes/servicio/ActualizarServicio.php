@@ -21,7 +21,7 @@
                   <div class="col-md-4 py-md-3 py-2 order-2 order-md-1">
                       <a class="btn btn-primary w-100" href="<?php url("seguimiento/registrar/") ?>"
                          role="button">Añadir producto</a>
-                       </br>
+                       <br>
                       <a class="btn btn-primary w-100" href="<?php url("") ?>"
                             role="button">Cancelar</a>
                   </div>
@@ -49,7 +49,7 @@
 
                   <div class="col-12 order-3 table-responsive">
 
-                      <table id="UserList" class="table table-hover" id="tblServices" aria-label="Lista de Servicios">
+                      <table class="table table-hover" id="tblServices" aria-label="Lista de Servicios">
                           <thead>
                               <tr>
                                   <th scope="col">TIPO DE PROCESO</th>
@@ -62,13 +62,16 @@
                                   for ($i = 0; $i < count($Listado); $i++) {
                                       ?>
                                       <tr>
-                                              <td><?= $Listado[$i]->getServicio()->getTipoServicio; ?></td>
-                                              <td><?= $Listado[$i]->getFecha(); ?></td>
-                                              <td>
+                                          <td><?= $Listado[$i]->getServicio()->getTipoServicio(); ?></td>
+                                          <td><?= $Listado[$i]->getFecha(); ?></td>
+                                          <td>
+                                              <a href="#"
+                                                 class="bnt"><span data-feather="eye"></span></a>
                                               <a href="<?php url("seguimiento/editar/" . $Listado[$i]->getIdVentas()) ?>"
                                                  class="bnt"><span data-feather="edit-3"></span></a>
                                               <a href="<?php url("seguimiento/eliminar/" . $Listado[$i]->getIdVentas()) ?>"
                                                  class="bnt"><span data-feather="trash-2"></span></a>
+
                                           </td>
                                       </tr>
                                   <?php }
