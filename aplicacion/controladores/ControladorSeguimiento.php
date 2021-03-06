@@ -1,6 +1,6 @@
 <?php
 
-use cliente\Cliente;
+use ControlVentas\ControlVentas;
 use vista\Vista;
 
 class ControladorSeguimiento
@@ -10,25 +10,25 @@ class ControladorSeguimiento
     {
         validarSession();
         return Vista::crear("Clientes.servicio.ActualizarServicio");
-      }
-
+    }
 
 
     public function cliente($id)
     {
-      validarSession();
-      $controlVenta = new ControlVentas();
-      $Listado = $controlVenta->ListarControlVentasDelCliente($id);
+        validarSession();
+        $controlVenta = new ControlVentas();
+        $Listado = $controlVenta->ListarControlVentasDelCliente($id);
 
-      return Vista::crear("Clientes.servicio.ActualizarServicio", "Listado", $Listado);
+        return Vista::crear("Clientes.servicio.ActualizarServicio", "Listado", $Listado);
     }
 
+
+    //esto no va aqui esto esta mal
     public function editar($id_servicios)
     {
         validarSession();
 
-        $servicio = new Servicio();
-        $servicio = $servicio->ConsultarServicio($id_servicio);
+        $servicio = Servicio::Obtener($id_servicios);
 
         return Vista::crear("servicio.ActualizarServicio", "servicio", $servicio);
     }
@@ -43,7 +43,7 @@ class ControladorSeguimiento
 
 
         $servicio = new Servicio();
-        $servicio->__set("id_servicio",$id_servicio);
+        $servicio->__set("id_servicio", $id_servicio);
 
 
         $resultado = $servicio->ActualizarServicio();
@@ -55,47 +55,6 @@ class ControladorSeguimiento
         }
     }
 
-    public function crear()
-    {
-        validarSession();
-
-        $servicio = $_POST['tipo_servicio'];
-
-
-        $servicio = new Servicio();
-
-        $servicio->__set("servicio",$tipo_servicio);
-
-
-        $resultado = $servicio->CrearServicio();
-
-        if ($resultado) {
-            redirecciona("servicio");
-        } else {
-            self::registrar();
-        }
-    }
-
-    //public function registrar()
-    //{
-        //validarSession();
-
-      //  $roles = array(
-      //      "1" => "Administrador",
-      //      "2" => "Coordinador Comercial",
-      //      "3" => "Asesor Comercial"
-    //    );
-
-      //  $sedes = array(
-      //      "1040" => "San Diego",
-      //      "1041" => "Santa Fe",
-      //      "1042" => "Molinos",
-      //      "1043" => "Oriental"
-      //  );
-
-      //  return Vista::crear("usuario.registrar", array("sedes" => $sedes, "roles" => $roles));
-  //  }
-
     public function eliminar($id_servicio)
     {
         validarSession();
@@ -105,6 +64,4 @@ class ControladorSeguimiento
 
         redirecciona("servicio");
     }
-
-
 }
