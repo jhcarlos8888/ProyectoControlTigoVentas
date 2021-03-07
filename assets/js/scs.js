@@ -47,19 +47,21 @@ function busqueda(search, modelo) {
                                     <td>${el.sede}</td>
                                     <td>${el.rol}</td>
                                     <td>
-                                        <a href="/ProyectoControlTigoVentas/usuario/${modelo}/${el.id}" class="bnt"><span data-feather="edit-3"></span></a>
-                                        <a href="/ProyectoControlTigoVentas/usuario/${modelo}/${el.id}" class="bnt"><span data-feather="trash-2"></span></a>
+                                        <a href="/ProyectoControlTigoVentas/${modelo}/editar/${el.id}" class="bnt"><span data-feather="edit-3"></span></a>
+                                        <a href="/ProyectoControlTigoVentas/${modelo}/eliminar/${el.id}" class="bnt"><span data-feather="trash-2"></span></a>
                                     </td>`;
                     $fragment.appendChild($tr);
                 } else {
                     $tr.innerHTML = `<td>${el.identificacion}</td>
+                                    <td><a href="/ProyectoControlTigoVentas/seguimiento/${modelo}/${el.id}"
+                                              <span>${el.nombre}</span></a></td>
                                     <td>${el.nombre}</td>
                                     <td>${el.direccion}</td>
                                     <td>${el.email}</td>
                                     <td>${el.celular}</td>
                                     <td>
-                                        <a href="/ProyectoControlTigoVentas/usuario/${modelo}/${el.id}" class="bnt"><span data-feather="edit-3"></span></a>
-                                        <a href="/ProyectoControlTigoVentas/usuario/${modelo}/${el.id}" class="bnt"><span data-feather="trash-2"></span></a>
+                                        <a href="/ProyectoControlTigoVentas/${modelo}/editar/${el.id}" class="bnt"><span data-feather="edit-3"></span></a>
+                                        <a href="/ProyectoControlTigoVentas/${modelo}/eliminar/${el.id}" class="bnt"><span data-feather="trash-2"></span></a>
                                     </td>`;
                     $fragment.appendChild($tr);
                 }
