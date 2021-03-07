@@ -177,7 +177,13 @@ class Usuario
         $conexion = $conexionDataBase->CrearConexion();
 
         $valor = $valor . "%";
-        $stmt = $conexion->prepare("SELECT * FROM usuario WHERE identificacion LIKE :cedula OR nombre LIKE :nombre");
+        $stmt = $conexion->prepare(
+            "SELECT user.id, user.identificacion, user.nombre, user.celular, user.usuario, user.email, zona_sede.nombre_sede, rol.nombre_rol
+                FROM usuario AS user
+                INNER JOIN zona_sede ON fk_zona_sede = zona_sede.id 
+                INNER JOIN rol ON fk_rol = rol.id
+                WHERE identificacion LIKE :cedula OR nombre LIKE :nombre"
+                );
         $stmt->bindParam(":cedula", $valor);
         $stmt->bindParam(":nombre", $valor);
         $stmt->setFetchMode(PDO::FETCH_OBJ);
@@ -191,8 +197,8 @@ class Usuario
                 "celular" => $fila->celular,
                 "usuario" => $fila->usuario,
                 "email" => $fila->email,
-                "sede" => $fila->fk_zona_sede,
-                "rol" => $fila->fk_rol,
+                "sede" => $fila->nombre_sede,
+                "rol" => $fila->nombre_rol,
             );
 
             $usuarios[] = $user;
