@@ -200,4 +200,9 @@ input[type=number] {
 }
 
 
+/*--------Fuentes para las paginas----*/
+
+#titleCabecera{
+  font-family: 'Bungee', cursive;
+  color: white;
 }
