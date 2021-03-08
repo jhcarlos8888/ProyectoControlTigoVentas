@@ -1,6 +1,8 @@
 <?php
 
+use Cliente\Cliente;
 use ControlVentas\ControlVentas;
+use servicio\Servicio;
 use vista\Vista;
 
 class ControladorSeguimiento
@@ -17,9 +19,9 @@ class ControladorSeguimiento
     {
         validarSession();
         $controlVenta = new ControlVentas();
+        $cliente = (new Cliente)->Obtener($id);
         $Listado = $controlVenta->ListarControlVentasDelCliente($id);
-
-        return Vista::crear("Clientes.servicio.ActualizarServicio", "Listado", $Listado);
+        return Vista::crear("Clientes.servicio.ActualizarServicio", array("Listado" => $Listado, "cliente" => $cliente));
     }
 
 
@@ -42,16 +44,16 @@ class ControladorSeguimiento
         $tipo_servicio = $_POST['tipo_servicio'];
 
 
-        $servicio = new Servicio();
+        $servicio = new Servicio($id_servicio, $tipo_servicio);
         $servicio->__set("id_servicio", $id_servicio);
 
 
-        $resultado = $servicio->ActualizarServicio();
+        $resultado = $servicio->Actualizar();
 
         if ($resultado) {
             redirecciona("servicio");
         } else {
-            self::editar($servicio->__get("id_servicio"));
+            self::editar($servicio->getIdServicio());
         }
     }
 
@@ -60,7 +62,7 @@ class ControladorSeguimiento
         validarSession();
 
         $servicio = new Servicio();
-        $servicio->EliminarServicio($id_servicio);
+        $servicio->Eliminar($id_servicio);
 
         redirecciona("servicio");
     }
