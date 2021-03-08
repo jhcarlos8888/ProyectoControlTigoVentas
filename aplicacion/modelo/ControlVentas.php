@@ -2,6 +2,7 @@
 
 namespace ControlVentas;
 
+use aplicacion\modelo\Estado\Estado;
 use Conexion;
 use Exception;
 use PDO;
@@ -18,8 +19,6 @@ class ControlVentas
     private $estado;
     private $fecha;
     private $numero_orden_instalacion;
-    private $pdo;
-
 
     public function getIdVentas()
     {
@@ -234,7 +233,7 @@ class ControlVentas
             $conexionDataBase = new Conexion();
             $conexion = $conexionDataBase->CrearConexion();
 
-            $stm = $conexion->prepare("SELECT control_ventas.id, servicios.id_servicios, servicios.tipo_servicio AS servicio, control_ventas.fecha 
+            $stm = $conexion->prepare("SELECT control_ventas.id, servicios.id_servicios, servicios.tipo_servicio AS servicio, fk_estado, control_ventas.fecha 
                            FROM control_ventas
                            INNER JOIN servicios ON control_ventas.fk_servicio = servicios.id_servicios
                            WHERE control_ventas.fk_cliente = ?");
@@ -248,8 +247,9 @@ class ControlVentas
                 $control->setIdVentas($seguimiento->id);
 
                 $ser = new Servicio($seguimiento->id_servicios, $seguimiento->servicio);
-
+                $nuevoEstado = (new Estado)->consultarEstado($seguimiento->fk_estado);
                 $control->setServicio($ser);
+                $control->setEstado($nuevoEstado);
                 $control->setFecha($seguimiento->fecha);
                 $ListaSeguimiento[] = $control;
 
