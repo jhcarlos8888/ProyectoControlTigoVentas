@@ -32,7 +32,7 @@ class Estado
         $this->estado = $estado;
     }
 
-    public static function consultarEestado($id){
+    public function consultarEstado($id){
 
         $estado = new Estado();
 
