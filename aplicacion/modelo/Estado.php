@@ -53,14 +53,14 @@ class Estado
         return $estado;
     }
 
-    public static function listarEstados(){
+    public function listarEstados(){
 
         $estados = array();
 
         $conexionDataBase = new Conexion();
         $conexion = $conexionDataBase->CrearConexion();
 
-        $stmt = $conexion->prepare("SELECT id_estado as id, tipo_estado as estado FROM estado");
+        $stmt = $conexion->prepare("SELECT id_estado as id, tipo_estado as nombre FROM estado");
         $stmt->setFetchMode(PDO::FETCH_OBJ);
         $stmt->execute();
 
