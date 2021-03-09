@@ -175,7 +175,7 @@ class ControlVentas
         }
     }
 
-    public function Actualizar(ControlVentas $data)
+    public function Actualizar()
     {
         try {
             $sql = "UPDATE control_ventas 
@@ -187,13 +187,13 @@ class ControlVentas
 
             $stm = $conexion->prepare($sql);
             $stm->execute(array(
-                $data->getOferta(),
-                $data->getAsesor(),
-                $data->getCliente(),
-                $data->getServicio(),
-                $data->getEstado(),
-                $data->getFecha(),
-                $data->getNumeroOrdenInstalacion()
+                $this->getOferta(),
+                $this->getAsesor(),
+                $this->getCliente(),
+                $this->getServicio(),
+                $this->getEstado(),
+                $this->getFecha(),
+                $this->getNumeroOrdenInstalacion()
             ));
 
         } catch (Exception $e) {
@@ -202,7 +202,7 @@ class ControlVentas
     }
 
 
-    public function Registrar(ControlVentas $data)
+    public function Registrar()
     {
         try {
             $sql = "INSERT INTO control_ventas (oferta, fk_usuario, fk_cliente, fk_servicio,fk_estado,fecha,numero_instalacion)
@@ -212,15 +212,17 @@ class ControlVentas
             $conexion = $conexionDataBase->CrearConexion();
 
             $stm = $conexion->prepare($sql);
-            $stm->execute(array(
-                $data->getOferta(),
-                $data->getAsesor(),
-                $data->getCliente(),
-                $data->getServicio(),
-                $data->getEstado(),
-                $data->getFecha(),
-                $data->getNumeroOrdenInstalacion()
+            $resultado = $stm->execute(array(
+                $this->getOferta(),
+                $this->getAsesor(),
+                $this->getCliente(),
+                $this->getServicio(),
+                $this->getEstado(),
+                $this->getFecha(),
+                $this->getNumeroOrdenInstalacion()
             ));
+
+            return $resultado;
         } catch (Exception $e) {
             die($e->getMessage());
         }
