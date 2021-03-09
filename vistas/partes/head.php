@@ -1,6 +1,8 @@
-<link rel="shortcut icon" href="<?php assets("img/icon-dev.svg")?>" type="image/svg+xml">
+
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="shortcut icon" href="<?php assets("img/icon-dev.svg")?>" type="image/svg+xml">
 
 <!--Fuentes para las paginas-->
 <link rel="preconnect" href="https://fonts.gstatic.com">
