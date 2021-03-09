@@ -19,8 +19,8 @@
           <main role="main" class="col-12 col-md-10 px-md-4 py-md-2 py-2">
               <div class="row">
                   <div class="col-md-4 py-md-3 py-2 order-2 order-md-1">
-                      <a class="btn btn-primary w-40" href="<?php url("seguimiento/registrar") ?>"
-                         role="button">Añadir producto</a>
+                      <a class="btn btn-primary w-40" href="<?php url("seguimiento/registrar/".$cliente->__get("id")) ?>"
+                         role="button">Añadir Producto</a>
                       <a class="btn btn-danger w-40" href="<?php url("") ?>"
                             role="button">Regresar</a>
                   </div>

@@ -38,7 +38,7 @@ class Servicio
         $this->tipo_servicio = $tipo_servicio;
     }
 
-    public function listar()
+    public static function listar()
     {
         try {
 
@@ -48,11 +48,12 @@ class Servicio
             $conexion = $conexionDataBase->CrearConexion();
 
             $stm = $conexion->prepare("SELECT * FROM servicios");
+            $stm->setFetchMode(PDO::FETCH_OBJ);
             $stm->execute();
 
-            foreach ($stm->fetchAll(PDO::FETCH_OBJ) as $r) {
+            while ($r = $stm->fetch() ){
 
-                $ser = new servicio($r->id, $r->tipo_servicio);
+                $ser = new servicio($r->id_servicios, $r->tipo_servicio);
 
                 $result[] = $ser;
             }
