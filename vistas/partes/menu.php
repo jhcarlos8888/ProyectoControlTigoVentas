@@ -20,10 +20,10 @@
 
             <li class="nav-item dropdow">
                 <a class="nav-link dropdown-toggle" role="button" href="<?php url("cliente") ?>"
-                   data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                   data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                     <span data-feather="bar-chart-2"></span>Clientes</a>
 
-                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                     <a class="dropdown-item" href="<?php url("cliente") ?>">Seguimiento de clientes</a>
                     <a class="dropdown-item" href="#">Ventas, productos y servicios</a>
                     <a class="dropdown-item" href="#">Generacion de Id de pedido</a>
@@ -31,11 +31,11 @@
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" role="button" href="#" data-bs-toggle="collapse"
-                   data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <a class="nav-link dropdown-toggle" role="button" href="#" data-toggle="collapse"
+                   data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                     <span data-feather="dollar-sign"></span>Mi gestión</a>
 
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                     <a class="dropdown-item" href="#">Descuentos y promociones</a>
                     <a class="dropdown-item" href="#">Historial de ventas</a>
                     <a class="dropdown-item" href="#">Estrategias de ventas</a>
@@ -46,11 +46,11 @@
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" role="button" href="#" data-bs-toggle="collapse"
-                   data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><span
+                <a class="nav-link dropdown-toggle" role="button" href="#" data-toggle="collapse"
+                   data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><span
                             data-feather="help-circle"></span>Ayudas</a>
 
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                     <a class="dropdown-item" href="<?php url("manuales") ?>">Manuales</a>
                 </div>
             </li>

@@ -3,8 +3,8 @@
                 src="<?php assets("img/logo_project_control_min.png") ?>" width="50" alt=""></a>
     <h4 id="titleCabecera" class=" navbar-nav ml-2 px-8 text-center">Sales Control System</h4>
     <button class="navbar-toggler position-absolute d-dm-none d-lg-none collapsed my-2" type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            data-toggle="collapse"
+            data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
