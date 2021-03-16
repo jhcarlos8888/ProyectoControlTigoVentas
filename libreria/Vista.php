@@ -1,18 +1,8 @@
 <?php namespace vista;
 
-/**
- * Class Vista
- * @package vista
- */
 class Vista
 {
 
-    /**
-     * @param $path
-     * @param null $key
-     * @param null $valor
-     * @return null
-     */
     public static function crear($path, $key = null, $valor = null)
     {
         //Validamos la variable path

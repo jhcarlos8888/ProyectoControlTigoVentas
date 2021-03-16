@@ -1,3 +1,4 @@
+<?php $rol_usuario=$_SESSION['rol_user']?>
 <nav id="sidebarMenu"
      class="col-12 col-md-2  d-md-block bg-light sidebar collapse text-md-left text-left mr-0 pr-0 py-md-5 px-0">
     <div class="sidebar-sticky p-10">
@@ -8,15 +9,16 @@
                 <a class="nav-link active" href="#">
                     <span data-feather="airplay"></span>¡Hola!
                     <span>
-                        <?php echo (isset($_SESSION['nombre_user'])) ? $_SESSION['nombre_user'] : "Error User_name" ?>
+                        <?php echo (isset($_SESSION['nombre_user'])) ? $_SESSION['nombre_user'] : redirecciona("/"); ?>
                     </span>
                 </a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" role="button" href="<?php url("usuario") ?>">
-                    <span data-feather="users"></span>Usuario</a>
-            </li>
+            <?php if ($rol_usuario === "Administrador"){ ?>
+                <li class="nav-item">
+                    <a class="nav-link" role="button" href="<?php url("usuario") ?>">
+                        <span data-feather="users"></span>Usuario</a>
+                </li>
+            <?php }?>
 
             <li class="nav-item dropdow">
                 <a class="nav-link dropdown-toggle" role="button" href="<?php url("cliente") ?>"
