@@ -40,6 +40,7 @@ class ControladorAutenticacion
                 $_SESSION['id'] = session_id();
                 $_SESSION['id_user'] = $usuario->__get("id_usuario");
                 $_SESSION['nombre_user'] = $usuario->__get("nombre");
+                $_SESSION['rol_user'] = $usuario->__get("rol")->getNombre();
 
                 redirecciona("usuario");
             } else {
