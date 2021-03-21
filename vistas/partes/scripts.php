@@ -11,5 +11,5 @@
 <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 
 
-
+<script src="<?php assets("js/hamburger.js") ?>"></script>
 <script src="<?php assets("js/scs.js") ?>"></script>
