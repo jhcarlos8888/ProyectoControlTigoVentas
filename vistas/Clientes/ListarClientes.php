@@ -21,7 +21,7 @@
                 <div class="row">
                     <div class="col-md-4 py-md-3 py-2 order-2 order-md-1">
                         <a class="btn btn-primary w-100" href="<?php url("cliente/registrar") ?>"
-                           role="button">Crear Cuenta</a>
+                           role="button">Registrar Cliente</a>
                     </div>
 
                     <div class="offset-md-2 col-md-6 offset-lg-4 col-lg-4 py-md-3 order-1 order-md-2">
