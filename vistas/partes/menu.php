@@ -27,7 +27,7 @@
 
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                     <a class="dropdown-item" href="<?php url("cliente") ?>">Seguimiento de clientes</a>
-                    <a class="dropdown-item" href="#">Ventas, productos y servicios</a>
+                    <a class="dropdown-item" href="<?php url("control_ventas") ?>">Ventas, productos y servicios</a>
                     <a class="dropdown-item" href="#">Generacion de Id de pedido</a>
                 </div>
             </li>
