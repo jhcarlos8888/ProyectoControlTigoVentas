@@ -11,8 +11,8 @@ class ControladorSeguimiento
 
     public function index()
     {
-        validarSession();
-        return Vista::crear("Clientes.servicio.ActualizarServicio");
+	    validarSession();
+	    redirecciona("control_ventas");
     }
 
 
@@ -22,7 +22,7 @@ class ControladorSeguimiento
         $controlVenta = new ControlVentas();
         $cliente = (new Cliente)->Obtener($id);
         $Listado = $controlVenta->ListarControlVentasDelCliente($id);
-        return Vista::crear("Clientes.servicio.ActualizarServicio",
+        return Vista::crear("Clientes.servicio.ListaServicios",
             array("Listado" => $Listado, "cliente" => $cliente));
     }
 
@@ -37,44 +37,14 @@ class ControladorSeguimiento
     }
 
     //esto no va aqui esto esta mal
-    public function editar($id_servicios)
+    public function editar($id_ventas)
     {
         validarSession();
-
-        $servicio = Servicio::Obtener($id_servicios);
-
-        return Vista::crear("servicio.ActualizarServicio", "servicio", $servicio);
-    }
-
-
-    public function actualizar()
-    {
-        validarSession();
-
-        $id_servicio = $_POST['id_servicio'];
-        $tipo_servicio = $_POST['tipo_servicio'];
-
-
-        $servicio = new Servicio($id_servicio, $tipo_servicio);
-        $servicio->__set("id_servicio", $id_servicio);
-
-
-        $resultado = $servicio->Actualizar();
-
-        if ($resultado) {
-            redirecciona("servicio");
-        } else {
-            self::editar($servicio->getIdServicio());
-        }
-    }
-
-    public function eliminar($id_servicio)
-    {
-        validarSession();
-
-        $servicio = new Servicio();
-        $servicio->Eliminar($id_servicio);
-
-        redirecciona("servicio");
+	    $listaEstados = (new Estado)->listarEstados();
+	    $listaServicios = Servicio::listar();
+	    $ControlVentas = new ControlVentas();
+	    $ControlVentas = $ControlVentas->Obtener($id_ventas);
+	    return Vista::crear("ControlVentas.Actualizar",
+		    array("ControlVentas" => $ControlVentas, "listaEstados" => $listaEstados, "listaServicios" => $listaServicios));
     }
 }
