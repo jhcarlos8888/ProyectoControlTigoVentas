@@ -260,4 +260,42 @@ class ControlVentas
             die($e->getMessage());
         }
     }
+
+	public function listarPorAsesor($idAsesor)
+	{
+		$listaControlVentas = array();
+		try {
+			$conexionDataBase = new Conexion();
+			$conexion = $conexionDataBase->CrearConexion();
+			$stm = $conexion->prepare("SELECT control_ventas.id, control_ventas.oferta, 
+       												control_ventas.fk_usuario as usuario, control_ventas.fk_cliente as cliente, 
+       												servicios.id_servicios, servicios.tipo_servicio AS servicio, fk_estado as estado, 
+       												control_ventas.fecha, control_ventas.numero_instalacion 
+                           					 FROM control_ventas
+                           					 INNER JOIN servicios ON control_ventas.fk_servicio = servicios.id_servicios
+                           					 WHERE control_ventas.fk_usuario = ?");
+			$stm->setFetchMode(PDO::FETCH_OBJ);
+			$stm->execute(array($idAsesor));
+			while ($control = $stm->fetch()) {
+				$controlVenta = new ControlVentas();
+				$controlVenta->setIdVentas($control->id);
+				$controlVenta->setOferta($control->oferta);
+				$nuevoUsuario = (new Usuario)->ConsultarUsuario($control->usuario);
+				$nuevoCliente = (new Cliente)->Obtener($control->cliente);
+				$nuevoServicio = new Servicio($control->id_servicios, $control->servicio);
+				$nuevoEstado = (new Estado)->consultarEstado($control->estado);
+				$controlVenta->setServicio($nuevoServicio);
+				$controlVenta->setUsuario($nuevoUsuario);
+				$controlVenta->setCliente($nuevoCliente);
+				$controlVenta->setEstado($nuevoEstado);
+				$controlVenta->setFecha($control->fecha);
+				$controlVenta->setNumeroOrdenInstalacion($control->numero_instalacion);
+				$listaControlVentas[] = $controlVenta;
+			}
+			return $listaControlVentas;
+		} catch (Exception $e) {
+			die($e->getMessage());
+		}
+
+	}
 }

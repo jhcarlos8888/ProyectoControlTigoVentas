@@ -88,4 +88,12 @@ class ControladorControlVentas
         $ControlVentas->Eliminar($id_ventas);
 	    ($idCliente!==null) ? redirecciona("seguimiento/cliente/".$idCliente) : redirecciona("control_ventas");
     }
+
+    public function mis_registros()
+    {
+	    validarSession();
+	    $idAsesor = $_SESSION['id_user'];
+	    $listaControlVentas = (new ControlVentas())->listarPorAsesor($idAsesor);
+	    return Vista::crear("ControlVentas.ListarControlVentasAsesor", "listaControlVentas", $listaControlVentas);
+    }
 }

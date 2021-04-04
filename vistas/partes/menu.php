@@ -28,7 +28,6 @@
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                     <a class="dropdown-item" href="<?php url("cliente") ?>">Seguimiento de clientes</a>
                     <a class="dropdown-item" href="<?php url("control_ventas") ?>">Ventas, productos y servicios</a>
-                    <a class="dropdown-item" href="#">Generacion de Id de pedido</a>
                 </div>
             </li>
 
@@ -38,8 +37,8 @@
                     <span data-feather="dollar-sign"></span>Mi gestión</a>
 
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <a class="dropdown-item" href="<?php url("control_ventas/mis_registros") ?>">Historial de ventas</a>
                     <a class="dropdown-item" href="#">Descuentos y promociones</a>
-                    <a class="dropdown-item" href="#">Historial de ventas</a>
                     <a class="dropdown-item" href="#">Estrategias de ventas</a>
                     <a class="dropdown-item" href="#">Generación de informes financieros</a>
                     <a class="dropdown-item" href="#">Indicadores de gestión comercial</a>
