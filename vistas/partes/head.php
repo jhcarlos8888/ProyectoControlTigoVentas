@@ -9,5 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
 
 <!--Rutas de CSS-->
+
 <link href="<?php assets("css/bootstrap/bootstrap.css" )?>" type="text/css" rel="stylesheet">
 <link href="<?php assets("css/estilo.css")?>" type="text/css" rel="stylesheet">
+<link href="<?php assets("css/hamburgers.css")?>" type="text/css" rel="stylesheet">
