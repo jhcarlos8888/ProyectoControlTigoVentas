@@ -3,17 +3,19 @@
 namespace ControlVentas;
 
 use aplicacion\modelo\Estado\Estado;
+use Cliente\Cliente;
 use Conexion;
 use Exception;
 use PDO;
 use servicio\Servicio;
+use usuario\Usuario;
 
 class ControlVentas
 {
 
     private $id_ventas;
     private $oferta;
-    private $asesor;
+    private $usuario;
     private $cliente;
     private $servicio;
     private $estado;
@@ -40,14 +42,14 @@ class ControlVentas
         $this->oferta = $oferta;
     }
 
-    public function getAsesor()
+    public function getUsuario()
     {
-        return $this->asesor;
+        return $this->usuario;
     }
 
-    public function setAsesor($asesor): void
+    public function setUsuario($usuario): void
     {
-        $this->asesor = $asesor;
+        $this->usuario = $usuario;
     }
 
     public function getCliente()
@@ -103,31 +105,31 @@ class ControlVentas
     public function listar()
     {
         try {
-            $result = array();
-
+	        $ListaControlVentas= array();
             $conexionDataBase = new Conexion();
             $conexion = $conexionDataBase->CrearConexion();
-
-            $stm = $conexion->prepare("SELECT * FROM control_ventas");
+	        $stm = $conexion->prepare("SELECT control_ventas.id, control_ventas.oferta, control_ventas.fk_usuario as usuario, control_ventas.fk_cliente as cliente, servicios.id_servicios, servicios.tipo_servicio AS servicio, fk_estado as estado, control_ventas.fecha, control_ventas.numero_instalacion 
+                           FROM control_ventas
+                           INNER JOIN servicios ON control_ventas.fk_servicio = servicios.id_servicios");
+	        $stm->setFetchMode(PDO::FETCH_OBJ);
             $stm->execute();
-
-            foreach ($stm->fetchAll(PDO::FETCH_OBJ) as $r) {
-
-                $cvtas = new ControlVentas();
-
-                $cvtas->setIdVentas($r->id);
-                $cvtas->setOferta($r->oferta);
-                $cvtas->setAsesor($r->asesor);
-                $cvtas->setCliente($r->cliente);
-                $cvtas->setServicio($r->servicio);
-                $cvtas->setEstado($r->estado);
-                $cvtas->setFecha($r->fecha);
-                $cvtas->setNumeroOrdenInstalacion($r->numero_orden_instalacion);
-
-                $result[] = $cvtas;
-            }
-
-            return $result;
+	        while ($control = $stm->fetch()) {
+		        $controlVenta = new ControlVentas();
+		        $controlVenta->setIdVentas($control->id);
+		        $controlVenta->setOferta($control->oferta);
+		        $nuevoUsuario = (new Usuario)->ConsultarUsuario($control->usuario);
+		        $nuevoCliente = (new Cliente)->Obtener($control->cliente);
+		        $nuevoServicio = new Servicio($control->id_servicios, $control->servicio);
+		        $nuevoEstado = (new Estado)->consultarEstado($control->estado);
+		        $controlVenta->setServicio($nuevoServicio);
+		        $controlVenta->setUsuario($nuevoUsuario);
+		        $controlVenta->setCliente($nuevoCliente);
+		        $controlVenta->setEstado($nuevoEstado);
+		        $controlVenta->setFecha($control->fecha);
+		        $controlVenta->setNumeroOrdenInstalacion($control->numero_instalacion);
+		        $ListaControlVentas[] = $controlVenta;
+	        }
+            return $ListaControlVentas;
         } catch (Exception $e) {
             die($e->getMessage());
         }
@@ -139,23 +141,28 @@ class ControlVentas
             $conexionDataBase = new Conexion();
             $conexion = $conexionDataBase->CrearConexion();
 
-            $stm = $conexion->prepare("SELECT * FROM control_ventas WHERE id = ?");
+            $stm = $conexion->prepare("SELECT control_ventas.id, control_ventas.oferta, control_ventas.fk_usuario as usuario, control_ventas.fk_cliente as cliente, servicios.id_servicios, servicios.tipo_servicio AS servicio, fk_estado as estado, control_ventas.fecha, control_ventas.numero_instalacion 
+                           FROM control_ventas
+                           INNER JOIN servicios ON control_ventas.fk_servicio = servicios.id_servicios
+	        			   WHERE id = ?");
 
             $stm->execute(array($id));
-            $r = $stm->fetch(PDO::FETCH_OBJ);
+	        $control = $stm->fetch(PDO::FETCH_OBJ);
+	        $controlVenta = new ControlVentas();
+	        $controlVenta->setIdVentas($control->id);
+	        $controlVenta->setOferta($control->oferta);
+	        $nuevoUsuario = (new Usuario)->ConsultarUsuario($control->usuario);
+	        $nuevoCliente = (new Cliente)->Obtener($control->cliente);
+	        $nuevoServicio = new Servicio($control->id_servicios, $control->servicio);
+	        $nuevoEstado = (new Estado)->consultarEstado($control->estado);
+	        $controlVenta->setServicio($nuevoServicio);
+	        $controlVenta->setUsuario($nuevoUsuario);
+	        $controlVenta->setCliente($nuevoCliente);
+	        $controlVenta->setEstado($nuevoEstado);
+	        $controlVenta->setFecha($control->fecha);
+	        $controlVenta->setNumeroOrdenInstalacion($control->numero_instalacion);
 
-            $cvtas = new ControlVentas();
-
-            $cvtas->setIdVentas($r->id);
-            $cvtas->setOferta($r->oferta);
-            $cvtas->setAsesor($r->asesor);
-            $cvtas->setCliente($r->cliente);
-            $cvtas->setServicio($r->servicio);
-            $cvtas->setEstado($r->estado);
-            $cvtas->setFecha($r->fecha);
-            $cvtas->setNumeroOrdenInstalacion($r->numero_orden_instalacion);
-
-            return $cvtas;
+            return $controlVenta;
         } catch (Exception $e) {
             die($e->getMessage());
         }
@@ -179,23 +186,19 @@ class ControlVentas
     {
         try {
             $sql = "UPDATE control_ventas 
-                    SET oferta=?, fk_usuario=?, fk_cliente=?, fk_servicio=?, fk_estado=?,fecha=?, numero_instalacion=?
-                    WHERE id = ?";
-
+                    SET oferta=?, fk_servicio=?, fk_estado=?, numero_instalacion=?
+                    WHERE id=?";
             $conexionDataBase = new Conexion();
             $conexion = $conexionDataBase->CrearConexion();
-
             $stm = $conexion->prepare($sql);
             $stm->execute(array(
                 $this->getOferta(),
-                $this->getAsesor(),
-                $this->getCliente(),
                 $this->getServicio(),
                 $this->getEstado(),
-                $this->getFecha(),
-                $this->getNumeroOrdenInstalacion()
+                $this->getNumeroOrdenInstalacion(),
+	            $this->getIdVentas()
             ));
-
+            return TRUE;
         } catch (Exception $e) {
             die($e->getMessage());
         }
@@ -214,7 +217,7 @@ class ControlVentas
             $stm = $conexion->prepare($sql);
             $resultado = $stm->execute(array(
                 $this->getOferta(),
-                $this->getAsesor(),
+                $this->getUsuario(),
                 $this->getCliente(),
                 $this->getServicio(),
                 $this->getEstado(),
@@ -243,20 +246,15 @@ class ControlVentas
             $stm->execute(array($id));
 
             while ($seguimiento = $stm->fetch()) {
-
                 $control = new ControlVentas();
-
                 $control->setIdVentas($seguimiento->id);
-
                 $ser = new Servicio($seguimiento->id_servicios, $seguimiento->servicio);
                 $nuevoEstado = (new Estado)->consultarEstado($seguimiento->fk_estado);
                 $control->setServicio($ser);
                 $control->setEstado($nuevoEstado);
                 $control->setFecha($seguimiento->fecha);
                 $ListaSeguimiento[] = $control;
-
             }
-
             return $ListaSeguimiento;
         } catch (Exception $e) {
             die($e->getMessage());
