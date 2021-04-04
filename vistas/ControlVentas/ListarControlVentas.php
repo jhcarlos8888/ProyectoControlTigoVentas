@@ -47,7 +47,7 @@
 
                     <div class="col-12 order-3 table-responsive">
 
-                        <table id="VentasList" class="table table-hover" id="tblVentas" aria-label="Lista de Ventas">
+                        <table id="VentasList" class="table table-hover" aria-label="Lista de Ventas">
                             <thead>
                                 <tr>
                                     <th scope="col">OFERTA</th>

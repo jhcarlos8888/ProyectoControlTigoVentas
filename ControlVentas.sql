@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 05-03-2021 a las 19:32:55
--- Versión del servidor: 10.4.17-MariaDB
--- Versión de PHP: 7.4.13
+-- Tiempo de generación: 03-04-2021 a las 07:03:37
+-- Versión del servidor: 10.4.18-MariaDB
+-- Versión de PHP: 7.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -58,9 +58,18 @@ CREATE TABLE `control_ventas` (
   `fk_cliente` int(3) NOT NULL,
   `fk_servicio` int(3) NOT NULL,
   `fk_estado` int(3) NOT NULL,
-  `fecha` int(11) NOT NULL,
+  `fecha` date NOT NULL,
   `numero_instalacion` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `control_ventas`
+--
+
+INSERT INTO `control_ventas` (`id`, `oferta`, `fk_usuario`, `fk_cliente`, `fk_servicio`, `fk_estado`, `fecha`, `numero_instalacion`) VALUES
+(1, 'DSA132', 41, 123, 1123, 1, '2021-04-01', 'DSA123'),
+(2, 'FAS123', 41, 123, 1122, 1, '2021-04-01', 'FAS123'),
+(3, 'DSAF123', 33, 356, 1123, 1, '2021-04-03', 'ORDEN1651');
 
 -- --------------------------------------------------------
 
@@ -72,6 +81,14 @@ CREATE TABLE `estado` (
   `id_estado` int(11) NOT NULL,
   `tipo_estado` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `estado`
+--
+
+INSERT INTO `estado` (`id_estado`, `tipo_estado`) VALUES
+(1, 'ACTIVO'),
+(2, 'SUSPENDIDO');
 
 -- --------------------------------------------------------
 
@@ -158,8 +175,28 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `identificacion`, `nombre`, `celular`, `usuario`, `contrasena`, `email`, `fk_zona_sede`, `fk_rol`) VALUES
-(33, '123456', 'Faver Lopez', '3100000000', 'faverl', '$2y$15$KpYxRj3e5hHqaJj4scAzoOeC61MJgWz7YpGf71QImW1.nNPqoS8X2', 'faver@prueba.com', 1040, 1),
-(34, '123', 'Andres', '3100000000', 'andres', '$2y$15$cgvdtW2xJ4V/7SYFS/5wpuLOALQ90KQhSvAATCokzj9cyHtMWKakW', 'prueba@prueba.com', 1040, 1);
+(33, '1017208971', 'Faver Lopez', '3100000000', 'faverl', '$2y$15$KpYxRj3e5hHqaJj4scAzoOeC61MJgWz7YpGf71QImW1.nNPqoS8X2', 'faver@prueba.com', 1040, 1),
+(34, '123', 'Andres', '3100000000', 'andres', '$2y$15$cgvdtW2xJ4V/7SYFS/5wpuLOALQ90KQhSvAATCokzj9cyHtMWKakW', 'prueba@prueba.com', 1040, 1),
+(41, '142536', 'Prueba', '3231231321', 'prueba23', '$2y$15$lYQTPEkgC1ITPS6VqVj.UuH8dYtabhgqvBdy0riGWWRqRqXfIr2Sq', 'prueba@correo.co', 1040, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `volante`
+--
+
+CREATE TABLE `volante` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `ruta` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `volante`
+--
+
+INSERT INTO `volante` (`id`, `nombre`, `ruta`) VALUES
+(1, 'Volante', 'volantes/Volante.pdf');
 
 -- --------------------------------------------------------
 
@@ -234,6 +271,12 @@ ALTER TABLE `usuario`
   ADD KEY `fk_rol` (`fk_rol`);
 
 --
+-- Indices de la tabla `volante`
+--
+ALTER TABLE `volante`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `zona_sede`
 --
 ALTER TABLE `zona_sede`
@@ -253,13 +296,13 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de la tabla `control_ventas`
 --
 ALTER TABLE `control_ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `estado`
 --
 ALTER TABLE `estado`
-  MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `manual`
@@ -283,7 +326,13 @@ ALTER TABLE `servicios`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT de la tabla `volante`
+--
+ALTER TABLE `volante`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `zona_sede`
