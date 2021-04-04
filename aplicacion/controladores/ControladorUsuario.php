@@ -11,22 +11,20 @@ class ControladorUsuario
     public function index()
     {
         validarSession();
-
+        $this->validarAdmin();
         $usuario = new Usuario();
         $listaUsuarios = $usuario->ListarUsuarios();
-
         return Vista::crear("usuario.ListarUsuarios", "listaUsuarios", $listaUsuarios);
     }
 
     public function editar($id)
     {
         validarSession();
-
+        $this->validarAdmin();
         $usuario = new Usuario();
         $usuario = $usuario->ConsultarUsuario($id);
         $roles = Rol::ListarRoles();
         $sedes = Sede::ListarSedes();
-
         return Vista::crear("usuario.actualizarUsuario",
             array("usuario" => $usuario, "sedes" => $sedes, "roles" => $roles));
     }
@@ -34,7 +32,7 @@ class ControladorUsuario
     public function actualizar()
     {
         validarSession();
-
+        $this->validarAdmin();
         $id = $_POST['id'];
         $identificacion = $_POST['identificacion'];
         $nombre = $_POST['nombre'];
@@ -43,7 +41,6 @@ class ControladorUsuario
         $email = $_POST['email'];
         $sede = Sede::consultarSede($_POST['sede']);
         $rol = Rol::consultarRol($_POST['rol']);
-
         $usuario = new Usuario();
         $usuario->__set("id_usuario", $id);
         $usuario->__set("identificacion", $identificacion);
@@ -53,7 +50,6 @@ class ControladorUsuario
         $usuario->__set("email", $email);
         $usuario->__set("sede", $sede);
         $usuario->__set("rol", $rol);
-
         $resultado = $usuario->ActualizarUsuario();
 
         if ($resultado) {
@@ -66,7 +62,7 @@ class ControladorUsuario
     public function crear()
     {
         validarSession();
-
+        $this->validarAdmin();
         $identificacion = $_POST['identificacion'];
         $nombre = $_POST['nombre'];
         $celular = $_POST['celular'];
@@ -76,7 +72,6 @@ class ControladorUsuario
         $sede = Sede::consultarSede($_POST['sede']);
         $rol = Rol::consultarRol($_POST['rol']);
         $usuario = new Usuario();
-
         $usuario->__set("identificacion", $identificacion);
         $usuario->__set("nombre", $nombre);
         $usuario->__set("celular", $celular);
@@ -85,7 +80,6 @@ class ControladorUsuario
         $usuario->__set("email", $email);
         $usuario->__set("sede", $sede);
         $usuario->__set("rol", $rol);
-
         $resultado = $usuario->CrearUsuario();
 
         if ($resultado) {
@@ -98,35 +92,31 @@ class ControladorUsuario
     public function registrar()
     {
         validarSession();
-
+        $this->validarAdmin();
         $roles = Rol::ListarRoles();
         $sedes = Sede::ListarSedes();
-
         return Vista::crear("usuario.registrar", array("sedes" => $sedes, "roles" => $roles));
     }
 
     public function eliminar($id)
     {
         validarSession();
-
+        $this->validarAdmin();
         $usuario = new Usuario();
         $usuario->EliminarUsuario($id);
-
         redirecciona("usuario");
     }
 
     public function cambiarContrasena()
     {
-
         validarSession();
-
+        $this->validarAdmin();
         $id = $_POST['id'];
         $nuevaContrasena = $_POST['contrasena'];
         $validacionContrasena = $_POST['validacionContrasena'];
         $resultado = false;
 
         if ($nuevaContrasena === $validacionContrasena) {
-
             $usuario = new Usuario();
             $contrasenaEncriptada = encriptar($_POST['contrasena']);
             $resultado = $usuario->cambiarContrasena($id, $contrasenaEncriptada);
@@ -136,6 +126,13 @@ class ControladorUsuario
             redirecciona("usuario");
         } else {
             redirecciona("usuario/editar/" . $id);
+        }
+    }
+
+    private function validarAdmin(){
+        if($_SESSION['rol_user'] !== "Administrador"){
+            redirecciona("");
+            exit();
         }
     }
 }
