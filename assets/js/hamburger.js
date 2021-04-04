@@ -1,4 +1,4 @@
-<script>
+
 /**
  * forEach implementation for Objects/NodeLists/Arrays, automatic type loops and context options
  *
@@ -20,4 +20,3 @@
       }, false);
     });
   }
-</script>
