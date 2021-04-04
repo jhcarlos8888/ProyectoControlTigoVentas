@@ -47,7 +47,7 @@
                                         </small>
                                         <small class="text-muted">
                                             <a class="btn btn-md btn-outline-success"
-                                               href="<?php assets($listaDeVolantes[$i]->getRuta()); ?>"><span data-feather="eye"></span></a>
+                                               href="<?php assets($listaDeVolantes[$i]->getRuta()); ?>" target="_blank"><span data-feather="eye"></span></a>
                                         </small>
                                     </div>
                                 </div>
