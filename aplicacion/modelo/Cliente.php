@@ -14,17 +14,6 @@ class Cliente
     private $celular;
     private $direccion;
     private $email;
-    private $pdo;
-
-    public function __CONSTRUCT()
-    {
-        try {
-            $this->pdo = new PDO('mysql:host=localhost;dbname=ControlVentas', USER, PASSWORD);
-            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (Exception $e) {
-            die($e->getMessage());
-        }
-    }
 
     public function __get($name)
     {
@@ -42,15 +31,15 @@ class Cliente
 
     public function listar()
     {
+        $conexionDataBase = new Conexion();
+        $conexion = $conexionDataBase->CrearConexion();
         try {
             $result = array();
-
-            $stm = $this->pdo->prepare("SELECT * FROM cliente");
+            $stm = $conexion->prepare("SELECT * FROM cliente");
             $stm->execute();
 
             foreach ($stm->fetchAll(PDO::FETCH_OBJ) as $r) {
                 $clt = new cliente();
-
                 $clt->__SET('id', $r->id);
                 $clt->__SET('identificacion', $r->identificacion);
                 $clt->__SET('nombre', $r->nombre);
@@ -60,52 +49,59 @@ class Cliente
 
                 $result[] = $clt;
             }
-
+            $conexionDataBase->CerrarConexion();
             return $result;
         } catch (Exception $e) {
+            $conexionDataBase->CerrarConexion();
             die($e->getMessage());
         }
     }
 
     public function Obtener($id)
     {
+        $conexionDataBase = new Conexion();
+        $conexion = $conexionDataBase->CrearConexion();
         try {
-            $stm = $this->pdo->prepare("SELECT * FROM cliente WHERE id = ?");
-
+            $stm = $conexion->prepare("SELECT * FROM cliente WHERE id = ?");
             $stm->execute(array($id));
             $r = $stm->fetch(PDO::FETCH_OBJ);
-
             $clt = new cliente();
-
             $clt->__SET('id', $r->id);
             $clt->__SET('identificacion', $r->identificacion);
             $clt->__SET('nombre', $r->nombre);
             $clt->__SET('celular', $r->celular);
             $clt->__SET('direccion', $r->direccion);
             $clt->__SET('email', $r->email);
-
+            $conexionDataBase->CerrarConexion();
             return $clt;
         } catch (Exception $e) {
+            $conexionDataBase->CerrarConexion();
             die($e->getMessage());
         }
     }
 
     public function Eliminar($id)
     {
+        $conexionDataBase = new Conexion();
+        $conexion = $conexionDataBase->CrearConexion();
         try {
-            $stm = $this->pdo->prepare("DELETE FROM cliente WHERE id = ?");
+            $stm = $conexion->prepare("DELETE FROM cliente WHERE id = ?");
             $stm->execute(array($id));
+            $conexionDataBase->CerrarConexion();
         } catch (Exception $e) {
+            $conexionDataBase->CerrarConexion();
             die($e->getMessage());
         }
     }
 
     public function Actualizar($cliente)
     {
+        $conexionDataBase = new Conexion();
+        $conexion = $conexionDataBase->CrearConexion();
         try {
             $sql = "UPDATE cliente SET identificacion = ?, nombre = ?, celular = ?, direccion = ?, email = ? WHERE id = ?";
 
-            return $this->pdo->prepare($sql)
+            $resultado = $conexion->prepare($sql)
                 ->execute(array(
                     $cliente->__GET('identificacion'),
                     $cliente->__GET('nombre'),
@@ -114,18 +110,22 @@ class Cliente
                     $cliente->__GET('email'),
                     $cliente->__GET('id')
                 ));
-
+            $conexionDataBase->CerrarConexion();
+            return $resultado;
         } catch (Exception $e) {
+            $conexionDataBase->CerrarConexion();
             die($e->getMessage());
         }
     }
 
     public function Registrar()
     {
+        $conexionDataBase = new Conexion();
+        $conexion = $conexionDataBase->CrearConexion();
         try {
             $sql = "INSERT INTO cliente (identificacion, nombre, celular, direccion, email) VALUES (?, ?, ?, ?, ?)";
 
-            return $this->pdo->prepare($sql)
+            $resultado = $conexion->prepare($sql)
                 ->execute(array(
                     $this->__GET('identificacion'),
                     $this->__GET('nombre'),
@@ -133,19 +133,19 @@ class Cliente
                     $this->__GET('direccion'),
                     $this->__GET('email'),
                 ));
+            $conexionDataBase->CerrarConexion();
+            return $resultado;
         } catch (Exception $e) {
+            $conexionDataBase->CerrarConexion();
             die($e->getMessage() . $e->getFile() . $e->getTraceAsString());
         }
     }
 
     public function Buscar($valor)
     {
-        $clientes = array();
-
         $conexionDataBase = new Conexion();
-
         $conexion = $conexionDataBase->CrearConexion();
-
+        $clientes = array();
         $valor = $valor . "%";
         $stmt = $conexion->prepare("SELECT * FROM cliente WHERE identificacion LIKE :cedula OR nombre LIKE :nombre");
         $stmt->bindParam(":cedula", $valor);
@@ -161,14 +161,10 @@ class Cliente
                 "celular" => $fila->celular,
                 "direccion" => $fila->direccion,
                 "email" => $fila->email,
-
             );
-
             $clientes[] = $cliente;
         }
-
         $conexionDataBase->CerrarConexion();
-
         return $clientes;
     }
 }

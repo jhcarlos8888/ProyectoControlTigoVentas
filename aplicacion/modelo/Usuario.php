@@ -35,26 +35,25 @@ class Usuario
         $conexion = $conexionDataBase->CrearConexion();
         $stmt = $conexion->prepare("INSERT INTO usuario (identificacion, nombre, celular, usuario, contrasena, email, fk_zona_sede, fk_rol) 
                                         VALUES (:identificacion,:nombre, :celular, :usuario, :contrasena, :email, :sede, :rol)");
-
         $stmt->bindValue(":contrasena", $this->contrasena);
         $stmt = $this->agregarParametros($stmt);
-
-        return $stmt->execute();
+        $resultado = $stmt->execute();
+        $conexionDataBase->CerrarConexion();
+        return $resultado;
     }
 
     public function ConsultarUsuario($id)
     {
         $conexionDataBase = new Conexion();
-        $user = new Usuario();
-
         $conexion = $conexionDataBase->CrearConexion();
+        $user = null;
         $stmt = $conexion->prepare("SELECT * FROM usuario WHERE id=:id");
         $stmt->bindParam(":id", $id);
         $stmt->setFetchMode(PDO::FETCH_OBJ);
         $stmt->execute();
 
         if ($stmt->rowCount() == 1) {
-
+            $user = new Usuario();
             $fila = $stmt->fetch();
             $user->__set("id_usuario",$fila->id);
             $user->__set("identificacion",$fila->identificacion);
@@ -65,12 +64,8 @@ class Usuario
             $user->__set("email",$fila->email);
             $user->__set("sede",Sede::consultarSede($fila->fk_zona_sede));
             $user->__set("rol",Rol::consultarRol($fila->fk_rol));
-        } else {
-            $user = null;
         }
-
         $conexionDataBase->CerrarConexion();
-
         return $user;
     }
 
@@ -79,14 +74,10 @@ class Usuario
         $conexionDataBase = new Conexion();
         $conexion = $conexionDataBase->CrearConexion();
         $stmt = $conexion->prepare("UPDATE usuario SET identificacion=:identificacion, nombre=:nombre, celular=:celular, usuario=:usuario, email=:email, fk_zona_sede=:sede, fk_rol=:rol WHERE id=:id");
-
         $stmt->bindValue(':id', $this->id_usuario, PDO::PARAM_INT);
         $stmt =$this->agregarParametros($stmt);
-
         $stmt->execute();
-
         $conexionDataBase->CerrarConexion();
-
         return ($stmt->rowCount() > 0);
     }
 
@@ -98,15 +89,12 @@ class Usuario
         $stmt->bindParam(":id", $id);
         $resultado = $stmt->execute();
         $conexionDataBase->CerrarConexion();
-
         return $resultado;
     }
 
     public function ListarUsuarios()
     {
-
         $listaUsuarios = array();
-
         $conexionDataBase = new Conexion();
         $conexion = $conexionDataBase->CrearConexion();
         $stmt = $conexion->prepare("SELECT * FROM usuario");
@@ -114,9 +102,7 @@ class Usuario
         $stmt->execute();
 
         while ($fila = $stmt->fetch()) {
-
             $user = new Usuario();
-
             $user->__set("id_usuario", $fila->id);
             $user->__set("identificacion", $fila->identificacion);
             $user->__set("nombre", $fila->nombre);
@@ -125,30 +111,24 @@ class Usuario
             $user->__set("email", $fila->email);
             $user->__set("sede", Sede::consultarSede($fila->fk_zona_sede));
             $user->__set("rol", Rol::consultarRol($fila->fk_rol));
-
             $listaUsuarios[] = $user;
         }
-
+        $conexionDataBase->CerrarConexion();
         return $listaUsuarios;
     }
 
     public function LoguearUsuario($cedula, $contrasena)
     {
         $conexionDataBase = new Conexion();
-
         $conexion = $conexionDataBase->CrearConexion();
-
         $stmt = $conexion->prepare("SELECT * FROM usuario WHERE identificacion=:cedula");
         $stmt->bindParam(":cedula", $cedula);
         $stmt->setFetchMode(PDO::FETCH_OBJ);
         $stmt->execute();
-
         $conexionDataBase->CerrarConexion();
 
         if ($stmt->rowCount() == 1) {
-
             $fila = $stmt->fetch();
-
             $this->id_usuario = $fila->id;
             $this->identificacion = $fila->identificacion;
             $this->nombre = $fila->nombre;
@@ -158,24 +138,17 @@ class Usuario
             $this->email = $fila->email;
             $this->sede = Sede::consultarSede($fila->fk_zona_sede);
             $this->rol = Rol::consultarRol($fila->fk_rol);
-
             return (validarEncriptacion($contrasena,$this->contrasena));
-
         } else {
-
             return false;
         }
     }
 
     public function Buscar($valor)
     {
-
         $usuarios = array();
-
         $conexionDataBase = new Conexion();
-
         $conexion = $conexionDataBase->CrearConexion();
-
         $valor = $valor . "%";
         $stmt = $conexion->prepare(
             "SELECT user.id, user.identificacion, user.nombre, user.celular, user.usuario, user.email, zona_sede.nombre_sede, rol.nombre_rol
@@ -200,18 +173,14 @@ class Usuario
                 "sede" => $fila->nombre_sede,
                 "rol" => $fila->nombre_rol,
             );
-
             $usuarios[] = $user;
         }
-
         $conexionDataBase->CerrarConexion();
-
         return $usuarios;
     }
 
     private function agregarParametros($stmt)
     {
-
         $stmt->bindValue(":identificacion", $this->identificacion);
         $stmt->bindValue(":nombre", $this->nombre);
         $stmt->bindValue(":celular", $this->celular);
@@ -219,7 +188,6 @@ class Usuario
         $stmt->bindValue(":email", $this->email);
         $stmt->bindValue(":sede",$this->__get("sede")->getId(), PDO::PARAM_INT);
         $stmt->bindValue(":rol", $this->__get("rol")->getId(), PDO::PARAM_INT);
-
         return $stmt;
     }
 
@@ -227,14 +195,11 @@ class Usuario
     {
         $conexionDataBase = new Conexion();
         $conexion = $conexionDataBase->CrearConexion();
-
         $stmt = $conexion->prepare("UPDATE usuario SET contrasena=:contrasena WHERE id=:id");
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->bindValue(':contrasena', $contrasenaEncriptada);
         $stmt->execute();
-
         $conexionDataBase->CerrarConexion();
-
         return ($stmt->rowCount() > 0);
     }
 }

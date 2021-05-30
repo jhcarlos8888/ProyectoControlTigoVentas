@@ -12,7 +12,6 @@ use usuario\Usuario;
 
 class ControlVentas
 {
-
     private $id_ventas;
     private $oferta;
     private $usuario;
@@ -104,10 +103,10 @@ class ControlVentas
 
     public function listar()
     {
+        $conexionDataBase = new Conexion();
+        $conexion = $conexionDataBase->CrearConexion();
         try {
 	        $ListaControlVentas= array();
-            $conexionDataBase = new Conexion();
-            $conexion = $conexionDataBase->CrearConexion();
 	        $stm = $conexion->prepare("SELECT control_ventas.id, control_ventas.oferta, control_ventas.fk_usuario as usuario, control_ventas.fk_cliente as cliente, servicios.id_servicios, servicios.tipo_servicio AS servicio, fk_estado as estado, control_ventas.fecha, control_ventas.numero_instalacion 
                            FROM control_ventas
                            INNER JOIN servicios ON control_ventas.fk_servicio = servicios.id_servicios");
@@ -129,23 +128,23 @@ class ControlVentas
 		        $controlVenta->setNumeroOrdenInstalacion($control->numero_instalacion);
 		        $ListaControlVentas[] = $controlVenta;
 	        }
+            $conexionDataBase->CerrarConexion();
             return $ListaControlVentas;
         } catch (Exception $e) {
+            $conexionDataBase->CerrarConexion();
             die($e->getMessage());
         }
     }
 
     public function Obtener($id)
     {
+        $conexionDataBase = new Conexion();
+        $conexion = $conexionDataBase->CrearConexion();
         try {
-            $conexionDataBase = new Conexion();
-            $conexion = $conexionDataBase->CrearConexion();
-
             $stm = $conexion->prepare("SELECT control_ventas.id, control_ventas.oferta, control_ventas.fk_usuario as usuario, control_ventas.fk_cliente as cliente, servicios.id_servicios, servicios.tipo_servicio AS servicio, fk_estado as estado, control_ventas.fecha, control_ventas.numero_instalacion 
                            FROM control_ventas
                            INNER JOIN servicios ON control_ventas.fk_servicio = servicios.id_servicios
 	        			   WHERE id = ?");
-
             $stm->execute(array($id));
 	        $control = $stm->fetch(PDO::FETCH_OBJ);
 	        $controlVenta = new ControlVentas();
@@ -161,35 +160,36 @@ class ControlVentas
 	        $controlVenta->setEstado($nuevoEstado);
 	        $controlVenta->setFecha($control->fecha);
 	        $controlVenta->setNumeroOrdenInstalacion($control->numero_instalacion);
-
+            $conexionDataBase->CerrarConexion();
             return $controlVenta;
         } catch (Exception $e) {
+            $conexionDataBase->CerrarConexion();
             die($e->getMessage());
         }
     }
 
     public function Eliminar($id)
     {
+        $conexionDataBase = new Conexion();
+        $conexion = $conexionDataBase->CrearConexion();
         try {
-            $conexionDataBase = new Conexion();
-            $conexion = $conexionDataBase->CrearConexion();
-
             $stm = $conexion->prepare("DELETE FROM control_ventas WHERE id = ?");
-
             $stm->execute(array($id));
+            $conexionDataBase->CerrarConexion();
         } catch (Exception $e) {
+            $conexionDataBase->CerrarConexion();
             die($e->getMessage());
         }
     }
 
     public function Actualizar()
     {
+        $conexionDataBase = new Conexion();
+        $conexion = $conexionDataBase->CrearConexion();
         try {
             $sql = "UPDATE control_ventas 
                     SET oferta=?, fk_servicio=?, fk_estado=?, numero_instalacion=?
                     WHERE id=?";
-            $conexionDataBase = new Conexion();
-            $conexion = $conexionDataBase->CrearConexion();
             $stm = $conexion->prepare($sql);
             $stm->execute(array(
                 $this->getOferta(),
@@ -198,8 +198,10 @@ class ControlVentas
                 $this->getNumeroOrdenInstalacion(),
 	            $this->getIdVentas()
             ));
+            $conexionDataBase->CerrarConexion();
             return TRUE;
         } catch (Exception $e) {
+            $conexionDataBase->CerrarConexion();
             die($e->getMessage());
         }
     }
@@ -207,13 +209,11 @@ class ControlVentas
 
     public function Registrar()
     {
+        $conexionDataBase = new Conexion();
+        $conexion = $conexionDataBase->CrearConexion();
         try {
             $sql = "INSERT INTO control_ventas (oferta, fk_usuario, fk_cliente, fk_servicio,fk_estado,fecha,numero_instalacion)
                     VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-            $conexionDataBase = new Conexion();
-            $conexion = $conexionDataBase->CrearConexion();
-
             $stm = $conexion->prepare($sql);
             $resultado = $stm->execute(array(
                 $this->getOferta(),
@@ -224,20 +224,20 @@ class ControlVentas
                 $this->getFecha(),
                 $this->getNumeroOrdenInstalacion()
             ));
-
+            $conexionDataBase->CerrarConexion();
             return $resultado;
         } catch (Exception $e) {
+            $conexionDataBase->CerrarConexion();
             die($e->getMessage());
         }
     }
 
     public function ListarControlVentasDelCliente($id)
     {
+        $conexionDataBase = new Conexion();
+        $conexion = $conexionDataBase->CrearConexion();
         $ListaSeguimiento = array();
         try {
-            $conexionDataBase = new Conexion();
-            $conexion = $conexionDataBase->CrearConexion();
-
             $stm = $conexion->prepare("SELECT control_ventas.id, servicios.id_servicios, servicios.tipo_servicio AS servicio, fk_estado, control_ventas.fecha 
                            FROM control_ventas
                            INNER JOIN servicios ON control_ventas.fk_servicio = servicios.id_servicios
@@ -255,18 +255,20 @@ class ControlVentas
                 $control->setFecha($seguimiento->fecha);
                 $ListaSeguimiento[] = $control;
             }
+            $conexionDataBase->CerrarConexion();
             return $ListaSeguimiento;
         } catch (Exception $e) {
+            $conexionDataBase->CerrarConexion();
             die($e->getMessage());
         }
     }
 
 	public function listarPorAsesor($idAsesor)
 	{
+        $conexionDataBase = new Conexion();
+        $conexion = $conexionDataBase->CrearConexion();
 		$listaControlVentas = array();
 		try {
-			$conexionDataBase = new Conexion();
-			$conexion = $conexionDataBase->CrearConexion();
 			$stm = $conexion->prepare("SELECT control_ventas.id, control_ventas.oferta, 
        												control_ventas.fk_usuario as usuario, control_ventas.fk_cliente as cliente, 
        												servicios.id_servicios, servicios.tipo_servicio AS servicio, fk_estado as estado, 
@@ -292,10 +294,11 @@ class ControlVentas
 				$controlVenta->setNumeroOrdenInstalacion($control->numero_instalacion);
 				$listaControlVentas[] = $controlVenta;
 			}
+            $conexionDataBase->CerrarConexion();
 			return $listaControlVentas;
 		} catch (Exception $e) {
+            $conexionDataBase->CerrarConexion();
 			die($e->getMessage());
 		}
-
 	}
 }

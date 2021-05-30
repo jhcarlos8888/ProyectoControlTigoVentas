@@ -73,7 +73,9 @@ class Manual
 
         $stmt->bindValue(":nombre", $this->nombre);
         $stmt->bindValue(":ruta", $this->ruta);
-        return $stmt->execute();
+        $resultado = $stmt->execute();
+        $conexionDataBase->CerrarConexion();
+        return $resultado;
 
     }
 }

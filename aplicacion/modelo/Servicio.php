@@ -40,91 +40,84 @@ class Servicio
 
     public static function listar()
     {
+        $conexionDataBase = new Conexion();
+        $conexion = $conexionDataBase->CrearConexion();
         try {
-
             $result = array();
-
-            $conexionDataBase = new Conexion();
-            $conexion = $conexionDataBase->CrearConexion();
-
             $stm = $conexion->prepare("SELECT * FROM servicios");
             $stm->setFetchMode(PDO::FETCH_OBJ);
             $stm->execute();
 
             while ($r = $stm->fetch() ){
-
                 $ser = new servicio($r->id_servicios, $r->tipo_servicio);
-
                 $result[] = $ser;
             }
-
+            $conexionDataBase->CerrarConexion();
             return $result;
         } catch (Exception $e) {
+            $conexionDataBase->CerrarConexion();
             die($e->getMessage());
         }
     }
 
     public static function Obtener($id)
     {
+        $conexionDataBase = new Conexion();
+        $conexion = $conexionDataBase->CrearConexion();
         try {
-
-            $conexionDataBase = new Conexion();
-            $conexion = $conexionDataBase->CrearConexion();
-
             $stm = $conexion->prepare("SELECT * FROM servicios WHERE id_servicios = ?");
-
             $stm->execute(array($id));
             $r = $stm->fetch(PDO::FETCH_OBJ);
-
+            $conexionDataBase->CerrarConexion();
             return new servicio($r->id, $r->tipo_servicio);
 
         } catch (Exception $e) {
+            $conexionDataBase->CerrarConexion();
             die($e->getMessage());
         }
     }
 
     public function Eliminar($id)
     {
+        $conexionDataBase = new Conexion();
+        $conexion = $conexionDataBase->CrearConexion();
         try {
-            $conexionDataBase = new Conexion();
-            $conexion = $conexionDataBase->CrearConexion();
-
             $stm = $conexion->prepare("DELETE FROM servicios WHERE id_servicios = ?");
-
+            $conexionDataBase->CerrarConexion();
             $stm->execute(array($id));
         } catch (Exception $e) {
+            $conexionDataBase->CerrarConexion();
             die($e->getMessage());
         }
     }
 
     public function Actualizar(servicio $data)
     {
+        $conexionDataBase = new Conexion();
+        $conexion = $conexionDataBase->CrearConexion();
         try {
             $sql = "UPDATE servicios SET tipo_servicio = ? WHERE id_servicios = ?";
-
-            $conexionDataBase = new Conexion();
-            $conexion = $conexionDataBase->CrearConexion();
-
             $stm = $conexion->prepare($sql);
             $stm->execute(array($data->getTipoServicio(), $data->getIdServicio()));
-
+            $conexionDataBase->CerrarConexion();
         } catch (Exception $e) {
+            $conexionDataBase->CerrarConexion();
             die($e->getMessage());
         }
     }
 
     public function Registrar(servicio $data)
     {
+        $conexionDataBase = new Conexion();
+        $conexion = $conexionDataBase->CrearConexion();
         try {
             $sql = "INSERT INTO servicios (id_servicios, tipo_servicio)
                 VALUES (?, ?)";
-
-            $conexionDataBase = new Conexion();
-            $conexion = $conexionDataBase->CrearConexion();
-
             $stm = $conexion->prepare($sql);
             $stm->execute(array($data->getIdServicio(), $data->getTipoServicio()));
+            $conexionDataBase->CerrarConexion();
         } catch (Exception $e) {
+            $conexionDataBase->CerrarConexion();
             die($e->getMessage());
         }
     }
